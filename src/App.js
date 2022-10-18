@@ -1,5 +1,11 @@
+import Modal from "./Components/Modal/Modal";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Modal />
+    </>
+  );
 }
 
 export default App;
