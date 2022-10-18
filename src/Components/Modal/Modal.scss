@@ -5,50 +5,128 @@
 
 .modal {
   padding: 0 16px;
-  &__buttons {
-    display: flex;
+  height: 100vh;
+  width: 100%;
+
+  &__card {
+    position: fixed;
+    background-color: white;
+
+    @include tablet {
+      background-color: rgba($color: $background-colour-1, $alpha: 0.8);
+      height: 100vh;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
-  &__cross-icon {
+  &__card-within {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    height: 100vh;
+    @include tablet {
+      position: relative;
+      height: 262px;
+      width: 672px;
+      left: 48px;
+      top: 185px;
+      border-radius: 3px;
+      background-color: #fff;
+      padding: 50px 64px 10px 64px;
+    }
+  }
+
+  &__title-paragraph-container {
+  }
+
+  &__title {
+    margin: 20px 0;
+    left: 16px;
+    top: 60px;
+
+    font-family: "Titillium Web";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 36px;
+
+    color: #13182c;
+  }
+
+  &__confirmation-paragraph {
+    font-family: "Titillium Web";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 26px;
+    color: #13182c;
+  }
+
+  &__cross-btn {
+    position: absolute;
+    right: 30px;
+    top: -2%;
+
+    @include tablet {
+      top: 8%;
+    }
+  }
+
+  &__buttons {
+    margin: 0 auto;
+    width: 100%;
+    @include tablet {
+      padding-top: 25px;
+      gap: 10px;
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 
   &__button-cancel {
-    position: absolute;
-
     padding: 8px 63px;
-    gap: 10px;
-
     width: 163px;
     height: 36px;
     left: 16px;
     top: 607px;
 
-    /* White */
-
     background: #ffffff;
-    /* Cloud */
-
     border: 1px solid #bdc5d5;
     border-radius: 20px;
+    position: absolute;
+    @include tablet {
+      position: static;
+      padding: 8px 16px;
+      width: 72px;
+      height: 38px;
+    }
   }
 
   &__button-delete {
     position: absolute;
-
     padding: 8px 63px;
     gap: 10px;
-
     width: 163px;
     height: 36px;
     left: 196px;
     top: 607px;
-
     color: #ffffff;
-
     border: none;
     background: #c94515;
     border-radius: 20px;
+
+    @include tablet {
+      position: static;
+      padding: 8px 16px;
+      width: 72px;
+      height: 38px;
+    }
   }
 }
