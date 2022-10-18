@@ -1,5 +1,11 @@
+import AddWarehouse from "./Components/AddWarehouse/AddWarehouse";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <AddWarehouse />
+    </>
+  );
 }
 
 export default App;
