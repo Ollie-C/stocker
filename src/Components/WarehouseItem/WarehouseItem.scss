@@ -1,0 +1,15 @@
+.card {
+  &__delete-button {
+    background: url("../../assets/Icons/delete_outline-24px.svg") no-repeat;
+    height: 50px;
+    width: 100%;
+    border: none;
+  }
+
+  &__edit-button {
+    background: url("../../assets/Icons/edit-24px.svg") no-repeat;
+    height: 50px;
+    width: 100%;
+    border: none;
+  }
+}
