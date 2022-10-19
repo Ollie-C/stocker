@@ -1,7 +1,7 @@
 //styles
 import "./AddWarehouse.scss";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { Link, useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 
 const AddWarehouse = () => {
