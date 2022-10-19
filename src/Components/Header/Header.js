@@ -11,7 +11,7 @@ const Header = () => {
         </Link>
         <nav className="header__nav">
           <ul className="header__links">
-            <li className="header__item header__item--active">
+            <li className="header__item">
               <a
                 href="./index.html"
                 className="header__button header__button--active"
