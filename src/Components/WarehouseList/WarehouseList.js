@@ -2,7 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import WarehouseItem from "../WarehouseItem/WarehouseItem";
 
-const WarehouseList = (props) => {
+const WarehouseList = ({ warehouses, handleSelectedProduct }) => {
+  console.log(!warehouses.length);
+
+  if (!warehouses.length) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
       <header className="warehouse-list__header">
@@ -12,8 +18,14 @@ const WarehouseList = (props) => {
       </header>
       <section>
         <ul className="List">
-          {props.warehouses.map((warehouse) => {
-            return <WarehouseItem key={warehouse.id} warehouse={warehouse} />;
+          {warehouses.map((warehouse) => {
+            return (
+              <WarehouseItem
+                key={warehouse.id}
+                warehouse={warehouse}
+                handleSelectedProduct={handleSelectedProduct}
+              />
+            );
           })}
         </ul>
       </section>

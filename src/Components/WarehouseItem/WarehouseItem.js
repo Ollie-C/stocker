@@ -1,7 +1,7 @@
 import React from "react";
 import "../WarehouseItem/WarehouseItem.scss";
 
-const WarehouseItem = ({ warehouse }) => {
+const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
   return (
     <article className="card">
       <div className="card__text-wrapper">
@@ -22,7 +22,9 @@ const WarehouseItem = ({ warehouse }) => {
         </div>
       </div>
       <div>
-        <button className="card__delete-button"></button>
+        <button
+          onClick={(e) => handleSelectedProduct(warehouse)}
+          className="card__delete-button"></button>
         <button className="card__edit-button"></button>
       </div>
     </article>
