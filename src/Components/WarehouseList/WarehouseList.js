@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import WarehouseItem from "../WarehouseItem/WarehouseItem";
+import "../WarehouseList/WarehouseList.scss";
 
 const WarehouseList = ({ warehouses, handleSelectedProduct }) => {
   console.log(!warehouses.length);
@@ -12,9 +13,16 @@ const WarehouseList = ({ warehouses, handleSelectedProduct }) => {
   return (
     <>
       <header className="warehouse-list__header">
-        <h2 className="warehouse-list__title">Warehouses</h2>
-        <input className="warehouse-list__search"></input>
-        <button className="warehouse-list__button">+ Add New Warehouse</button>
+        <h2 className="warehouse-list__title split">Warehouses</h2>
+        <div className="warehouse-list__inputs">
+          <input
+            className="warehouse-list__search split"
+            placeholder="Search..."
+          ></input>
+          <button className="warehouse-list__button split">
+            + Add New Warehouse
+          </button>
+        </div>
       </header>
       <section>
         <ul className="List">
