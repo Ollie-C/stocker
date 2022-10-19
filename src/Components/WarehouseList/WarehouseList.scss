@@ -43,3 +43,27 @@
     }
   }
 }
+
+.key {
+  display: none;
+  @include tablet {
+    display: flex;
+    width: 100%;
+    padding: 1.6rem;
+    justify-content: space-between;
+    background-color: $background-colour-2;
+  }
+  &__label {
+    @include tablet {
+      min-width: 20%;
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__sort {
+    @include tablet {
+      width: 25px;
+    }
+  }
+}
