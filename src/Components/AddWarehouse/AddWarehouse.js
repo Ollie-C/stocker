@@ -1,46 +1,73 @@
 //styles
 import "./AddWarehouse.scss";
-// import axios from "axios";
-// import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
+import { useState } from "react";
+const validator = require("validator");
 
 const AddWarehouse = () => {
-  //   const navigate = useNavigate();
-  //   const [name, setName] = useState("");
-  //   const [address, setAddress] = useState("");
-  //   const [city, setcity] = useState("");
-  //   const [country, setcountry] = useState("");
-  //   const [contactName, setcontactName] = useState("");
-  //   const [position, setposition] = useState("");
-  //   //   const [phone, setphone] = useState("");
-  //   //   const [email, setemail] = useState("");
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [contactName, setContactName] = useState("");
+  const [position, setPosition] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
 
-  //   const addWarehouse = async (e) => {
-  //     e.preventDefault();
-  //     const { data } = await axios
-  //       .post("http://localhost:8080/warehouses", {
-  //         name: name,
-  //         address: address,
-  //         city: city,
-  //         country: country,
-  //         contact: {
-  //           contactName: contactName,
-  //           position: position,
-  //           phone: phone,
-  //           email: email,
-  //         },
-  //       })
-  //       .catch((error) => {
-  //         alert(error.response.statusText);
-  //         console.log(error.response);
-  //       });
-  //   };
+  //POST REQUEST
+  const addWarehouse = async (
+    e,
+    name,
+    address,
+    city,
+    country,
+    contactName,
+    position,
+    phone,
+    email
+  ) => {
+    e.preventDefault();
+    const { data } = await axios
+      .post("http://localhost:8080/warehouses", {
+        name: name,
+        address: address,
+        city: city,
+        country: country,
+        contact: {
+          contactName: contactName,
+          position: position,
+          phone: phone,
+          email: email,
+        },
+      })
+      .catch((error) => {
+        alert(error.response.statusText);
+        console.log(error.response);
+      });
+    console.log(data);
+  };
 
+  //FORM SUBMIT HANDLER
   const submitHandler = (e) => {
     e.preventDefault();
-    //   addWarehouse();
-    //   alert("Success.");
-    //   navigate("/");
+    console.log(validator.isEmail(email));
+
+    addWarehouse(
+      e,
+      name,
+      address,
+      city,
+      country,
+      contactName,
+      position,
+      phone,
+      email
+    );
+    alert("Success.");
+    navigate("/");
   };
 
   return (
@@ -60,6 +87,7 @@ const AddWarehouse = () => {
             className="form__input"
             placeholder="Warehouse Name"
             name="name"
+            onChange={(e) => setName(e.target.value)}
           />
           <label htmlFor="address" className="form__label">
             Street Address
@@ -69,6 +97,7 @@ const AddWarehouse = () => {
             className="form__input"
             placeholder="Street Address"
             name="address"
+            onChange={(e) => setAddress(e.target.value)}
           />
           <label htmlFor="city" className="form__label">
             City
@@ -78,6 +107,7 @@ const AddWarehouse = () => {
             className="form__input"
             placeholder="City"
             name="city"
+            onChange={(e) => setCity(e.target.value)}
           />
           <label htmlFor="country" className="form__label">
             Country
@@ -87,6 +117,7 @@ const AddWarehouse = () => {
             className="form__input"
             placeholder="Country"
             name="country"
+            onChange={(e) => setCountry(e.target.value)}
           />
         </div>
         <div className="form__fields">
@@ -99,6 +130,7 @@ const AddWarehouse = () => {
             className="form__input"
             placeholder="Contact Name"
             name="contactName"
+            onChange={(e) => setContactName(e.target.value)}
           />
           <label htmlFor="position" className="form__label">
             Position
@@ -108,6 +140,7 @@ const AddWarehouse = () => {
             className="form__input"
             placeholder="Position"
             name="position"
+            onChange={(e) => setPosition(e.target.value)}
           />
           <label htmlFor="phone" className="form__label">
             Phone Number
@@ -117,6 +150,7 @@ const AddWarehouse = () => {
             className="form__input"
             placeholder="Phone Number"
             name="phone"
+            onChange={(e) => setPhone(e.target.value)}
           />
           <label htmlFor="emai" className="form__label">
             Email
@@ -126,12 +160,13 @@ const AddWarehouse = () => {
             className="form__input"
             placeholder="Email"
             name="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
       </form>
 
       <section className="form__buttons">
-        <button className="form__button" /*onClick={() => navigate(-1)}*/>
+        <button className="form__button" onClick={() => navigate(-1)}>
           Cancel
         </button>
         <button
