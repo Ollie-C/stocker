@@ -3,6 +3,7 @@
 
 .header {
   background-color: $background-colour-1;
+  height: 30vh;
   &__container {
     display: flex;
     flex-direction: column;
@@ -11,6 +12,7 @@
       flex-direction: row;
       align-items: center;
       padding: 0 3.6rem;
+      justify-content: space-between;
     }
     @include desktop {
       padding: 0;
@@ -23,53 +25,43 @@
     display: flex;
     justify-content: center;
     padding: 2rem;
+    margin-bottom: 2rem;
 
     @include tablet {
       padding: 2rem 0;
-    }
-    @include desktop {
-      padding: 0;
+      margin-bottom: 0;
     }
   }
 
-  //   &__img {
-  //     width: 12rem;
-  //     height: 2rem;
-  //   }
-
   &__nav {
     width: 100%;
-    @include tablet {
-      width: 30%;
-    }
   }
   &__links {
     list-style-type: none;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     padding: 0;
     margin: 0;
   }
 
   &__item {
     text-align: center;
-    padding-bottom: 2rem;
     width: 50%;
-    margin: 2rem;
     @include tablet {
-      padding-top: 2rem;
       width: fit-content;
+      margin-left: 4rem;
     }
   }
 
   &__button--active {
     background-color: $primary-colour-1;
+
     border-radius: 2rem;
   }
 
   &__button {
     text-decoration: none;
-    padding: 1.8rem;
     color: $primary-colour-3;
+    padding: 1.8rem 4rem;
   }
 }
