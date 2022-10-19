@@ -1,4 +1,5 @@
 import React from "react";
+import "../WarehouseItem/WarehouseItem.scss";
 
 const WarehouseItem = ({ warehouse }) => {
   return (
