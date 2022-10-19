@@ -47,26 +47,7 @@ const WarehousePage = () => {
 
   /////////////////////////axios edit warehouses
   // const editWarehouse = (event, warehouseId) => {
-  //   console.log("save clicked");
-  //   const editObj = {
-  //     name: event.target.name.value,
-  //     address: event.target.address.value,
-  //     city: event.target.city.value,
-  //     country: event.target.country.value,
-  //     contactName: event.target.contactName.value,
-  //     position: event.target.position.value,
-  //     phone: event.target.phone.value,
-  //     email: event.target.email.value,
-  //   };
-
-  //   axios
-  //     .put(`http://localhost:8080/warehouses/edit/${warehouseId}`, editObj)
-  //     .then((response) => {
-  //       axios.get(`http://localhost:8080/warehouses`).then((response) => {
-  //         SetWarehouses(response.data);
-  //       });
-  //     });
-  // };
+  //}
   /////////////////////////axios edit warehouses
 
   return (
