@@ -38,14 +38,27 @@ $desktop-breakpoint: 1280px;
   width: 14rem;
   height: 3.6rem;
   border-radius: 20px;
-  border: 1px solid grey;
+  border: 2px solid $secondary-colour-2;
   background-color: $primary-colour-3;
+  &:hover {
+    border: 2px solid $primary-colour-2;
+  }
+  @include tablet {
+    width: 7rem;
+  }
 }
 
 @mixin form-button-blue {
   background-color: $primary-colour-2;
   color: $primary-colour-3;
   border: none;
+  &:hover {
+    background-color: $background-colour-1;
+    border: none;
+  }
+  @include tablet {
+    width: 14rem;
+  }
 }
 
 @mixin form-input {
