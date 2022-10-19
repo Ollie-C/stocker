@@ -1,5 +1,7 @@
 import React from "react";
 import "../WarehouseItem/WarehouseItem.scss";
+import { Link } from "react-router-dom";
+import EditWarehouse from "../EditWarehouse/EditWarehouse";
 
 const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
   return (
@@ -25,7 +27,11 @@ const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
         <button
           onClick={(e) => handleSelectedProduct(warehouse)}
           className="card__delete-button"></button>
-        <button className="card__edit-button"></button>
+        <Link to={`/${warehouse.id}/edit`}>
+          <button
+            onClick={(e) => handleSelectedProduct(warehouse)}
+            className="card__edit-button"></button>
+        </Link>
       </div>
     </article>
   );
