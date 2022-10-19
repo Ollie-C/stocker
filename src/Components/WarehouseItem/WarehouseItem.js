@@ -1,5 +1,7 @@
 import React from "react";
 import "../WarehouseItem/WarehouseItem.scss";
+import { Link } from "react-router-dom";
+import chevron from "../../assets/Icons/chevron_right-24px.svg";
 
 const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
   return (
@@ -7,7 +9,10 @@ const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
       <div className="card__text-wrapper">
         <div className="card__left">
           <h5 className="card__label">Warehouse</h5>
-          <p className="card__name">{warehouse.name}</p>
+          <Link to="/" className="card__name split">
+            <p>{warehouse.name} </p>
+            <img src={chevron} />
+          </Link>
           <h5 className="card__label">Address</h5>
           <p className="card__address">
             {warehouse.address}, {warehouse.city}, {warehouse.country}
@@ -15,16 +20,17 @@ const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
         </div>
         <div className="card__right">
           <h5 className="card__label">Contact Name</h5>
-          <p className="card__contact-name">{warehouse.contact.name}</p>
+          <p className="card__contact-name split">{warehouse.contact.name}</p>
           <h5 className="card__label">Contact Information</h5>
           <p className="card__contact-phone">{warehouse.contact.phone}</p>
           <p className="card__contact-email">{warehouse.contact.email}</p>
         </div>
       </div>
-      <div>
+      <div className="card__buttons">
         <button
           onClick={(e) => handleSelectedProduct(warehouse)}
-          className="card__delete-button"></button>
+          className="card__delete-button"
+        ></button>
         <button className="card__edit-button"></button>
       </div>
     </article>
