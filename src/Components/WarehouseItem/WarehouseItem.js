@@ -4,15 +4,26 @@ import { Link } from "react-router-dom";
 import EditWarehouse from "../EditWarehouse/EditWarehouse";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 
+const WarehouseItem = ({
+  warehouse,
+  handleSelectedProduct,
+  showModalHandler,
+}) => {
+  const deleteClickHandler = () => {
+    handleSelectedProduct(warehouse);
+    showModalHandler();
+  };
 
-const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
   return (
     <article className="card">
       <div className="card__text-wrapper">
         <div className="card__left">
           <h5 className="card__label">Warehouse</h5>
-          <Link to="/" className="card__name split">
-            <p>{warehouse.name} </p>
+          <Link
+            to={`/warehouses/details/${warehouse.id}`}
+            className="card__name split"
+          >
+            <p>{warehouse.name}</p>
             <img className="card__chevron" src={chevron} />
           </Link>
           <h5 className="card__label">Address</h5>
@@ -32,15 +43,15 @@ const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
       </div>
       <div className="card__buttons">
         <button
-          onClick={(e) => handleSelectedProduct(warehouse)}
-
-          className="card__delete-button"></button>
+          onClick={deleteClickHandler}
+          className="card__delete-button"
+        ></button>
         <Link to={`/${warehouse.id}/edit`}>
           <button
             onClick={(e) => handleSelectedProduct(warehouse)}
-            className="card__edit-button"></button>
+            className="card__edit-button"
+          ></button>
         </Link>
-
       </div>
     </article>
   );

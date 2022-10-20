@@ -1,0 +1,19 @@
+@use "../../styles/partials/variables" as *;
+
+.WH-details {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__title {
+    display: flex;
+  }
+
+  &__edit {
+    background-color: $primary-colour-2;
+  }
+
+  &__edit-icon {
+    color: white;
+  }
+}
