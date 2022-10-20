@@ -1,7 +1,4 @@
-// import axios from "axios";
-// import { Link, useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
-import errorIcon from "../../assets/Icons/error-24px.svg";
 import "./EditWarehouse.scss";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -50,9 +47,18 @@ const EditWarehouse = () => {
 
     console.log("saved button clicked");
 
-    // if (name.trim("") === "" && address.trim("")) {
-    //   return;
-    // }
+    if (
+      name.trim("") === "" &&
+      address.trim("") &&
+      city.trim("") &&
+      country.trim("") &&
+      contactName.trim("") &&
+      position.trim("") &&
+      phone.trim("") &&
+      email.trim("")
+    ) {
+      return;
+    }
 
     const { data } = await axios.put(
       `http://localhost:8080/warehouses/${warehouseId}`,
@@ -73,7 +79,7 @@ const EditWarehouse = () => {
 
     setTimeout(() => {
       navigate("/");
-    }, 1500);
+    }, 1000);
   };
 
   const saveHandler = (e) => {
