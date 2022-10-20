@@ -84,9 +84,13 @@
   }
 
   &__buttons {
-    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 50px;
     width: 100%;
     @include tablet {
+      position: static;
       padding-top: 25px;
       gap: 10px;
       display: flex;
