@@ -21,12 +21,22 @@ $padding-mobile: 2.4rem;
   }
 }
 
+//FOR THE BORDERS
+.form-fields-wrapper {
+  border-top: 1px solid $secondary-colour-2;
+  padding: 1.6rem 0;
+  @include tablet {
+    border: none;
+  }
+}
+
 .form {
   @include tablet {
     display: flex;
   }
+
   &__fields {
-    padding: 1.6rem $padding-mobile;
+    padding: 0 $padding-mobile;
   }
 
   &__title {

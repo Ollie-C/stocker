@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import { useState } from "react";
-const validator = require("validator");
+// const validator = require("validator");
 
 const AddWarehouse = () => {
   const navigate = useNavigate();
@@ -18,7 +18,6 @@ const AddWarehouse = () => {
   const [email, setEmail] = useState("");
   // const [error, setError] = useState(false);
 
-  //POST REQUEST
   const addWarehouse = async (
     e,
     name,
@@ -59,7 +58,6 @@ const AddWarehouse = () => {
   //   }
   // };
 
-  //FORM SUBMIT HANDLER
   const submitHandler = (e) => {
     e.preventDefault();
     // console.log(validator.isEmail(email));
@@ -92,92 +90,96 @@ const AddWarehouse = () => {
         <h1 className="addWarehouse-header__title">Add New Warehouse</h1>
       </section>
       <form className="form" id="addWarehouseForm" onSubmit={submitHandler}>
-        <div className="form__fields">
-          <h2 className="form__title">Warehouse Details</h2>
-          <label htmlFor="name" className="form__label">
-            Warehouse Name
-          </label>
-          <input
-            type="text"
-            className="form__input"
-            placeholder="Warehouse Name"
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-            /*onBlur={(e) => validateInput(e.target)}*/
-          />
-          <label htmlFor="address" className="form__label">
-            Street Address
-          </label>
-          <input
-            type="text"
-            className="form__input"
-            placeholder="Street Address"
-            name="address"
-            onChange={(e) => setAddress(e.target.value)}
-          />
-          <label htmlFor="city" className="form__label">
-            City
-          </label>
-          <input
-            type="text"
-            className="form__input"
-            placeholder="City"
-            name="city"
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <label htmlFor="country" className="form__label">
-            Country
-          </label>
-          <input
-            type="text"
-            className="form__input"
-            placeholder="Country"
-            name="country"
-            onChange={(e) => setCountry(e.target.value)}
-          />
+        <div className="form-fields-wrapper">
+          <div className="form__fields">
+            <h2 className="form__title">Warehouse Details</h2>
+            <label htmlFor="name" className="form__label">
+              Warehouse Name
+            </label>
+            <input
+              type="text"
+              className="form__input"
+              placeholder="Warehouse Name"
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+              /*onBlur={(e) => validateInput(e.target)}*/
+            />
+            <label htmlFor="address" className="form__label">
+              Street Address
+            </label>
+            <input
+              type="text"
+              className="form__input"
+              placeholder="Street Address"
+              name="address"
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            <label htmlFor="city" className="form__label">
+              City
+            </label>
+            <input
+              type="text"
+              className="form__input"
+              placeholder="City"
+              name="city"
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <label htmlFor="country" className="form__label">
+              Country
+            </label>
+            <input
+              type="text"
+              className="form__input"
+              placeholder="Country"
+              name="country"
+              onChange={(e) => setCountry(e.target.value)}
+            />
+          </div>
         </div>
-        <div className="form__fields">
-          <h2 className="form__title">Contact Details</h2>
-          <label htmlFor="contactName" className="form__label">
-            Contact Name
-          </label>
-          <input
-            type="text"
-            className="form__input"
-            placeholder="Contact Name"
-            name="contactName"
-            onChange={(e) => setContactName(e.target.value)}
-          />
-          <label htmlFor="position" className="form__label">
-            Position
-          </label>
-          <input
-            type="text"
-            className="form__input"
-            placeholder="Position"
-            name="position"
-            onChange={(e) => setPosition(e.target.value)}
-          />
-          <label htmlFor="phone" className="form__label">
-            Phone Number
-          </label>
-          <input
-            type="text"
-            className="form__input"
-            placeholder="Phone Number"
-            name="phone"
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <label htmlFor="emai" className="form__label">
-            Email
-          </label>
-          <input
-            type="text"
-            className="form__input"
-            placeholder="Email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <div className="form-fields-wrapper">
+          <div className="form__fields">
+            <h2 className="form__title">Contact Details</h2>
+            <label htmlFor="contactName" className="form__label">
+              Contact Name
+            </label>
+            <input
+              type="text"
+              className="form__input"
+              placeholder="Contact Name"
+              name="contactName"
+              onChange={(e) => setContactName(e.target.value)}
+            />
+            <label htmlFor="position" className="form__label">
+              Position
+            </label>
+            <input
+              type="text"
+              className="form__input"
+              placeholder="Position"
+              name="position"
+              onChange={(e) => setPosition(e.target.value)}
+            />
+            <label htmlFor="phone" className="form__label">
+              Phone Number
+            </label>
+            <input
+              type="text"
+              className="form__input"
+              placeholder="Phone Number"
+              name="phone"
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <label htmlFor="emai" className="form__label">
+              Email
+            </label>
+            <input
+              type="text"
+              className="form__input"
+              placeholder="Email"
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
         </div>
       </form>
 
