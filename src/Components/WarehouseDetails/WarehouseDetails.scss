@@ -3,17 +3,28 @@
 .WH-details {
   &__header {
     display: flex;
+    height: 10rem;
     justify-content: space-between;
+    padding: 2rem;
   }
   &__title {
     display: flex;
   }
 
+  &__arrow {
+    width: 4rem;
+  }
+
   &__edit {
     background-color: $primary-colour-2;
+    display: flex;
   }
 
   &__edit-icon {
     color: white;
+  }
+
+  &__edit-text {
+    display: none;
   }
 }

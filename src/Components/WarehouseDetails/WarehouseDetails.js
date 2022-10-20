@@ -26,11 +26,11 @@ const WarehouseDetails = () => {
       <header className="WH-details__header">
         <div className="WH-details__title">
           <img className="WH-details__arrow" src={arrow} />
-          <h2 className="WH-details__title-text">{warehouse.name}</h2>
+          <h1 className="WH-details__title-text">{warehouse.name}</h1>
         </div>
         <div className="WH-details__edit">
           <img src={edit} className="WH-details__edit-icon" />
-          <p className="WH-detils__edit-text">Edit</p>
+          <p className="WH-details__edit-text">Edit</p>
         </div>
       </header>
     </div>
