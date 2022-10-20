@@ -5,13 +5,26 @@ import "./styles/partials/_resets.scss";
 import AddWarehouse from "./Components/AddWarehouse/AddWarehouse";
 import EditWarehouse from "./Components/EditWarehouse/EditWarehouse";
 import WarehouseDetails from "./Components/WarehouseDetails/WarehouseDetails";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
+import InventoryPage from "./pages/InventoryPage/InventoryPage";
 
 function App() {
   const [warehouses, SetWarehouses] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const [inventories, setInventories] = useState([]);
+
+  const getInventories = async () => {
+    const { data } = await axios.get("http://localhost:8080/inventory");
+    setInventories(data);
+  };
+
+  useEffect(() => {
+    getInventories();
+  }, []);
 
   const getWarehouses = async () => {
     const { data } = await axios.get("http://localhost:8080/warehouses");
@@ -68,11 +81,22 @@ function App() {
                   />
                 }
               />
+              <Route InventoryPage inventories={inventories} />
               <Route path="/warehouses/add" element={<AddWarehouse />} />
               <Route path="/:warehouseId/edit" element={<EditWarehouse />} />
               <Route
                 path="/warehouses/details/:warehouseId"
                 element={<WarehouseDetails />}
+              />
+
+              <Route
+                path="/inventory"
+                element={
+                  <InventoryPage
+                    inventories={inventories}
+                    showModal={showModal}
+                  />
+                }
               />
             </Routes>
           </div>
