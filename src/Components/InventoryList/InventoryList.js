@@ -5,10 +5,10 @@ import "./InventoryList.scss";
 import InventoryItem from "../InventoryItem/InventoryItem";
 
 const InventoryList = ({ inventories }) => {
-  console.log(inventories);
-  if (inventories.length) {
-    return <p>Loading...</p>;
-  }
+  // console.log(inventories);
+  // if (inventories.length) {
+  //   return <p>Loading...</p>;
+  // }
   return (
     <>
       <header className="warehouse-list__header">
