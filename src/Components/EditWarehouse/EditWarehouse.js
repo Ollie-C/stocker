@@ -1,7 +1,7 @@
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import "./EditWarehouse.scss";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const EditWarehouse = () => {
@@ -75,11 +75,9 @@ const EditWarehouse = () => {
         },
       }
     );
-    setShowMessage(true);
+    // setShowMessage(true);
 
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
+    navigate("/");
   };
 
   const saveHandler = (e) => {
@@ -149,13 +147,13 @@ const EditWarehouse = () => {
   return (
     <main className="main">
       <section className="editWarehouse-header">
-        <button className="editWarehouse-header__back-btn">
+        <Link className="editWarehouse-header__icon-container" to="/">
           <img
             className="editWarehouse-header__icon"
             src={backIcon}
             alt="back-button"
           />
-        </button>
+        </Link>
 
         <h1 className="editWarehouse-header__title">Edit Warehouse</h1>
       </section>
