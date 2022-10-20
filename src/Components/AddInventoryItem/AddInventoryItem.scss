@@ -1,0 +1,94 @@
+@use "../../styles/partials/fonts";
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/resets";
+
+$padding-mobile: 2.4rem;
+
+.addInventoryItem-header {
+  display: flex;
+  padding: 3rem $padding-mobile 2rem $padding-mobile;
+  @include tablet {
+    border-bottom: 1px solid $secondary-colour-2;
+  }
+  &__title {
+    font-weight: 600;
+    font-size: 2.8rem;
+    margin-left: 1rem;
+    @include tablet {
+      font-size: 3.2rem;
+    }
+  }
+}
+
+//FOR THE BORDERS
+.form-fields-wrapper {
+  border-top: 1px solid $secondary-colour-2;
+  padding: 1.6rem 0;
+  @include tablet {
+    border: none;
+    max-width: 50%;
+  }
+}
+
+.form {
+  @include tablet {
+    display: flex;
+  }
+
+  &__fields {
+    padding: 0 $padding-mobile;
+  }
+
+  &__title {
+    padding-bottom: 2.6rem;
+    @include tablet {
+      font-size: 2.4rem;
+    }
+  }
+
+  &__label {
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 0.4rem 0;
+  }
+
+  &__label--radio {
+    font-size: 1.3rem;
+    padding: 0.4rem 0;
+    margin-right: 4rem;
+  }
+
+  &__input {
+    @include form-input;
+    margin-bottom: 2rem;
+    &--error {
+      outline: 1px solid $supporting-colour-2;
+    }
+  }
+
+  &__textarea {
+    @include form-text-area;
+    margin-bottom: 1rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.6rem $padding-mobile;
+    background-color: $background-colour-2;
+    @include tablet {
+      justify-content: flex-end;
+    }
+  }
+
+  &__button {
+    @include form-button;
+    &--blue {
+      @include form-button-blue;
+      @include tablet {
+        margin-left: 2rem;
+      }
+    }
+  }
+}

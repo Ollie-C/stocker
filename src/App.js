@@ -4,6 +4,7 @@ import WarehousePage from "./pages/WarehousePage/WarehousePage";
 import "./styles/partials/_resets.scss";
 import AddWarehouse from "./Components/AddWarehouse/AddWarehouse";
 import EditWarehouse from "./Components/EditWarehouse/EditWarehouse";
+import AddInventoryItem from "./Components/AddInventoryItem/AddInventoryItem";
 import WarehouseDetails from "./Components/WarehouseDetails/WarehouseDetails";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -74,6 +75,7 @@ function App() {
                 path="/warehouses/details/:warehouseId"
                 element={<WarehouseDetails />}
               />
+              <Route path="/inventories/add" element={<AddInventoryItem />} />
             </Routes>
           </div>
         </div>
