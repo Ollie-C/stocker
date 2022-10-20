@@ -21,10 +21,33 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+ul {
   margin: 0;
+  padding: 0;
 }
 
 button {
   cursor: pointer;
+}
+
+.parent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-container {
+  background-color: white;
+  margin: 0 auto;
+  position: absolute;
+  top: -8rem;
+  width: 90%;
+  box-shadow: 0 2px 5px rgba(19, 24, 44, 0.1);
+  border-radius: 3px;
+}
+
+.split {
+  margin-bottom: 1.6rem;
 }
