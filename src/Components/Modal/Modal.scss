@@ -106,4 +106,9 @@
     @include form-button;
     background-color: #c94515;
   }
+
+  &__cross-btn {
+    border: none;
+    background-color: #ffff;
+  }
 }

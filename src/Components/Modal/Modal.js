@@ -13,9 +13,10 @@ const Modal = ({
     <section className="modal">
       <div className="modal__card">
         <div className="modal__card-within">
-          <Link to="/">
+          <button className="modal__cross-btn" onClick={hideModal}>
             <img className="modal__cross-btn" src={closeBtn} alt="cross-btn" />
-          </Link>
+          </button>
+
           <div className="modal__title-paragraph-container">
             <h1 className="modal__title">
               Delete {selectedProduct.name} warehouse
