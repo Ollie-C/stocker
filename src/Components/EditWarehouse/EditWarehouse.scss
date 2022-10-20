@@ -18,6 +18,11 @@ $padding-mobile: 2.4rem;
       font-size: 3.2rem;
     }
   }
+
+  &__back-btn {
+    border: none;
+    background-color: #ffff;
+  }
 }
 .form {
   @include tablet {

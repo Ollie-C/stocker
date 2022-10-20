@@ -149,11 +149,14 @@ const EditWarehouse = () => {
   return (
     <main className="main">
       <section className="editWarehouse-header">
-        <img
-          className="editWarehouse-header__icon"
-          src={backIcon}
-          alt="back-button"
-        />
+        <button className="editWarehouse-header__back-btn">
+          <img
+            className="editWarehouse-header__icon"
+            src={backIcon}
+            alt="back-button"
+          />
+        </button>
+
         <h1 className="editWarehouse-header__title">Edit Warehouse</h1>
       </section>
       <form
