@@ -4,7 +4,7 @@
 @use "../../styles/partials/resets";
 
 $padding-mobile: 2.4rem;
-.header {
+.editWarehouse-header {
   display: flex;
   padding: 3rem $padding-mobile 2rem $padding-mobile;
   @include tablet {
