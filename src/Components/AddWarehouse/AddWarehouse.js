@@ -16,6 +16,7 @@ const AddWarehouse = () => {
   const [position, setPosition] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  // const [error, setError] = useState(false);
 
   //POST REQUEST
   const addWarehouse = async (
@@ -51,16 +52,20 @@ const AddWarehouse = () => {
   };
 
   //FORM VALIDATION
-  const isValid = (e, value) => {
-    e.preventDefault();
-    return value.length > 0;
-  };
+  // const validateInput = (input) => {
+  //   const isValid = input.value.length > 0;
+  //   if (!isValid) {
+  //     setError(false)
+  //   }
+  // };
 
   //FORM SUBMIT HANDLER
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(validator.isEmail(email));
-
+    // console.log(validator.isEmail(email));
+    // if (error == false){
+    //   alert("Fill in all fields")
+    // }
     addWarehouse(
       e,
       name,
@@ -78,9 +83,13 @@ const AddWarehouse = () => {
 
   return (
     <main className="main">
-      <section className="header">
-        <img className="header__icon" src={backIcon} alt="back-button" />
-        <h1 className="header__title">Add New Warehouse</h1>
+      <section className="addWarehouse-header">
+        <img
+          className="addWarehouse-header__icon"
+          src={backIcon}
+          alt="back-button"
+        />
+        <h1 className="addWarehouse-header__title">Add New Warehouse</h1>
       </section>
       <form className="form" id="addWarehouseForm" onSubmit={submitHandler}>
         <div className="form__fields">
@@ -90,13 +99,11 @@ const AddWarehouse = () => {
           </label>
           <input
             type="text"
-            className={`form__input ${
-              !isValid(e.target.value) ? "form__input--error" : ""
-            }}`}
+            className="form__input"
             placeholder="Warehouse Name"
             name="name"
             onChange={(e) => setName(e.target.value)}
-            onBlur={isValid(e.target.value)}
+            /*onBlur={(e) => validateInput(e.target)}*/
           />
           <label htmlFor="address" className="form__label">
             Street Address
