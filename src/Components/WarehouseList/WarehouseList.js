@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import WarehouseItem from "../WarehouseItem/WarehouseItem";
+import "../WarehouseList/WarehouseList.scss";
+import sort from "../../assets/Icons/sort-24px.svg";
 
 const WarehouseList = ({ warehouses, handleSelectedProduct }) => {
   console.log(!warehouses.length);
@@ -12,27 +14,51 @@ const WarehouseList = ({ warehouses, handleSelectedProduct }) => {
   return (
     <>
       <header className="warehouse-list__header">
-        <h2 className="warehouse-list__title">Warehouses</h2>
-        <input className="warehouse-list__search"></input>
-        <Link to="/warehouses/add">
-          <button className="warehouse-list__button">
-            + Add New Warehouse
-          </button>
-        </Link>
+        <h2 className="warehouse-list__title split">Warehouses</h2>
+        <div className="warehouse-list__inputs">
+          <input
+            className="warehouse-list__search split"
+            placeholder="Search..."
+          ></input>
+          <Link to="/warehouses/add">
+            <button className="warehouse-list__button">
+              + Add New Warehouse
+            </button>
+          </Link>
+        </div>
       </header>
-      <section>
-        <ul className="List">
-          {warehouses.map((warehouse) => {
-            return (
-              <WarehouseItem
-                key={warehouse.id}
-                warehouse={warehouse}
-                handleSelectedProduct={handleSelectedProduct}
-              />
-            );
-          })}
-        </ul>
-      </section>
+      <ul className="key">
+        <li className="key__label">
+          <p className="key__text">Warehouse</p>
+          <img src={sort} alt="sort" className="key__sort" />
+        </li>
+        <li className="key__label">
+          <p className="key__text">Address</p>
+          <img src={sort} alt="sort" className="key__sort" />
+        </li>
+        <li className="key__label">
+          <p className="key__text">Contact Name</p>
+          <img src={sort} alt="sort" className="key__sort" />
+        </li>
+        <li className="key__label">
+          <p className="key__text">Contact Information</p>
+          <img src={sort} alt="sort" className="key__sort" />
+        </li>
+        <li className="key__label">
+          <p className="key__text">Actions</p>
+        </li>
+      </ul>
+      <ul className="List">
+        {warehouses.map((warehouse) => {
+          return (
+            <WarehouseItem
+              key={warehouse.id}
+              warehouse={warehouse}
+              handleSelectedProduct={handleSelectedProduct}
+            />
+          );
+        })}
+      </ul>
     </>
   );
 };
