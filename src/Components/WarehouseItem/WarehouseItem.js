@@ -1,7 +1,9 @@
 import React from "react";
 import "../WarehouseItem/WarehouseItem.scss";
 import { Link } from "react-router-dom";
+import EditWarehouse from "../EditWarehouse/EditWarehouse";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
+
 
 const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
   return (
@@ -31,9 +33,14 @@ const WarehouseItem = ({ warehouse, handleSelectedProduct }) => {
       <div className="card__buttons">
         <button
           onClick={(e) => handleSelectedProduct(warehouse)}
-          className="card__delete-button"
-        ></button>
-        <button className="card__edit-button"></button>
+
+          className="card__delete-button"></button>
+        <Link to={`/${warehouse.id}/edit`}>
+          <button
+            onClick={(e) => handleSelectedProduct(warehouse)}
+            className="card__edit-button"></button>
+        </Link>
+
       </div>
     </article>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WarehouseList from "../../Components/WarehouseList/WarehouseList";
 import axios from "axios";
 import Modal from "../../Components/Modal/Modal";
+import EditWarehouse from "../../Components/EditWarehouse/EditWarehouse";
 
 const WarehousePage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +17,6 @@ const WarehousePage = () => {
   //select product to open a model
   const handleSelectedProduct = (product) => {
     setSelectedProduct(product);
-
     setShowModal(true);
   };
   //////////////////////////////////////////////Modal
@@ -25,7 +25,6 @@ const WarehousePage = () => {
   const getwarehouses = async () => {
     const { data } = await axios.get("http://localhost:8080/warehouses");
     SetWarehouses(data);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -41,12 +40,15 @@ const WarehousePage = () => {
         axios.get(`http://localhost:8080/warehouses`).then((response) => {
           SetWarehouses(response.data);
           setShowModal(false);
-          console.log(response.data);
         });
       });
   };
-
   /////////////////////////axios delete warehouses
+
+  /////////////////////////axios edit warehouses
+  // const editWarehouse = (event, warehouseId) => {
+  //}
+  /////////////////////////axios edit warehouses
 
   return (
     <>
@@ -54,6 +56,7 @@ const WarehousePage = () => {
         warehouses={warehouses}
         handleSelectedProduct={handleSelectedProduct}
       />
+
       {showModal ? (
         <Modal
           hideModal={hideModal}
@@ -64,16 +67,5 @@ const WarehousePage = () => {
     </>
   );
 };
-// return (
-//   <>
-//     <div>
-//       <button onClick={handleSelectedProduct}>click Modal</button>
-//     </div>
-//     {showModal ? (
-//       <Modal
-//         handleSelectedProduct={handleSelectedProduct}
-//         hideModal={hideModal}
-//       />
-//     ) : null}
 
 export default WarehousePage;
