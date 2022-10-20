@@ -1,10 +1,7 @@
-// import axios from "axios";
-// import { Link, useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
-import errorIcon from "../../assets/Icons/error-24px.svg";
 import "./EditWarehouse.scss";
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const EditWarehouse = () => {
@@ -12,52 +9,27 @@ const EditWarehouse = () => {
   const { warehouseId } = useParams();
   const [showMessage, setShowMessage] = useState(false);
 
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [contactName, setContactName] = useState("");
-  const [position, setPosition] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [formFields, setFormFields] = useState({
+    name: "",
+    address: "",
+    city: "",
+    country: "",
+    contactName: "",
+    position: "",
+    phone: "",
+    email: "",
+  });
 
-  // const nameUpdated = (e) => {
-  //   const value = e.target;
-  //   setName({ name: value });
-  // };
+  // Will update the correct input state, based
+  // on whichever input the user changed.
+  const inputChangeHandler = (e) => {
+    const value = e.target.value;
 
-  // const addressUpdated = (e) => {
-  //   const value = e.target;
-  //   setAddress({ address: value });
-  // };
-  // const cityUpdated = (e) => {
-  //   const value = e.target;
-  //   setCity({ city: value });
-  // };
-  // const countryUpdated = (e) => {
-  //   const value = e.target;
-  //   setCountry({ country: value });
-  // };
-
-  // const contactNameUpdated = (e) => {
-  //   const value = e.target;
-  //   setContactName({ contactName: value });
-  // };
-
-  // const positionUpdated = (e) => {
-  //   const value = e.target;
-  //   setPosition({ position: value });
-  // };
-
-  // const phoneUpdated = (e) => {
-  //   const value = e.target;
-  //   setPhone({ number: value });
-  // };
-
-  // const emailUpdated = (e) => {
-  //   const { value } = e.target;
-  //   setEmail({ email: value });
-  // };
+    setFormFields({
+      ...formFields,
+      [e.target.name]: value,
+    });
+  };
 
   //method 1
   const editWarehouse = async (
@@ -75,7 +47,16 @@ const EditWarehouse = () => {
 
     console.log("saved button clicked");
 
-    if (name.trim("") === "" && address.trim("")) {
+    if (
+      name.trim("") === "" &&
+      address.trim("") &&
+      city.trim("") &&
+      country.trim("") &&
+      contactName.trim("") &&
+      position.trim("") &&
+      phone.trim("") &&
+      email.trim("")
+    ) {
       return;
     }
 
@@ -94,35 +75,23 @@ const EditWarehouse = () => {
         },
       }
     );
-    setShowMessage(true);
+    // setShowMessage(true);
 
-    setTimeout(() => {
-      navigate("/");
-    }, 1500);
-
-    console.log("2", data);
-    // setName(name);
-    // setAddress(address);
-    // setCity(city);
-    // setCountry(country);
-    // setContactName(contactName);
-    // setPosition(position);
-    // setPhone(phone);
-    // setEmail(email);
+    navigate("/");
   };
 
   const saveHandler = (e) => {
     e.preventDefault();
     editWarehouse(
       e,
-      name,
-      address,
-      city,
-      country,
-      contactName,
-      position,
-      phone,
-      email
+      formFields.name,
+      formFields.address,
+      formFields.city,
+      formFields.country,
+      formFields.contactName,
+      formFields.position,
+      formFields.phone,
+      formFields.email
     );
     // console.log("success");
   };
@@ -152,21 +121,46 @@ const EditWarehouse = () => {
   //     });
   // };
 
+  useEffect(() => {
+    // GET request to /warehouses/:warehouseId
+    const getWarehouseDetails = async () => {
+      const { data } = await axios.get(
+        `http://localhost:8080/warehouses/${warehouseId}`
+      );
+
+      setFormFields({
+        name: data.name,
+        address: data.address,
+        city: data.city,
+        country: data.country,
+        contactName: data.contact.name,
+        position: data.contact.position,
+        phone: data.contact.phone,
+        email: data.contact.email,
+      });
+    };
+
+    getWarehouseDetails();
+    // Set the state above
+  }, [warehouseId]);
+
   return (
     <main className="main">
       <section className="editWarehouse-header">
-        <img
-          className="editWarehouse-header__icon"
-          src={backIcon}
-          alt="back-button"
-        />
+        <Link className="editWarehouse-header__icon-container" to="/">
+          <img
+            className="editWarehouse-header__icon"
+            src={backIcon}
+            alt="back-button"
+          />
+        </Link>
+
         <h1 className="editWarehouse-header__title">Edit Warehouse</h1>
       </section>
       <form
         className="form"
         id="addWarehouseForm"
-        onSubmit={(e) => saveHandler(e)}
-      >
+        onSubmit={(e) => saveHandler(e)}>
         <div className="form__fields">
           <h2 className="form__title">Warehouse Details</h2>
           {/* <h2 className="form__title">{selectedProduct.id}</h2> */}
@@ -178,7 +172,8 @@ const EditWarehouse = () => {
             className="form__input"
             placeholder="Warehouse Name"
             name="name"
-            // onInput="hello"
+            value={formFields.name}
+            onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="address" className="form__label">
             Street Address
@@ -188,7 +183,8 @@ const EditWarehouse = () => {
             className="form__input"
             placeholder="Street Address"
             name="address"
-            // onInput="addressUpdated"
+            value={formFields.address}
+            onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="city" className="form__label">
             City
@@ -198,7 +194,8 @@ const EditWarehouse = () => {
             className="form__input"
             placeholder="City"
             name="city"
-            // onInput="cityUpdated"
+            value={formFields.city}
+            onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="country" className="form__label">
             Country
@@ -208,7 +205,8 @@ const EditWarehouse = () => {
             className="form__input"
             placeholder="Country"
             name="country"
-            // onInput="countryUpdated"
+            value={formFields.country}
+            onChange={(e) => inputChangeHandler(e)}
           />
         </div>
         <div className="form__fields">
@@ -221,7 +219,8 @@ const EditWarehouse = () => {
             className="form__input"
             placeholder="Contact Name"
             name="contactName"
-            // onInput="contactNameUpdated"
+            value={formFields.contactName}
+            onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="position" className="form__label">
             Position
@@ -231,7 +230,8 @@ const EditWarehouse = () => {
             className="form__input"
             placeholder="Position"
             name="position"
-            // onInput="positionUpdated"
+            value={formFields.position}
+            onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="phone" className="form__label">
             Phone Number
@@ -241,7 +241,8 @@ const EditWarehouse = () => {
             className="form__input"
             placeholder="Phone Number"
             name="phone"
-            // onInput="phoneUpdated"
+            value={formFields.phone}
+            onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="email" className="form__label">
             Email
@@ -251,7 +252,8 @@ const EditWarehouse = () => {
             className="form__input"
             placeholder="Email"
             name="email"
-            // onInput="emailUpdated"
+            value={formFields.email}
+            onChange={(e) => inputChangeHandler(e)}
           />
         </div>
       </form>
@@ -261,8 +263,7 @@ const EditWarehouse = () => {
         </button>
         <button
           className="form__button form__button--blue"
-          form="addWarehouseForm"
-        >
+          form="addWarehouseForm">
           Save
         </button>
       </section>
