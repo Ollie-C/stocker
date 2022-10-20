@@ -154,7 +154,7 @@ const EditWarehouse = () => {
 
   return (
     <main className="main">
-      <section className="header">
+      <section className="header__Edit">
         <img className="header__icon" src={backIcon} alt="back-button" />
         <h1 className="header__title">Edit Warehouse</h1>
       </section>

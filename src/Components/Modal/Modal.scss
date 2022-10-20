@@ -1,15 +1,17 @@
 @use "../../styles/partials/fonts";
+@use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/resets";
-@use "../../styles/partials/mixins" as *;
 
 .modal {
-  padding: 0 16px;
-  height: 100vh;
-  width: 100%;
-
   &__card {
-    position: fixed;
+    padding: 0 16px;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
     background-color: white;
 
     @include tablet {
@@ -35,8 +37,7 @@
       position: relative;
       height: 262px;
       width: 672px;
-      left: 48px;
-      top: 185px;
+      margin: auto 0;
       border-radius: 3px;
       background-color: #fff;
       padding: 50px 64px 10px 64px;
@@ -47,9 +48,9 @@
   }
 
   &__title {
-    margin: 20px 0;
-    left: 16px;
-    top: 60px;
+    margin-top: 80px;
+    // left: 16px;
+    // top: 60px;
 
     font-family: "Titillium Web";
     font-style: normal;
@@ -58,6 +59,9 @@
     line-height: 36px;
 
     color: #13182c;
+    @include tablet {
+      margin: 20px 0;
+    }
   }
 
   &__confirmation-paragraph {
@@ -71,8 +75,8 @@
 
   &__cross-btn {
     position: absolute;
-    right: 30px;
-    top: -2%;
+    right: 17px;
+    top: 2%;
 
     @include tablet {
       top: 8%;
@@ -91,42 +95,11 @@
   }
 
   &__button-cancel {
-    padding: 8px 63px;
-    width: 163px;
-    height: 36px;
-    left: 16px;
-    top: 607px;
-
-    background: #ffffff;
-    border: 1px solid #bdc5d5;
-    border-radius: 20px;
-    position: absolute;
-    @include tablet {
-      position: static;
-      padding: 8px 16px;
-      width: 72px;
-      height: 38px;
-    }
+    @include form-button;
   }
 
   &__button-delete {
-    position: absolute;
-    padding: 8px 63px;
-    gap: 10px;
-    width: 163px;
-    height: 36px;
-    left: 196px;
-    top: 607px;
-    color: #ffffff;
-    border: none;
-    background: #c94515;
-    border-radius: 20px;
-
-    @include tablet {
-      position: static;
-      padding: 8px 16px;
-      width: 72px;
-      height: 38px;
-    }
+    @include form-button;
+    background-color: #c94515;
   }
 }
