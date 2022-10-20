@@ -8,39 +8,31 @@ import { useState } from "react";
 
 const AddWarehouse = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [contactName, setContactName] = useState("");
-  const [position, setPosition] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  // const [error, setError] = useState(false);
+  const [currentDetail, setCurrentDetail] = useState("");
+  const [warehouseDetails, setWarehouseDetails] = useState({
+    name: "",
+    address: "",
+    city: "",
+    country: "",
+    contactName: "",
+    position: "",
+    phone: "",
+    email: "",
+  });
+  const [formValid, setFormValid] = useState(false);
 
-  const addWarehouse = async (
-    e,
-    name,
-    address,
-    city,
-    country,
-    contactName,
-    position,
-    phone,
-    email
-  ) => {
-    e.preventDefault();
+  const addWarehouse = async () => {
     const { data } = await axios
       .post("http://localhost:8080/warehouses", {
-        name: name,
-        address: address,
-        city: city,
-        country: country,
+        name: warehouseDetails.name,
+        address: warehouseDetails.address,
+        city: warehouseDetails.city,
+        country: warehouseDetails.country,
         contact: {
-          contactName: contactName,
-          position: position,
-          phone: phone,
-          email: email,
+          contactName: warehouseDetails.contactName,
+          position: warehouseDetails.position,
+          phone: warehouseDetails.phone,
+          email: warehouseDetails.email,
         },
       })
       .catch((error) => {
@@ -50,33 +42,38 @@ const AddWarehouse = () => {
     console.log(data);
   };
 
-  //FORM VALIDATION
-  // const validateInput = (input) => {
-  //   const isValid = input.value.length > 0;
-  //   if (!isValid) {
-  //     setError(false)
-  //   }
-  // };
+  //INPUT VALIDATION - tests for the TYPE of data being sent
+  const isValid = (e) => {
+    if (e.target.value.length === 0) {
+      setFormValid(false);
+      return false;
+    } else {
+      setFormValid(true);
+      return true;
+    }
+  };
+
+  //FORM VALIDATION - checks if all fields have been filled in
+  const validateForm = () => {};
+
+  const handleChange = (e) => {
+    setWarehouseDetails({
+      ...warehouseDetails,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
     // console.log(validator.isEmail(email));
-    // if (error == false){
-    //   alert("Fill in all fields")
-    // }
-    addWarehouse(
-      e,
-      name,
-      address,
-      city,
-      country,
-      contactName,
-      position,
-      phone,
-      email
-    );
-    alert("Success.");
-    navigate("/");
+    if (!formValid) {
+      alert("NOPE");
+    } else {
+      console.log(warehouseDetails);
+    }
+    // addWarehouse();
+    // alert("Success.");
+    // navigate("/");
   };
 
   return (
@@ -101,9 +98,10 @@ const AddWarehouse = () => {
               className="form__input"
               placeholder="Warehouse Name"
               name="name"
-              onChange={(e) => setName(e.target.value)}
-              /*onBlur={(e) => validateInput(e.target)}*/
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => isValid(e)}
             />
+
             <label htmlFor="address" className="form__label">
               Street Address
             </label>
@@ -112,7 +110,8 @@ const AddWarehouse = () => {
               className="form__input"
               placeholder="Street Address"
               name="address"
-              onChange={(e) => setAddress(e.target.value)}
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => isValid(e)}
             />
             <label htmlFor="city" className="form__label">
               City
@@ -122,7 +121,8 @@ const AddWarehouse = () => {
               className="form__input"
               placeholder="City"
               name="city"
-              onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => isValid(e)}
             />
             <label htmlFor="country" className="form__label">
               Country
@@ -132,7 +132,8 @@ const AddWarehouse = () => {
               className="form__input"
               placeholder="Country"
               name="country"
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => isValid(e)}
             />
           </div>
         </div>
@@ -147,7 +148,8 @@ const AddWarehouse = () => {
               className="form__input"
               placeholder="Contact Name"
               name="contactName"
-              onChange={(e) => setContactName(e.target.value)}
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => isValid(e)}
             />
             <label htmlFor="position" className="form__label">
               Position
@@ -157,7 +159,8 @@ const AddWarehouse = () => {
               className="form__input"
               placeholder="Position"
               name="position"
-              onChange={(e) => setPosition(e.target.value)}
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => isValid(e)}
             />
             <label htmlFor="phone" className="form__label">
               Phone Number
@@ -167,7 +170,8 @@ const AddWarehouse = () => {
               className="form__input"
               placeholder="Phone Number"
               name="phone"
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => isValid(e)}
             />
             <label htmlFor="emai" className="form__label">
               Email
@@ -177,7 +181,8 @@ const AddWarehouse = () => {
               className="form__input"
               placeholder="Email"
               name="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => handleChange(e)}
+              onBlur={(e) => isValid(e)}
             />
           </div>
         </div>
