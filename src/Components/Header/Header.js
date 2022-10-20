@@ -11,13 +11,15 @@ const Header = () => {
         </Link>
         <nav className="header__nav">
           <ul className="header__links">
-            <li className="header__item">
-              <a
-                href="./index.html"
-                className="header__button header__button--active">
-                Warehouses
-              </a>
-            </li>
+            <Link to="/" className="header__title">
+              <li className="header__item">
+                <a
+                  href="./index.html"
+                  className="header__button header__button--active">
+                  Warehouses
+                </a>
+              </li>
+            </Link>
             <Link to="/inventory" className="header__title">
               <li className="header__item">
                 <a href="./pages/shows.html" className="header__button">

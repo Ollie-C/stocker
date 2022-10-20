@@ -5,6 +5,7 @@ import "./InventoryList.scss";
 import InventoryItem from "../InventoryItem/InventoryItem";
 
 const InventoryList = ({ inventories }) => {
+  console.log(inventories);
   if (inventories.length) {
     return <p>Loading...</p>;
   }
@@ -47,7 +48,7 @@ const InventoryList = ({ inventories }) => {
       </ul>
       <ul className="List">
         {inventories.map((inventory) => {
-          return <InventoryItem key={inventory.id} warehouse={inventory} />;
+          return <InventoryItem key={inventory.id} inventory={inventory} />;
         })}
       </ul>
     </>

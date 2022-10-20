@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
+import "./InventoryItem.scss";
 
 const InventoryItem = ({ inventory }) => {
   return (
