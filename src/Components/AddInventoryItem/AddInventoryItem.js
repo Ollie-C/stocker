@@ -6,28 +6,33 @@ import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import { useState } from "react";
 // const validator = require("validator");
 
-const AddInventoryItem = () => {
+const AddInventoryItem = ({ warehouses }) => {
   const navigate = useNavigate();
   const [itemDetails, setItemDetails] = useState({
-    warehouseID: "",
-    warehouseName: "",
+    warehouseName: "Jersey",
     itemName: "",
     description: "",
-    category: "",
-    status: "",
-    quantity: 0,
+    category: "Accessories",
+    stock: "",
+    quantity: "0",
   });
-  const [stock, setStock] = useState("In stock");
+  const [stock, setStock] = useState("In Stock");
 
   const addItem = async () => {
+    // console.log(warehouses);
+    // const warehouse = warehouses.find(
+    //   (warehouse) => warehouse.name === itemDetails.warehouseName
+    // );
+    // console.log(warehouse);
     const { data } = await axios
       .post("http://localhost:8080/inventory", {
-        warehouseID: itemDetails.warehouseID,
+        // warehouseID: warehouse.id,
         warehouseName: itemDetails.warehouseName,
         itemName: itemDetails.itemName,
         description: itemDetails.description,
         category: itemDetails.category,
-        status: itemDetails.status,
+        status: itemDetails.stock,
+        quantity: parseInt(itemDetails.quantity),
       })
       .catch((error) => {
         alert(error.response.statusText);
@@ -37,34 +42,34 @@ const AddInventoryItem = () => {
   };
 
   const handleChange = (e) => {
-    if (e === "In stock") {
+    if (e.target.value === "In stock") {
       setStock("In stock");
     }
-    if (e === "Out of stock") {
+    if (e.target.value === "Out of stock") {
       setStock("Out of stock");
     }
-    console.log(e);
-    // setItemDetails({
-    //   ...itemDetails,
-    //   [e.target.name]: e.target.value,
-    // });
+
+    setItemDetails({
+      ...itemDetails,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const submitHandler = (e) => {
-    // e.preventDefault();
-    // //Loops through the value submitted in the form
-    // const submittedValues = Object.values(itemDetails);
-    // //Finds empty values
-    // const errors = submittedValues.filter((value) => {
-    //   return !value;
-    // });
-    // if (errors.length > 0) {
-    //   alert("Please fill in all fields.");
-    // } else {
-    //   addItem();
-    //   alert("Success.");
-    //   navigate("/");
-    // }
+    e.preventDefault();
+    //Loops through the value submitted in the form
+    const submittedValues = Object.values(itemDetails);
+    //Finds empty values
+    const errors = submittedValues.filter((value) => {
+      return !value;
+    });
+    if (errors.length > 0) {
+      alert("Please fill in all fields.");
+    } else {
+      addItem();
+      alert("Success.");
+      navigate("/");
+    }
   };
 
   return (
@@ -74,6 +79,7 @@ const AddInventoryItem = () => {
           className="addInventoryItem-header__icon"
           src={backIcon}
           alt="back-button"
+          onClick={() => navigate(-1)}
         />
         <h1 className="addInventoryItem-header__title">
           Add New Inventory Item
@@ -91,7 +97,7 @@ const AddInventoryItem = () => {
               className="form__input"
               placeholder="Item Name"
               name="itemName"
-              onChange={(e) => handleChange(e.target.value)}
+              onChange={(e) => handleChange(e)}
             />
             <label htmlFor="description" className="form__label">
               Description
@@ -100,17 +106,19 @@ const AddInventoryItem = () => {
               className="form__textarea"
               placeholder="Please enter a brief item description..."
               name="description"
-              onChange={(e) => handleChange(e.target.value)}
+              onChange={(e) => handleChange(e)}
             ></textarea>
             <label htmlFor="category" className="form__label">
               Category
             </label>
             <select
               name="category"
-              className="form__input"
-              onChange={(e) => handleChange(e.target.value)}
+              className="form__input form__input--dropdown"
+              onChange={(e) => handleChange(e)}
             >
-              <option value="Accessories">Accessories</option>
+              <option defaultValue="Accessories" value="Accessories">
+                Accessories
+              </option>
               <option value="Apparel">Apparel</option>
               <option value="Electronics">Electronics</option>
               <option value="Gear">Gear</option>
@@ -126,19 +134,19 @@ const AddInventoryItem = () => {
               <input
                 type="radio"
                 name="stock"
-                value="In stock"
-                onClick={(e) => handleChange(e.target.value)}
+                value="In Stock"
+                onClick={(e) => handleChange(e)}
               />
               <label className="form__label--radio">In Stock</label>
               <input
                 type="radio"
                 name="stock"
-                value="Out of stock"
-                onClick={(e) => handleChange(e.target.value)}
+                value="Out of Stock"
+                onClick={(e) => handleChange(e)}
               />
               <label className="form__label--radio">Out of stock</label>
             </div>
-            {stock === "In stock" ? (
+            {stock === "In Stock" ? (
               <>
                 <label htmlFor="quantity" className="form__label">
                   Quantity
@@ -148,20 +156,20 @@ const AddInventoryItem = () => {
                   name="quantity"
                   className="form__input form__input--quantity"
                   defaultValue="0"
-                  onChange={(e) => handleChange(e.target.value)}
+                  onChange={(e) => handleChange(e)}
                 ></input>
               </>
             ) : (
               <></>
             )}
 
-            <label htmlFor="warehouse" className="form__label">
+            <label htmlFor="warehouseName" className="form__label">
               Warehouse
             </label>
             <select
-              name="warehouse"
-              className="form__input"
-              onChange={(e) => handleChange(e.target.value)}
+              name="warehouseName"
+              className="form__input form__input--dropdown"
+              onChange={(e) => handleChange(e)}
             >
               <option value="Jersey">Jersey</option>
               <option value="Manhattan">Manhattan</option>

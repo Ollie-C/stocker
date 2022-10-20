@@ -75,7 +75,6 @@ function App() {
                 path="/warehouses/details/:warehouseId"
                 element={<WarehouseDetails />}
               />
-              <Route path="/inventories/add" element={<AddInventoryItem />} />
             </Routes>
           </div>
         </div>
