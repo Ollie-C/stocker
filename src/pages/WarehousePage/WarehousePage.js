@@ -45,11 +45,6 @@ const WarehousePage = () => {
   };
   /////////////////////////axios delete warehouses
 
-  /////////////////////////axios edit warehouses
-  // const editWarehouse = (event, warehouseId) => {
-  //}
-  /////////////////////////axios edit warehouses
-
   return (
     <>
       <WarehouseList
