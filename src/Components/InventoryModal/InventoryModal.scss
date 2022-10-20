@@ -1,0 +1,105 @@
+@use "../../styles/partials/fonts";
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/resets";
+
+.modal {
+  &__card {
+    padding: 0 16px;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    background-color: white;
+
+    @include tablet {
+      background-color: rgba($color: $background-colour-1, $alpha: 0.8);
+      height: 100vh;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.1);
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  &__card-within {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    @include tablet {
+      position: relative;
+      height: 262px;
+      width: 672px;
+      margin: auto 0;
+      border-radius: 3px;
+      background-color: #fff;
+      padding: 50px 64px 10px 64px;
+    }
+  }
+
+  &__title-paragraph-container {
+  }
+
+  &__title {
+    margin-top: 80px;
+    // left: 16px;
+    // top: 60px;
+
+    font-family: "Titillium Web";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 36px;
+
+    color: #13182c;
+    @include tablet {
+      margin: 20px 0;
+    }
+  }
+
+  &__confirmation-paragraph {
+    font-family: "Titillium Web";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 26px;
+    color: #13182c;
+  }
+
+  &__cross-btn {
+    position: absolute;
+    right: 17px;
+    top: 2%;
+
+    @include tablet {
+      top: 8%;
+    }
+  }
+
+  &__buttons {
+    margin: 0 auto;
+    width: 100%;
+    @include tablet {
+      padding-top: 25px;
+      gap: 10px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &__button-cancel {
+    @include form-button;
+  }
+
+  &__button-delete {
+    @include form-button;
+    background-color: #c94515;
+  }
+}

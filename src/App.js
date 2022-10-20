@@ -60,6 +60,19 @@ function App() {
       });
   };
 
+  //delete Inventory
+  const deleteInventory = (itemId) => {
+    console.log("delete clicked");
+    axios
+      .delete(`http://localhost:8080/inventory/${itemId}`)
+      .then((response) => {
+        axios.get(`http://localhost:8080/inventory`).then((response) => {
+          setInventories(response.data);
+          setShowModal(false);
+        });
+      });
+  };
+
   return (
     <>
       <BrowserRouter>
@@ -72,8 +85,8 @@ function App() {
                 element={
                   <WarehousePage
                     warehouses={warehouses}
-                    showModal={showModal}
                     deleteWarehouse={deleteWarehouse}
+                    showModal={showModal}
                     hideModal={hideModal}
                     handleSelectedProduct={handleSelectedProduct}
                     selectedProduct={selectedProduct}
@@ -94,7 +107,12 @@ function App() {
                 element={
                   <InventoryPage
                     inventories={inventories}
+                    deleteInventory={deleteInventory}
                     showModal={showModal}
+                    hideModal={hideModal}
+                    handleSelectedProduct={handleSelectedProduct}
+                    selectedProduct={selectedProduct}
+                    showModalHandler={showModalHandler}
                   />
                 }
               />

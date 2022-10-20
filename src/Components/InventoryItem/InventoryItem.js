@@ -3,8 +3,15 @@ import { Link } from "react-router-dom";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import "./InventoryItem.scss";
 
-const InventoryItem = ({ inventory }) => {
-  console.log(inventory);
+const InventoryItem = ({
+  inventory,
+  handleSelectedProduct,
+  showModalHandler,
+}) => {
+  const deleteClickHandler = () => {
+    handleSelectedProduct(inventory);
+    showModalHandler();
+  };
   return (
     <article className="card">
       <div className="card__text-wrapper">
@@ -30,10 +37,12 @@ const InventoryItem = ({ inventory }) => {
         </div>
       </div>
       <div className="card__buttons">
-        <button className="card__delete-button"></button>
+        <button
+          onClick={deleteClickHandler}
+          className="card__delete-button"></button>
         {/* <Link to={`/${warehouse.id}/edit`}> */}
         <button
-          // onClick={(e) => handleSelectedProduct(warehouse)}
+          onClick={(e) => handleSelectedProduct(inventory)}
           className="card__edit-button"></button>
         {/* </Link> */}
       </div>

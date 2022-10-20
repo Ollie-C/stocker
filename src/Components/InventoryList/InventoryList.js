@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import "./InventoryList.scss";
 import InventoryItem from "../InventoryItem/InventoryItem";
 
-const InventoryList = ({ inventories }) => {
+const InventoryList = ({
+  inventories,
+  handleSelectedProduct,
+  showModalHandler,
+}) => {
   // console.log(inventories);
   // if (inventories.length) {
   //   return <p>Loading...</p>;
@@ -48,7 +52,14 @@ const InventoryList = ({ inventories }) => {
       </ul>
       <ul className="List">
         {inventories.map((inventory) => {
-          return <InventoryItem key={inventory.id} inventory={inventory} />;
+          return (
+            <InventoryItem
+              key={inventory.id}
+              inventory={inventory}
+              handleSelectedProduct={handleSelectedProduct}
+              showModalHandler={showModalHandler}
+            />
+          );
         })}
       </ul>
     </>
