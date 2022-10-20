@@ -1,5 +1,3 @@
-import { useState } from "react";
-import Modal from "./Components/Modal/Modal";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Components/Header/Header";
 import WarehousePage from "./pages/WarehousePage/WarehousePage";
@@ -11,10 +9,14 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-        <Routes>
-          <Route path="/" element={<WarehousePage />} />
-          <Route path="/:warehouseId/edit" element={<EditWarehouse />} />
-        </Routes>
+        <div className="parent">
+          <div className="app-container">
+            <Routes>
+              <Route path="/" element={<WarehousePage />} />
+              <Route path="/:warehouseId/edit" element={<EditWarehouse />} />
+            </Routes>
+          </div>
+        </div>
       </BrowserRouter>
     </>
   );
