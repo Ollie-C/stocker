@@ -8,41 +8,26 @@ import { useState } from "react";
 
 const AddInventoryItem = () => {
   const navigate = useNavigate();
-  const [stock, setStock] = useState("In Stock");
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [contactName, setContactName] = useState("");
-  const [position, setPosition] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  // const [error, setError] = useState(false);
+  const [itemDetails, setItemDetails] = useState({
+    warehouseID: "",
+    warehouseName: "",
+    itemName: "",
+    description: "",
+    category: "",
+    status: "",
+    quantity: 0,
+  });
+  const [stock, setStock] = useState("In stock");
 
-  const addInventoryItem = async (
-    e,
-    name,
-    address,
-    city,
-    country,
-    contactName,
-    position,
-    phone,
-    email
-  ) => {
-    e.preventDefault();
+  const addItem = async () => {
     const { data } = await axios
-      .post("http://localhost:8080/warehouses", {
-        name: name,
-        address: address,
-        city: city,
-        country: country,
-        contact: {
-          contactName: contactName,
-          position: position,
-          phone: phone,
-          email: email,
-        },
+      .post("http://localhost:8080/inventory", {
+        warehouseID: itemDetails.warehouseID,
+        warehouseName: itemDetails.warehouseName,
+        itemName: itemDetails.itemName,
+        description: itemDetails.description,
+        category: itemDetails.category,
+        status: itemDetails.status,
       })
       .catch((error) => {
         alert(error.response.statusText);
@@ -51,33 +36,35 @@ const AddInventoryItem = () => {
     console.log(data);
   };
 
-  //FORM VALIDATION
-  // const validateInput = (input) => {
-  //   const isValid = input.value.length > 0;
-  //   if (!isValid) {
-  //     setError(false)
-  //   }
-  // };
+  const handleChange = (e) => {
+    if (e === "In stock") {
+      setStock("In stock");
+    }
+    if (e === "Out of stock") {
+      setStock("Out of stock");
+    }
+    console.log(e);
+    // setItemDetails({
+    //   ...itemDetails,
+    //   [e.target.name]: e.target.value,
+    // });
+  };
 
   const submitHandler = (e) => {
-    e.preventDefault();
-    // console.log(validator.isEmail(email));
-    // if (error == false){
-    //   alert("Fill in all fields")
+    // e.preventDefault();
+    // //Loops through the value submitted in the form
+    // const submittedValues = Object.values(itemDetails);
+    // //Finds empty values
+    // const errors = submittedValues.filter((value) => {
+    //   return !value;
+    // });
+    // if (errors.length > 0) {
+    //   alert("Please fill in all fields.");
+    // } else {
+    //   addItem();
+    //   alert("Success.");
+    //   navigate("/");
     // }
-    addInventoryItem(
-      e,
-      name,
-      address,
-      city,
-      country,
-      contactName,
-      position,
-      phone,
-      email
-    );
-    alert("Success.");
-    navigate("/");
   };
 
   return (
@@ -96,15 +83,15 @@ const AddInventoryItem = () => {
         <div className="form-fields-wrapper">
           <div className="form__fields">
             <h2 className="form__title">Item Details</h2>
-            <label htmlFor="name" className="form__label">
+            <label htmlFor="itemName" className="form__label">
               Item Name
             </label>
             <input
               type="text"
               className="form__input"
               placeholder="Item Name"
-              name="name"
-              onChange={(e) => setName(e.target.value)}
+              name="itemName"
+              onChange={(e) => handleChange(e.target.value)}
             />
             <label htmlFor="description" className="form__label">
               Description
@@ -113,11 +100,16 @@ const AddInventoryItem = () => {
               className="form__textarea"
               placeholder="Please enter a brief item description..."
               name="description"
+              onChange={(e) => handleChange(e.target.value)}
             ></textarea>
             <label htmlFor="category" className="form__label">
               Category
             </label>
-            <select name="category" className="form__input">
+            <select
+              name="category"
+              className="form__input"
+              onChange={(e) => handleChange(e.target.value)}
+            >
               <option value="Accessories">Accessories</option>
               <option value="Apparel">Apparel</option>
               <option value="Electronics">Electronics</option>
@@ -131,25 +123,46 @@ const AddInventoryItem = () => {
             <h2 className="form__title">Item Availability</h2>
             <label className="form__label">Status</label>
             <div className="form__radio-buttons">
-              <input type="radio" name="stock" value="In Stock" />
+              <input
+                type="radio"
+                name="stock"
+                value="In stock"
+                onClick={(e) => handleChange(e.target.value)}
+              />
               <label className="form__label--radio">In Stock</label>
-              <input type="radio" name="stock" value="Out of stock" />
+              <input
+                type="radio"
+                name="stock"
+                value="Out of stock"
+                onClick={(e) => handleChange(e.target.value)}
+              />
               <label className="form__label--radio">Out of stock</label>
             </div>
-            <label htmlFor="quantity" className="form__label">
-              Quantity
-            </label>
-            <input
-              type="number"
-              name="quantity"
-              value="0"
-              className="form__input"
-            />
+            {stock === "In stock" ? (
+              <>
+                <label htmlFor="quantity" className="form__label">
+                  Quantity
+                </label>
+                <input
+                  type="number"
+                  name="quantity"
+                  className="form__input form__input--quantity"
+                  defaultValue="0"
+                  onChange={(e) => handleChange(e.target.value)}
+                ></input>
+              </>
+            ) : (
+              <></>
+            )}
 
             <label htmlFor="warehouse" className="form__label">
               Warehouse
             </label>
-            <select name="warehouse" className="form__input">
+            <select
+              name="warehouse"
+              className="form__input"
+              onChange={(e) => handleChange(e.target.value)}
+            >
               <option value="Jersey">Jersey</option>
               <option value="Manhattan">Manhattan</option>
               <option value="San Fran">San Fran</option>
@@ -166,9 +179,9 @@ const AddInventoryItem = () => {
         </button>
         <button
           className="form__button form__button--blue"
-          form="addWarehouseForm"
+          form="addInventoryItemForm"
         >
-          + Add Warehouse
+          + Add Item
         </button>
       </section>
     </main>
