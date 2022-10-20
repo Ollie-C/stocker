@@ -9,6 +9,7 @@ import WarehouseDetails from "./Components/WarehouseDetails/WarehouseDetails";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InventoryPage from "./pages/InventoryPage/InventoryPage";
+import EditInventory from "./Components/EditInventory/EditInventory";
 
 function App() {
   const [warehouses, SetWarehouses] = useState([]);
@@ -94,7 +95,7 @@ function App() {
                   />
                 }
               />
-              <Route InventoryPage inventories={inventories} />
+              {/* <Route InventoryPage inventories={inventories} /> */}
               <Route path="/warehouses/add" element={<AddWarehouse />} />
               <Route path="/:warehouseId/edit" element={<EditWarehouse />} />
               <Route
@@ -115,6 +116,10 @@ function App() {
                     showModalHandler={showModalHandler}
                   />
                 }
+              />
+              <Route
+                path="/inventory/inventory/:itemId/edit"
+                element={<EditInventory />}
               />
             </Routes>
           </div>

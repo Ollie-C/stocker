@@ -13,14 +13,15 @@ const InventoryModal = ({
     <section className="modal">
       <div className="modal__card">
         <div className="modal__card-within">
-          <Link to="/">
+          <button className="modal__cross-btn" onClick={hideModal}>
             <img className="modal__cross-btn" src={closeBtn} alt="cross-btn" />
-          </Link>
+          </button>
           <div className="modal__title-paragraph-container">
-            <h1 className="modal__title">Delete Item warehouse</h1>
+            <h1 className="modal__title">Delete {selectedProduct.itemName}</h1>
             <p className="modal__confirmation-paragraph">
-              Please confirm that you’d like to delete the Product from the list
-              of warehouses. You won’t be able to undo this action.
+              Please confirm that you’d like to delete the{" "}
+              {selectedProduct.itemName} from the list of warehouses. You won’t
+              be able to undo this action.
             </p>
           </div>
           <div className="modal__buttons">

@@ -29,6 +29,9 @@ $padding-mobile: 2.4rem;
   }
   &__fields {
     padding: 1.6rem $padding-mobile;
+    @include tablet {
+      width: 50%;
+    }
   }
   &__title {
     padding-bottom: 2.6rem;
@@ -45,6 +48,12 @@ $padding-mobile: 2.4rem;
     @include form-input;
     margin-bottom: 2rem;
   }
+
+  &__input-number {
+    @include form-input-number;
+    margin-bottom: 2rem;
+  }
+
   &__buttons {
     display: flex;
     justify-content: space-between;

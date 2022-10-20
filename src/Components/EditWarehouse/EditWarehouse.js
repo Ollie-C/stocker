@@ -4,7 +4,7 @@ import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import errorIcon from "../../assets/Icons/error-24px.svg";
 import "./EditWarehouse.scss";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const EditWarehouse = () => {
@@ -155,18 +155,20 @@ const EditWarehouse = () => {
   return (
     <main className="main">
       <section className="editWarehouse-header">
-        <img
-          className="editWarehouse-header__icon"
-          src={backIcon}
-          alt="back-button"
-        />
+        <Link className="editWarehouse-header__icon-container" to="/">
+          <img
+            className="editWarehouse-header__icon"
+            src={backIcon}
+            alt="back-button"
+          />
+        </Link>
+
         <h1 className="editWarehouse-header__title">Edit Warehouse</h1>
       </section>
       <form
         className="form"
         id="addWarehouseForm"
-        onSubmit={(e) => saveHandler(e)}
-      >
+        onSubmit={(e) => saveHandler(e)}>
         <div className="form__fields">
           <h2 className="form__title">Warehouse Details</h2>
           {/* <h2 className="form__title">{selectedProduct.id}</h2> */}
@@ -261,8 +263,7 @@ const EditWarehouse = () => {
         </button>
         <button
           className="form__button form__button--blue"
-          form="addWarehouseForm"
-        >
+          form="addWarehouseForm">
           Save
         </button>
       </section>

@@ -40,11 +40,11 @@ const InventoryItem = ({
         <button
           onClick={deleteClickHandler}
           className="card__delete-button"></button>
-        {/* <Link to={`/${warehouse.id}/edit`}> */}
-        <button
-          onClick={(e) => handleSelectedProduct(inventory)}
-          className="card__edit-button"></button>
-        {/* </Link> */}
+        <Link to={`inventory/${inventory.id}/edit`}>
+          <button
+            onClick={(e) => handleSelectedProduct(inventory)}
+            className="card__edit-button"></button>
+        </Link>
       </div>
     </article>
   );
