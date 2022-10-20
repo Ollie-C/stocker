@@ -13,21 +13,7 @@ $desktop-breakpoint: 1280px;
     @content;
   }
 }
-//FIX content size
-@mixin desktop-width {
-  max-width: 1202px;
-  margin: 0 auto;
-}
-@mixin tablet {
-  @media screen and (min-width: $tablet-breakpoint) {
-    @content;
-  }
-}
-@mixin desktop {
-  @media screen and (min-width: $desktop-breakpoint) {
-    @content;
-  }
-}
+
 //FORM STYLING
 @mixin form-button {
   width: 14rem;
