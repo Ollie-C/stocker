@@ -154,14 +154,19 @@ const EditWarehouse = () => {
 
   return (
     <main className="main">
-      <section className="header__Edit">
-        <img className="header__icon" src={backIcon} alt="back-button" />
-        <h1 className="header__title">Edit Warehouse</h1>
+      <section className="editWarehouse-header">
+        <img
+          className="editWarehouse-header__icon"
+          src={backIcon}
+          alt="back-button"
+        />
+        <h1 className="editWarehouse-header__title">Edit Warehouse</h1>
       </section>
       <form
         className="form"
         id="addWarehouseForm"
-        onSubmit={(e) => saveHandler(e)}>
+        onSubmit={(e) => saveHandler(e)}
+      >
         <div className="form__fields">
           <h2 className="form__title">Warehouse Details</h2>
           {/* <h2 className="form__title">{selectedProduct.id}</h2> */}
@@ -256,7 +261,8 @@ const EditWarehouse = () => {
         </button>
         <button
           className="form__button form__button--blue"
-          form="addWarehouseForm">
+          form="addWarehouseForm"
+        >
           Save
         </button>
       </section>

@@ -4,7 +4,8 @@
 @use "../../styles/partials/resets";
 
 $padding-mobile: 2.4rem;
-.editWarehouse-header {
+
+.addWarehouse-header {
   display: flex;
   padding: 3rem $padding-mobile 2rem $padding-mobile;
   @include tablet {
@@ -19,28 +20,46 @@ $padding-mobile: 2.4rem;
     }
   }
 }
+
+//FOR THE BORDERS
+.form-fields-wrapper {
+  border-top: 1px solid $secondary-colour-2;
+  padding: 1.6rem 0;
+  @include tablet {
+    border: none;
+  }
+}
+
 .form {
   @include tablet {
     display: flex;
   }
+
   &__fields {
-    padding: 1.6rem $padding-mobile;
+    padding: 0 $padding-mobile;
   }
+
   &__title {
     padding-bottom: 2.6rem;
     @include tablet {
       font-size: 2.4rem;
     }
   }
+
   &__label {
     font-weight: 600;
     font-size: 1.3rem;
     padding: 0.4rem 0;
   }
+
   &__input {
     @include form-input;
     margin-bottom: 2rem;
+    &--error {
+      outline: 1px solid $supporting-colour-2;
+    }
   }
+
   &__buttons {
     display: flex;
     justify-content: space-between;
@@ -50,6 +69,7 @@ $padding-mobile: 2.4rem;
       justify-content: flex-end;
     }
   }
+
   &__button {
     @include form-button;
     &--blue {

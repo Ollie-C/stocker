@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import WarehouseItem from "../WarehouseItem/WarehouseItem";
 import "../WarehouseList/WarehouseList.scss";
 import sort from "../../assets/Icons/sort-24px.svg";
@@ -20,9 +20,11 @@ const WarehouseList = ({ warehouses, handleSelectedProduct }) => {
             className="warehouse-list__search split"
             placeholder="Search..."
           ></input>
-          <button className="warehouse-list__button split">
-            + Add New Warehouse
-          </button>
+          <Link to="/warehouses/add">
+            <button className="warehouse-list__button">
+              + Add New Warehouse
+            </button>
+          </Link>
         </div>
       </header>
       <ul className="key">
