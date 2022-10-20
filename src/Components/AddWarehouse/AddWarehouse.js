@@ -50,6 +50,12 @@ const AddWarehouse = () => {
     console.log(data);
   };
 
+  //FORM VALIDATION
+  const isValid = (e, value) => {
+    e.preventDefault();
+    return value.length > 0;
+  };
+
   //FORM SUBMIT HANDLER
   const submitHandler = (e) => {
     e.preventDefault();
@@ -84,10 +90,13 @@ const AddWarehouse = () => {
           </label>
           <input
             type="text"
-            className="form__input"
+            className={`form__input ${
+              !isValid(e.target.value) ? "form__input--error" : ""
+            }}`}
             placeholder="Warehouse Name"
             name="name"
             onChange={(e) => setName(e.target.value)}
+            onBlur={isValid(e.target.value)}
           />
           <label htmlFor="address" className="form__label">
             Street Address
