@@ -4,9 +4,11 @@ import WarehouseItem from "../WarehouseItem/WarehouseItem";
 import "../WarehouseList/WarehouseList.scss";
 import sort from "../../assets/Icons/sort-24px.svg";
 
-const WarehouseList = ({ warehouses, handleSelectedProduct }) => {
-  console.log(!warehouses.length);
-
+const WarehouseList = ({
+  warehouses,
+  handleSelectedProduct,
+  showModalHandler,
+}) => {
   if (!warehouses.length) {
     return <p>Loading...</p>;
   }
@@ -55,6 +57,7 @@ const WarehouseList = ({ warehouses, handleSelectedProduct }) => {
               key={warehouse.id}
               warehouse={warehouse}
               handleSelectedProduct={handleSelectedProduct}
+              showModalHandler={showModalHandler}
             />
           );
         })}
