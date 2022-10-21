@@ -118,7 +118,7 @@ function App() {
                 }
               />
               <Route
-                path="/inventory/inventory/:itemId/edit"
+                path="/inventory/:itemId/edit"
                 element={<EditInventory />}
               />
             </Routes>

@@ -9,25 +9,19 @@ const EditInventory = () => {
   const navigate = useNavigate();
   const { itemId } = useParams();
 
-  // const [itemName, setItemName] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [status, setStatus] = useState(false);
-  // const [quantity, setQuantity] = useState(0);
-  // const [warehouseName, setWarehouseName] = useState(false);
-
   const [formFields, setFormFields] = useState({
     name: "",
     description: "",
     category: "",
-    status: 0,
-    quantity: 0,
+    status: "",
+    quantity: "",
     warehouseName: "",
   });
 
   // Will update the correct input state, based
   // on whichever input the user changed.
   const inputChangeHandler = (e) => {
+    console.log(e.target.value);
     const value = e.target.value;
 
     setFormFields({
@@ -60,6 +54,7 @@ const EditInventory = () => {
       }
     );
     navigate("/");
+    console.log(data);
   };
 
   const saveHandler = (e) => {
@@ -82,15 +77,17 @@ const EditInventory = () => {
       const { data } = await axios.get(
         `http://localhost:8080/inventory/${itemId}`
       );
+      console.log(data);
 
       setFormFields({
-        name: data.name,
+        name: data.itemName,
         description: data.description,
         category: data.category,
         status: data.status,
         quantity: data.quantity,
         warehouseName: data.warehouseName,
       });
+      // console.log(data);
     };
     getInventoryDetails();
   }, [itemId]);
@@ -122,23 +119,28 @@ const EditInventory = () => {
             placeholder="Warehouse Name"
             name="name"
             onChange={(e) => inputChangeHandler(e)}
+            value={formFields.name}
           />
           <label htmlFor="address" className="form__label">
             Description
           </label>
           <textarea
             name="description"
-            id="description"
             cols="30"
             rows="10"
             className=""
             placeholder="please enter a brief item description.."
-            onChange={(e) => inputChangeHandler(e)}></textarea>
+            onChange={(e) => inputChangeHandler(e)}
+            value={formFields.description}></textarea>
 
           <label htmlFor="category" className="form__label">
             Category
           </label>
-          <select type="text" name="category" className="form__input">
+          <select
+            onChange={(e) => inputChangeHandler(e)}
+            type="text"
+            name="category"
+            className="form__input">
             <option value="Electronics">Electronics</option>
             <option value="Gear">Gear</option>
             <option value="Apparel">Apparel</option>
@@ -156,19 +158,22 @@ const EditInventory = () => {
               type="radio"
               name="status"
               className="form__radio"
+              onChange={(e) => inputChangeHandler(e)}
               value="In Stock"
+              checked={formFields.status === "In Stock"}
             />
-            <label htmlFor="position" className="form__label">
+            <label for="In Stock" className="form__label">
               In Stock
             </label>
             <input
               type="radio"
               name="status"
               className="form__radio"
-              value="Out of Stock"
               onChange={(e) => inputChangeHandler(e)}
+              value="Out of Stock"
+              checked={formFields.status === "Out of Stock"}
             />
-            <label htmlFor="phone" className="form__label">
+            <label for="Out of Stock" className="form__label">
               Out of stock
             </label>
           </div>
@@ -179,13 +184,17 @@ const EditInventory = () => {
             type="number"
             name="quantity"
             className="form__input form__input--quantity"
-            value="In Stock"
             onChange={(e) => inputChangeHandler(e)}
+            value={formFields.quantity}
           />
           <label htmlFor="phone" className="form__label">
             Warehouse
           </label>
-          <select type="text" name="WarehouseName" className="form__input">
+          <select
+            onChange={(e) => inputChangeHandler(e)}
+            type="text"
+            name="warehouseName"
+            className="form__input">
             <option value="Manhattan">Manhattan</option>
             <option value="Washington">Washington</option>
             <option value="Jersey">Jersey</option>
