@@ -1,5 +1,7 @@
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import { Link } from "react-router-dom";
+import "./WarehouseInventoryItem.scss";
+import editbutton from "../../assets/Icons/edit-24px.svg";
 
 const WarehouseInventoryItem = ({ inventoryItem }) => {
   return (
@@ -17,7 +19,17 @@ const WarehouseInventoryItem = ({ inventoryItem }) => {
           </div>
           <div className="card__right">
             <h5 className="card__label">Status</h5>
-            <p className="card__contact-name split">{inventoryItem.status}</p>
+            <article className="card__contact-name split">
+              <p
+                className={` stock ${
+                  inventoryItem.status === "In Stock"
+                    ? "default--instock"
+                    : "default--outofstock"
+                }`}
+              >
+                {inventoryItem.status}
+              </p>
+            </article>
             <h5 className="card__label">Quantity</h5>
             <div className="card__contact-details">
               <p className="card__contact-phone">{inventoryItem.quantity}</p>
@@ -27,7 +39,10 @@ const WarehouseInventoryItem = ({ inventoryItem }) => {
         <div className="card__buttons">
           <button className="card__delete-button"></button>
           <Link to={`/`}>
-            <button className="card__edit-button"></button>
+            <div className="card__edit-button">
+              {" "}
+              <img className="card__edit-img" src={editbutton} />
+            </div>
           </Link>
         </div>
       </article>

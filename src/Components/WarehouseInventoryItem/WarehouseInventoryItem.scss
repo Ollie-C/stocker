@@ -1,0 +1,26 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/listItem";
+
+.stock {
+  border-radius: 20px;
+  width: fit-content;
+  padding: 0 0.8rem;
+  height: 2.4rem;
+  text-transform: uppercase;
+}
+
+.default--instock {
+  background-color: rgba($supporting-colour-1, 0.07);
+  color: $supporting-colour-1;
+}
+
+.default--outofstock {
+  background-color: rgba($supporting-colour-2, 0.07);
+  color: $supporting-colour-2;
+}
+
+.WH-details__label {
+  text-transform: uppercase;
+  color: $secondary-colour-1;
+}
