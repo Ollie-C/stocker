@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import "./EditInventory.scss";
 import { useState } from "react";
@@ -7,7 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const EditInventory = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { itemId } = useParams();
 
   const [itemName, setItemName] = useState("");
@@ -40,7 +39,7 @@ const EditInventory = () => {
 
   const saveHandler = (e) => {
     e.preventDefault();
-    editWarehouse(
+    editInventory(
       e,
       itemName,
       description,
