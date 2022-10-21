@@ -4,6 +4,7 @@ import WarehousePage from "./pages/WarehousePage/WarehousePage";
 import "./styles/partials/_resets.scss";
 import AddWarehouse from "./Components/AddWarehouse/AddWarehouse";
 import EditWarehouse from "./Components/EditWarehouse/EditWarehouse";
+import AddInventoryItem from "./Components/AddInventoryItem/AddInventoryItem";
 import WarehouseDetails from "./Components/WarehouseDetails/WarehouseDetails";
 
 import { useState, useEffect } from "react";
@@ -97,7 +98,10 @@ function App() {
               />
               {/* <Route InventoryPage inventories={inventories} /> */}
               <Route path="/warehouses/add" element={<AddWarehouse />} />
-              <Route path="/:warehouseId/edit" element={<EditWarehouse />} />
+              <Route
+                path="/warehouses/:warehouseId/edit"
+                element={<EditWarehouse />}
+              />
               <Route
                 path="/warehouses/details/:warehouseId"
                 element={<WarehouseDetails />}
@@ -118,9 +122,10 @@ function App() {
                 }
               />
               <Route
-                path="/inventory/inventory/:itemId/edit"
+                path="inventory/:itemId/edit"
                 element={<EditInventory />}
               />
+              <Route path="/inventory/add" element={<AddInventoryItem />} />
             </Routes>
           </div>
         </div>

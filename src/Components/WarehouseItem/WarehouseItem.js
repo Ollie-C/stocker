@@ -21,7 +21,8 @@ const WarehouseItem = ({
           <h5 className="card__label">Warehouse</h5>
           <Link
             to={`/warehouses/details/${warehouse.id}`}
-            className="card__name split">
+            className="card__name split"
+          >
             <p>{warehouse.name}</p>
             <img className="card__chevron" src={chevron} />
           </Link>
@@ -43,11 +44,13 @@ const WarehouseItem = ({
       <div className="card__buttons">
         <button
           onClick={deleteClickHandler}
-          className="card__delete-button"></button>
-        <Link to={`/${warehouse.id}/edit`}>
+          className="card__delete-button"
+        ></button>
+        <Link to={`/warehouses/${warehouse.id}/edit`}>
           <button
             onClick={(e) => handleSelectedProduct(warehouse)}
-            className="card__edit-button"></button>
+            className="card__edit-button"
+          ></button>
         </Link>
       </div>
     </article>
