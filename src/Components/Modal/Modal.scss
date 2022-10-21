@@ -64,7 +64,7 @@
 
     color: #13182c;
     @include tablet {
-      margin: 20px 0;
+      margin: 5px 0;
     }
   }
 
@@ -107,8 +107,7 @@
   }
 
   &__button-delete {
-    @include form-button;
-    background-color: #c94515;
+    @include form-button-delete;
   }
 
   &__cross-btn {

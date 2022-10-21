@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const EditWarehouse = () => {
+const EditWarehouse = ({ getWarehouses }) => {
   const navigate = useNavigate();
   const { warehouseId } = useParams();
   const [showMessage, setShowMessage] = useState(false);
@@ -143,6 +143,7 @@ const EditWarehouse = () => {
     getWarehouseDetails();
     // Set the state above
   }, [warehouseId]);
+  getWarehouses();
 
   return (
     <main className="main">
