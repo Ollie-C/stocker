@@ -59,9 +59,7 @@ const AddInventoryItem = ({ warehouses }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    //Loops through the value submitted in the form
     const submittedValues = Object.values(itemDetails);
-    //Finds empty values
     const errors = submittedValues.filter((value) => {
       return !value;
     });
@@ -70,7 +68,7 @@ const AddInventoryItem = ({ warehouses }) => {
     } else {
       addItem();
       alert("Success.");
-      navigate("/");
+      navigate("/inventory");
     }
   };
 
@@ -87,35 +85,39 @@ const AddInventoryItem = ({ warehouses }) => {
           Add New Inventory Item
         </h1>
       </section>
-      <form className="form" id="addInventoryItemForm" onSubmit={submitHandler}>
+      <form
+        className="addI-form"
+        id="addInventoryItemForm"
+        onSubmit={submitHandler}
+      >
         <div className="form-fields-wrapper">
-          <div className="form__fields">
-            <h2 className="form__title">Item Details</h2>
-            <label htmlFor="itemName" className="form__label">
+          <div className="addI-form__fields">
+            <h2 className="addI-form__title">Item Details</h2>
+            <label htmlFor="itemName" className="addI-form__label">
               Item Name
             </label>
             <input
               type="text"
-              className="form__input"
+              className="addI-form__input"
               placeholder="Item Name"
               name="itemName"
               onChange={(e) => handleChange(e)}
             />
-            <label htmlFor="description" className="form__label">
+            <label htmlFor="description" className="addI-form__label">
               Description
             </label>
             <textarea
-              className="form__textarea"
+              className="addI-form__textarea"
               placeholder="Please enter a brief item description..."
               name="description"
               onChange={(e) => handleChange(e)}
             ></textarea>
-            <label htmlFor="category" className="form__label">
+            <label htmlFor="category" className="addI-form__label">
               Category
             </label>
             <select
               name="category"
-              className="form__input form__input--dropdown"
+              className="addI-form__input addI-form__input--dropdown"
               onChange={(e) => handleChange(e)}
             >
               <option defaultValue="Accessories" value="Accessories">
@@ -129,34 +131,34 @@ const AddInventoryItem = ({ warehouses }) => {
           </div>
         </div>
         <div className="form-fields-wrapper">
-          <div className="form__fields">
-            <h2 className="form__title">Item Availability</h2>
-            <label className="form__label">Status</label>
-            <div className="form__radio-buttons">
+          <div className="addI-form__fields">
+            <h2 className="addI-form__title">Item Availability</h2>
+            <label className="addI-form__label">Status</label>
+            <div className="addI-form__radio-buttons">
               <input
                 type="radio"
                 name="stock"
                 value="In Stock"
                 onClick={(e) => handleChange(e)}
               />
-              <label className="form__label--radio">In Stock</label>
+              <label className="addI-form__label--radio">In Stock</label>
               <input
                 type="radio"
                 name="stock"
                 value="Out of Stock"
                 onClick={(e) => handleChange(e)}
               />
-              <label className="form__label--radio">Out of stock</label>
+              <label className="addI-form__label--radio">Out of stock</label>
             </div>
             {stock ? (
               <>
-                <label htmlFor="quantity" className="form__label">
+                <label htmlFor="quantity" className="addI-form__label">
                   Quantity
                 </label>
                 <input
                   type="number"
                   name="quantity"
-                  className="form__input form__input--quantity"
+                  className="addI-form__input addI-form__input--quantity"
                   defaultValue="0"
                   onChange={(e) => handleChange(e)}
                 ></input>
@@ -165,12 +167,12 @@ const AddInventoryItem = ({ warehouses }) => {
               <></>
             )}
 
-            <label htmlFor="warehouseName" className="form__label">
+            <label htmlFor="warehouseName" className="addI-form__label">
               Warehouse
             </label>
             <select
               name="warehouseName"
-              className="form__input form__input--dropdown"
+              className="addI-form__input addI-form__input--dropdown"
               onChange={(e) => handleChange(e)}
             >
               <option value="Jersey">Jersey</option>
@@ -183,12 +185,12 @@ const AddInventoryItem = ({ warehouses }) => {
         </div>
       </form>
 
-      <section className="form__buttons">
-        <button className="form__button" onClick={() => navigate(-1)}>
+      <section className="addI-form__buttons">
+        <button className="addI-form__button" onClick={() => navigate(-1)}>
           Cancel
         </button>
         <button
-          className="form__button form__button--blue"
+          className="addI-form__button addI-form__button--blue"
           form="addInventoryItemForm"
         >
           + Add Item
