@@ -3,12 +3,54 @@ import { Link } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import "./EditInventory.scss";
 import { useState } from "react";
-// import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const EditInventory = () => {
   // const navigate = useNavigate();
-  // const { itemId } = useParams();
+  const { itemId } = useParams();
+
+  const [itemName, setItemName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [status, setStatus] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+  const [warehouseName, setWarehouseName] = useState(false);
+
+  const editInventory = async (e) => {
+    e.preventDefault();
+
+    const { data } = await axios.put(
+      `http://localhost:8080/inventory/${itemId}`,
+      {
+        name: e.target.name.value,
+        description: e.target.description.value,
+        category: e.target.category.value,
+        status: e.target.status.value,
+        quantity: e.target.quantity.value,
+        WarehouseName: e.target.WarehouseName.value,
+      }
+    );
+    setTimeout(() => {
+      navigate("/");
+    }, 100);
+
+    console.log("2", data);
+  };
+
+  const saveHandler = (e) => {
+    e.preventDefault();
+    editWarehouse(
+      e,
+      itemName,
+      description,
+      category,
+      status,
+      quantity,
+      warehouseName
+    );
+    // console.log("success");
+  };
 
   return (
     <>
@@ -86,14 +128,14 @@ const EditInventory = () => {
           </label>
           <input
             type="number"
-            name="status"
+            name="quantity"
             className="form__input-number"
             value="In Stock"
           />
           <label htmlFor="phone" className="form__label">
             Warehouse
           </label>
-          <select type="text" name="category" className="form__input">
+          <select type="text" name="WarehouseName" className="form__input">
             <option value="Manhattan">Manhattan</option>
             <option value="Washington">Washington</option>
             <option value="Jersey">Jersey</option>
