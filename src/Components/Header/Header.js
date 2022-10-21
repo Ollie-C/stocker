@@ -11,21 +11,13 @@ const Header = () => {
         </Link>
         <nav className="header__nav">
           <ul className="header__links">
-            <Link to="/" className="header__title">
-              <li className="header__item">
-                <a
-                  href="./index.html"
-                  className="header__button header__button--active">
-                  Warehouses
-                </a>
+            <Link to="/" className="header__item">
+              <li className="header__button header__button--active">
+                Warehouses
               </li>
             </Link>
-            <Link to="/inventory" className="header__title">
-              <li className="header__item">
-                <a href="./pages/shows.html" className="header__button">
-                  Inventory
-                </a>
-              </li>
+            <Link to="/inventory" className="header__item">
+              <li className="header__button">Inventory</li>
             </Link>
           </ul>
         </nav>
