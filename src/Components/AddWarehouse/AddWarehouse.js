@@ -65,7 +65,6 @@ const AddWarehouse = () => {
     //   alert("Fill in all fields")
     // }
     addWarehouse(
-      e,
       name,
       address,
       city,

@@ -98,7 +98,10 @@ function App() {
               />
               {/* <Route InventoryPage inventories={inventories} /> */}
               <Route path="/warehouses/add" element={<AddWarehouse />} />
-              <Route path="/:warehouseId/edit" element={<EditWarehouse />} />
+              <Route
+                path="/warehouses/:warehouseId/edit"
+                element={<EditWarehouse />}
+              />
               <Route
                 path="/warehouses/details/:warehouseId"
                 element={<WarehouseDetails />}
@@ -122,6 +125,7 @@ function App() {
                 path="/inventory/inventory/:itemId/edit"
                 element={<EditInventory />}
               />
+              <Route path="/inventory/add" element={<AddInventoryItem />} />
             </Routes>
           </div>
         </div>

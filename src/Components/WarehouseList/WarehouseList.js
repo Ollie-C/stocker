@@ -22,10 +22,8 @@ const WarehouseList = ({
             className="warehouse-list__search split"
             placeholder="Search..."
           ></input>
-          <Link to="/warehouses/add">
-            <button className="warehouse-list__button">
-              + Add New Warehouse
-            </button>
+          <Link to="/warehouses/add" className="warehouse-list__button">
+            + Add New Warehouse
           </Link>
         </div>
       </header>
