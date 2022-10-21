@@ -47,7 +47,7 @@ const WarehouseItem = ({
           onClick={deleteClickHandler}
           className="card__delete-button"
         ></button>
-        <Link to={`/${warehouse.id}/edit`}>
+        <Link to={`warehouses/${warehouse.id}/edit`}>
           <div
             onClick={(e) => handleSelectedProduct(warehouse)}
             className="card__edit-button"
