@@ -22,7 +22,7 @@ const WarehouseList = ({
             className="warehouse-list__search split"
             placeholder="Search..."
           ></input>
-          <Link to="/warehouses/add">
+          <Link to="/inventories/add">
             <button className="warehouse-list__button">
               + Add New Warehouse
             </button>

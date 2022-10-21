@@ -16,7 +16,7 @@ const AddInventoryItem = ({ warehouses }) => {
     stock: "",
     quantity: "0",
   });
-  const [stock, setStock] = useState("In Stock");
+  const [stock, setStock] = useState(true);
 
   const addItem = async () => {
     // console.log(warehouses);
@@ -42,16 +42,18 @@ const AddInventoryItem = ({ warehouses }) => {
   };
 
   const handleChange = (e) => {
-    if (e.target.value === "In stock") {
-      setStock("In stock");
+    const { name, value } = e.target;
+
+    if (value === "In Stock") {
+      setStock(true);
     }
-    if (e.target.value === "Out of stock") {
-      setStock("Out of stock");
+    if (value === "Out of Stock") {
+      setStock(false);
     }
 
     setItemDetails({
       ...itemDetails,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
@@ -146,7 +148,7 @@ const AddInventoryItem = ({ warehouses }) => {
               />
               <label className="form__label--radio">Out of stock</label>
             </div>
-            {stock === "In Stock" ? (
+            {stock ? (
               <>
                 <label htmlFor="quantity" className="form__label">
                   Quantity
