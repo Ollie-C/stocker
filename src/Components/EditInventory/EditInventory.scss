@@ -28,7 +28,12 @@ $padding-mobile: 2.4rem;
     display: flex;
   }
   &__fields {
+    display: flex;
+    flex-direction: column;
     padding: 1.6rem $padding-mobile;
+    @include tablet {
+      width: 50%;
+    }
   }
   &__title {
     padding-bottom: 2.6rem;
@@ -44,7 +49,19 @@ $padding-mobile: 2.4rem;
   &__input {
     @include form-input;
     margin-bottom: 2rem;
+
+    &--quantity {
+      @include tablet {
+        max-width: 30%;
+      }
+    }
   }
+
+  &__input-number {
+    @include form-input-number;
+    margin-bottom: 2rem;
+  }
+
   &__buttons {
     display: flex;
     justify-content: space-between;
