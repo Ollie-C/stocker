@@ -1,0 +1,69 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.warehouse-list {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem;
+    @include tablet {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    @include tablet {
+      flex-direction: row;
+    }
+  }
+
+  &__search {
+    border-radius: 20px;
+    border: 1px solid $secondary-colour-2;
+    padding: 0.8rem 1.6rem;
+    background: url("../../assets/Icons/search-24px.svg") no-repeat 95% 50%;
+    @include tablet {
+      width: 27.4rem;
+    }
+  }
+
+  &__button {
+    background-color: $primary-colour-2;
+    color: $primary-colour-3;
+    border: none;
+    padding: 0.8rem 8.4rem;
+    border-radius: 20px;
+    font-weight: 600;
+    @include tablet {
+      margin-left: 1.6rem;
+      padding: 0.8rem 1.6rem;
+    }
+  }
+}
+
+.key {
+  display: none;
+  @include tablet {
+    display: flex;
+    width: 100%;
+    padding: 1.6rem;
+    justify-content: space-between;
+    background-color: $background-colour-2;
+  }
+  &__label {
+    @include tablet {
+      min-width: 20%;
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__sort {
+    @include tablet {
+      width: 25px;
+    }
+  }
+}

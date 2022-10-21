@@ -1,12 +1,12 @@
 import React from "react";
-import "./Modal.scss";
+import "./InventoryModal.scss";
 import closeBtn from "../../assets/Icons/close-24px.svg";
 import { Link } from "react-router-dom";
 
-const Modal = ({
+const InventoryModal = ({
   hideModal,
   handleSelectedProduct,
-  deleteWarehouse,
+  deleteInventory,
   selectedProduct,
 }) => {
   return (
@@ -17,13 +17,11 @@ const Modal = ({
             <img className="modal__cross-btn" src={closeBtn} alt="cross-btn" />
           </button>
           <div className="modal__title-paragraph-container">
-            <h1 className="modal__title">
-              Delete {selectedProduct.name} warehouse
-            </h1>
+            <h1 className="modal__title">Delete {selectedProduct.itemName}</h1>
             <p className="modal__confirmation-paragraph">
               Please confirm that you’d like to delete the{" "}
-              {selectedProduct.name} from the list of warehouses. You won’t be
-              able to undo this action.
+              {selectedProduct.itemName} from the list of warehouses. You won’t
+              be able to undo this action.
             </p>
           </div>
           <div className="modal__buttons">
@@ -31,7 +29,7 @@ const Modal = ({
               cancel
             </button>
             <button
-              onClick={() => deleteWarehouse(selectedProduct.id)}
+              onClick={() => deleteInventory(selectedProduct.id)}
               className="modal__button-delete">
               delete
             </button>
@@ -42,4 +40,4 @@ const Modal = ({
   );
 };
 
-export default Modal;
+export default InventoryModal;
