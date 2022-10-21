@@ -1,0 +1,83 @@
+@use "../../styles/partials/fonts";
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/resets";
+
+$padding-mobile: 2.4rem;
+.editWarehouse-header {
+  display: flex;
+  padding: 3rem $padding-mobile 2rem $padding-mobile;
+  @include tablet {
+    border-bottom: 1px solid $secondary-colour-2;
+  }
+  &__title {
+    font-weight: 600;
+    font-size: 2.8rem;
+    margin-left: 1rem;
+    @include tablet {
+      font-size: 3.2rem;
+    }
+  }
+
+  &__icon-container {
+    margin-top: 14px;
+  }
+}
+.form {
+  @include tablet {
+    display: flex;
+  }
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem $padding-mobile;
+    @include tablet {
+      width: 50%;
+    }
+  }
+  &__title {
+    padding-bottom: 2.6rem;
+    @include tablet {
+      font-size: 2.4rem;
+    }
+  }
+  &__label {
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 0.4rem 0;
+  }
+  &__input {
+    @include form-input;
+    margin-bottom: 2rem;
+
+    &--quantity {
+      @include tablet {
+        max-width: 30%;
+      }
+    }
+  }
+
+  &__input-number {
+    @include form-input-number;
+    margin-bottom: 2rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.6rem $padding-mobile;
+    background-color: $background-colour-2;
+    @include tablet {
+      justify-content: flex-end;
+    }
+  }
+  &__button {
+    @include form-button;
+    &--blue {
+      @include form-button-blue;
+      @include tablet {
+        margin-left: 2rem;
+      }
+    }
+  }
+}
