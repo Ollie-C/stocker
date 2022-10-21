@@ -28,6 +28,8 @@ $padding-mobile: 2.4rem;
     display: flex;
   }
   &__fields {
+    display: flex;
+    flex-direction: column;
     padding: 1.6rem $padding-mobile;
     @include tablet {
       width: 50%;
@@ -47,6 +49,12 @@ $padding-mobile: 2.4rem;
   &__input {
     @include form-input;
     margin-bottom: 2rem;
+
+    &--quantity {
+      @include tablet {
+        max-width: 30%;
+      }
+    }
   }
 
   &__input-number {

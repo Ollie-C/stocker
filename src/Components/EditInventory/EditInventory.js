@@ -1,7 +1,7 @@
 import React from "react";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import "./EditInventory.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -9,15 +9,44 @@ const EditInventory = () => {
   const navigate = useNavigate();
   const { itemId } = useParams();
 
-  const [itemName, setItemName] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [status, setStatus] = useState(false);
-  const [quantity, setQuantity] = useState(0);
-  const [warehouseName, setWarehouseName] = useState(false);
+  // const [itemName, setItemName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [category, setCategory] = useState("");
+  // const [status, setStatus] = useState(false);
+  // const [quantity, setQuantity] = useState(0);
+  // const [warehouseName, setWarehouseName] = useState(false);
 
-  const editInventory = async (e) => {
+  const [formFields, setFormFields] = useState({
+    name: "",
+    description: "",
+    category: "",
+    status: 0,
+    quantity: 0,
+    warehouseName: "",
+  });
+
+  // Will update the correct input state, based
+  // on whichever input the user changed.
+  const inputChangeHandler = (e) => {
+    const value = e.target.value;
+
+    setFormFields({
+      ...formFields,
+      [e.target.name]: value,
+    });
+  };
+
+  const editInventory = async (
+    e,
+    name,
+    description,
+    category,
+    status,
+    quantity,
+    warehouseName
+  ) => {
     e.preventDefault();
+    console.log("saved button clicked");
 
     const { data } = await axios.put(
       `http://localhost:8080/inventory/${itemId}`,
@@ -30,26 +59,41 @@ const EditInventory = () => {
         WarehouseName: e.target.WarehouseName.value,
       }
     );
-    setTimeout(() => {
-      navigate("/");
-    }, 100);
-
-    console.log("2", data);
+    navigate("/");
   };
 
   const saveHandler = (e) => {
     e.preventDefault();
     editInventory(
       e,
-      itemName,
-      description,
-      category,
-      status,
-      quantity,
-      warehouseName
+      formFields.itemName,
+      formFields.description,
+      formFields.category,
+      formFields.status,
+      formFields.quantity,
+      formFields.warehouseName
     );
     // console.log("success");
   };
+
+  useEffect(() => {
+    // GET request to /warehouses/:warehouseId
+    const getInventoryDetails = async () => {
+      const { data } = await axios.get(
+        `http://localhost:8080/inventory/${itemId}`
+      );
+
+      setFormFields({
+        name: data.name,
+        description: data.description,
+        category: data.category,
+        status: data.status,
+        quantity: data.quantity,
+        warehouseName: data.warehouseName,
+      });
+    };
+    getInventoryDetails();
+  }, [itemId]);
 
   return (
     <>
@@ -63,7 +107,10 @@ const EditInventory = () => {
         </Link>
         <h1 className="editWarehouse-header__title">Edit Inventory Item</h1>
       </section>
-      <form className="form" id="addWarehouseForm">
+      <form
+        onSubmit={(e) => saveHandler(e)}
+        className="form"
+        id="addWarehouseForm">
         <div className="form__fields">
           <h2 className="form__title">Item Details</h2>
           <label htmlFor="name" className="form__label">
@@ -74,6 +121,7 @@ const EditInventory = () => {
             className="form__input"
             placeholder="Warehouse Name"
             name="name"
+            onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="address" className="form__label">
             Description
@@ -84,7 +132,8 @@ const EditInventory = () => {
             cols="30"
             rows="10"
             className=""
-            placeholder="please enter a brief item description.."></textarea>
+            placeholder="please enter a brief item description.."
+            onChange={(e) => inputChangeHandler(e)}></textarea>
 
           <label htmlFor="category" className="form__label">
             Category
@@ -117,6 +166,7 @@ const EditInventory = () => {
               name="status"
               className="form__radio"
               value="Out of Stock"
+              onChange={(e) => inputChangeHandler(e)}
             />
             <label htmlFor="phone" className="form__label">
               Out of stock
@@ -128,8 +178,9 @@ const EditInventory = () => {
           <input
             type="number"
             name="quantity"
-            className="form__input-number"
+            className="form__input form__input--quantity"
             value="In Stock"
+            onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="phone" className="form__label">
             Warehouse
@@ -147,7 +198,7 @@ const EditInventory = () => {
       <section className="form__buttons">
         <button className="form__button">Cancel</button>
         <button
-          // onClick={() => navigate(-1)}
+          onClick={() => navigate(-1)}
           className="form__button form__button--blue"
           form="addWarehouseForm">
           Save
