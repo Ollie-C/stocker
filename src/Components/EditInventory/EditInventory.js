@@ -10,7 +10,7 @@ const EditInventory = () => {
   const { itemId } = useParams();
 
   const [formFields, setFormFields] = useState({
-    name: "",
+    itemName: "",
     description: "",
     category: "",
     status: "",
@@ -21,6 +21,7 @@ const EditInventory = () => {
   // Will update the correct input state, based
   // on whichever input the user changed.
   const inputChangeHandler = (e) => {
+    // console.log(e.target.value);
     console.log(e.target.value);
     const value = e.target.value;
 
@@ -32,25 +33,26 @@ const EditInventory = () => {
 
   const editInventory = async (
     e,
-    name,
+    itemName,
     description,
     category,
     status,
     quantity,
     warehouseName
   ) => {
+    console.log(e);
     e.preventDefault();
     console.log("saved button clicked");
 
     const { data } = await axios.put(
       `http://localhost:8080/inventory/${itemId}`,
       {
-        name: e.target.name.value,
-        description: e.target.description.value,
-        category: e.target.category.value,
-        status: e.target.status.value,
-        quantity: e.target.quantity.value,
-        WarehouseName: e.target.WarehouseName.value,
+        itemName: itemName,
+        description: description,
+        category: category,
+        status: status,
+        quantity: quantity,
+        warehouseName: warehouseName,
       }
     );
     navigate("/");
@@ -68,7 +70,7 @@ const EditInventory = () => {
       formFields.quantity,
       formFields.warehouseName
     );
-    // console.log("success");
+    console.log("success");
   };
 
   useEffect(() => {
@@ -77,10 +79,10 @@ const EditInventory = () => {
       const { data } = await axios.get(
         `http://localhost:8080/inventory/${itemId}`
       );
-      console.log(data);
+      // console.log(data);
 
       setFormFields({
-        name: data.itemName,
+        itemName: data.itemName,
         description: data.description,
         category: data.category,
         status: data.status,
@@ -117,9 +119,9 @@ const EditInventory = () => {
             type="text"
             className="form__input"
             placeholder="Warehouse Name"
-            name="name"
+            name="itemName"
             onChange={(e) => inputChangeHandler(e)}
-            value={formFields.name}
+            value={formFields.itemName}
           />
           <label htmlFor="address" className="form__label">
             Description
@@ -140,7 +142,8 @@ const EditInventory = () => {
             onChange={(e) => inputChangeHandler(e)}
             type="text"
             name="category"
-            className="form__input">
+            className="form__input"
+            selected={formFields.category}>
             <option value="Electronics">Electronics</option>
             <option value="Gear">Gear</option>
             <option value="Apparel">Apparel</option>
@@ -162,7 +165,7 @@ const EditInventory = () => {
               value="In Stock"
               checked={formFields.status === "In Stock"}
             />
-            <label for="In Stock" className="form__label">
+            <label htmlFor="In Stock" className="form__label">
               In Stock
             </label>
             <input
@@ -173,7 +176,7 @@ const EditInventory = () => {
               value="Out of Stock"
               checked={formFields.status === "Out of Stock"}
             />
-            <label for="Out of Stock" className="form__label">
+            <label htmlFor="Out of Stock" className="form__label">
               Out of stock
             </label>
           </div>
@@ -191,6 +194,7 @@ const EditInventory = () => {
             Warehouse
           </label>
           <select
+            value={formFields.warehouseName}
             onChange={(e) => inputChangeHandler(e)}
             type="text"
             name="warehouseName"
