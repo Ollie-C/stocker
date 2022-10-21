@@ -6,39 +6,26 @@ import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import { useState } from "react";
 // const validator = require("validator");
 
-const AddInventoryItem = ({ warehouses }) => {
+const AddInventoryItem = ({ getInventories }) => {
   const navigate = useNavigate();
   const [itemDetails, setItemDetails] = useState({
     warehouseName: "Jersey",
     itemName: "",
     description: "",
     category: "Accessories",
-    stock: "",
+    status: "",
     quantity: "0",
   });
   const [stock, setStock] = useState(true);
 
   const addItem = async () => {
-    // console.log(warehouses);
-    // const warehouse = warehouses.find(
-    //   (warehouse) => warehouse.name === itemDetails.warehouseName
-    // );
-    // console.log(warehouse);
     const { data } = await axios
-      .post("http://localhost:8080/inventory", {
-        // warehouseID: warehouse.id,
-        warehouseName: itemDetails.warehouseName,
-        itemName: itemDetails.itemName,
-        description: itemDetails.description,
-        category: itemDetails.category,
-        status: itemDetails.stock,
-        quantity: parseInt(itemDetails.quantity),
-      })
+      .post("http://localhost:8080/inventory", itemDetails)
       .catch((error) => {
         alert(error.response.statusText);
         console.log(error.response);
       });
-    console.log(data);
+    getInventories();
   };
 
   const handleChange = (e) => {
@@ -65,10 +52,11 @@ const AddInventoryItem = ({ warehouses }) => {
     });
     if (errors.length > 0) {
       alert("Please fill in all fields.");
+      console.log(itemDetails);
     } else {
       addItem();
       alert("Success.");
-      navigate("/inventory");
+      // navigate("/inventory");
     }
   };
 
@@ -137,14 +125,14 @@ const AddInventoryItem = ({ warehouses }) => {
             <div className="addI-form__radio-buttons">
               <input
                 type="radio"
-                name="stock"
+                name="status"
                 value="In Stock"
                 onClick={(e) => handleChange(e)}
               />
               <label className="addI-form__label--radio">In Stock</label>
               <input
                 type="radio"
-                name="stock"
+                name="status"
                 value="Out of Stock"
                 onClick={(e) => handleChange(e)}
               />
