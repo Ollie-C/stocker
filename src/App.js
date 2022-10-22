@@ -141,7 +141,10 @@ function App() {
                 }
               />
               {/* <Route InventoryPage inventories={inventories} /> */}
-              <Route path="/warehouses/add" element={<AddWarehouse />} />
+              <Route
+                path="/warehouses/add"
+                element={<AddWarehouse getWarehouses={getWarehouses} />}
+              />
               <Route
                 path="/:warehouseId/edit"
                 element={<EditWarehouse getWarehouses={getWarehouses} />}
