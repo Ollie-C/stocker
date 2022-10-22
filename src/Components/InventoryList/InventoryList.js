@@ -8,6 +8,9 @@ const InventoryList = ({
   inventories,
   handleSelectedProduct,
   showModalHandler,
+  sortInventory,
+  search,
+  setSearch,
 }) => {
   // console.log(inventories);
   // if (inventories.length) {
@@ -19,6 +22,7 @@ const InventoryList = ({
         <h2 className="warehouse-list__title split">Inventories</h2>
         <div className="warehouse-list__inputs">
           <input
+            onChange={(e) => setSearch(e.target.value)}
             className="warehouse-list__search split"
             placeholder="Search..."></input>
           <Link to="/warehouses/add">
@@ -29,19 +33,39 @@ const InventoryList = ({
       <ul className="key">
         <li className="key__label">
           <p className="key__text">Inventory Item</p>
-          <img src={sort} alt="sort" className="key__sort" />
+          <img
+            onClick={() => sortInventory("itemName")}
+            src={sort}
+            alt="sort"
+            className="key__sort"
+          />
         </li>
         <li className="key__label">
           <p className="key__text">Category</p>
-          <img src={sort} alt="sort" className="key__sort" />
+          <img
+            onClick={() => sortInventory("category")}
+            src={sort}
+            alt="sort"
+            className="key__sort"
+          />
         </li>
         <li className="key__label">
           <p className="key__text">Status</p>
-          <img src={sort} alt="sort" className="key__sort" />
+          <img
+            onClick={() => sortInventory("status")}
+            src={sort}
+            alt="sort"
+            className="key__sort"
+          />
         </li>
         <li className="key__label">
           <p className="key__text">QTY</p>
-          <img src={sort} alt="sort" className="key__sort" />
+          <img
+            onClick={() => sortInventory("quantity")}
+            src={sort}
+            alt="sort"
+            className="key__sort"
+          />
         </li>
         <li className="key__label">
           <p className="key__text">Warehouse</p>
@@ -51,16 +75,25 @@ const InventoryList = ({
         </li>
       </ul>
       <ul className="List">
-        {inventories.map((inventory) => {
-          return (
-            <InventoryItem
-              key={inventory.id}
-              inventory={inventory}
-              handleSelectedProduct={handleSelectedProduct}
-              showModalHandler={showModalHandler}
-            />
-          );
-        })}
+        {inventories
+          .filter((inventory) => {
+            return search.toLowerCase() === ""
+              ? inventory
+              : inventory.itemName.toLowerCase().includes(search) ||
+                  inventory.category.toLowerCase().includes(search) ||
+                  inventory.status.toLowerCase().includes(search) ||
+                  inventory.warehouseName.toLowerCase().includes(search);
+          })
+          .map((inventory) => {
+            return (
+              <InventoryItem
+                key={inventory.id}
+                inventory={inventory}
+                handleSelectedProduct={handleSelectedProduct}
+                showModalHandler={showModalHandler}
+              />
+            );
+          })}
       </ul>
     </>
   );

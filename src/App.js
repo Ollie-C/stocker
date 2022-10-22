@@ -18,6 +18,11 @@ function App() {
 
   const [inventories, setInventories] = useState([]);
 
+  ///searches
+  const [search, setSearch] = useState("");
+
+  ////////////////////////////search
+
   const getInventories = async () => {
     const { data } = await axios.get("http://localhost:8080/inventory");
     setInventories(data);
@@ -74,6 +79,43 @@ function App() {
       });
   };
 
+  //////////////////////////asc-desc warehouse
+  const [order, setOrder] = useState("ASC");
+  const sorting = (col) => {
+    if (order === "ASC") {
+      const sorted = [...warehouses].sort((a, b) =>
+        a[col].toLowerCase() > b[col].toLowerCase() ? 1 : -1
+      );
+      SetWarehouses(sorted);
+      setOrder("DSC");
+    }
+    if (order === "DSC") {
+      const sorted = [...warehouses].sort((a, b) => (a[col] < b[col] ? 1 : -1));
+      SetWarehouses(sorted);
+      setOrder("ASC");
+    }
+  };
+  //////////////////////////asc-desc
+  //////////////////////////asc-desc warehouse
+  const sortInventory = (col) => {
+    console.log("sort click");
+    if (order === "ASC") {
+      const sorted = [...inventories].sort((a, b) =>
+        a[col] > b[col] ? 1 : -1
+      );
+      setInventories(sorted);
+      setOrder("DSC");
+    }
+    if (order === "DSC") {
+      const sorted = [...inventories].sort((a, b) =>
+        a[col] < b[col] ? 1 : -1
+      );
+      setInventories(sorted);
+      setOrder("ASC");
+    }
+  };
+  //////////////////////////asc-desc
+
   return (
     <>
       <BrowserRouter>
@@ -92,6 +134,9 @@ function App() {
                     handleSelectedProduct={handleSelectedProduct}
                     selectedProduct={selectedProduct}
                     showModalHandler={showModalHandler}
+                    search={search}
+                    setSearch={setSearch}
+                    sorting={sorting}
                   />
                 }
               />
@@ -117,6 +162,9 @@ function App() {
                     handleSelectedProduct={handleSelectedProduct}
                     selectedProduct={selectedProduct}
                     showModalHandler={showModalHandler}
+                    sortInventory={sortInventory}
+                    search={search}
+                    setSearch={setSearch}
                   />
                 }
               />
