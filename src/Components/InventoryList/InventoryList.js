@@ -16,6 +16,9 @@ const InventoryList = ({
   // if (inventories.length) {
   //   return <p>Loading...</p>;
   // }
+
+  const keys = ["warehouseName", "description", "category", "status"];
+
   return (
     <>
       <header className="warehouse-list__header">
@@ -77,6 +80,9 @@ const InventoryList = ({
       <ul className="List">
         {inventories
           .filter((inventory) => {
+            // return keys.some((key) =>
+            //   inventory[key].toLowerCase().includes(search)
+            // );
             return search.toLowerCase() === ""
               ? inventory
               : inventory.itemName.toLowerCase().includes(search) ||
