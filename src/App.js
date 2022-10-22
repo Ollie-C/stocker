@@ -122,7 +122,7 @@ function App() {
               />
               <Route
                 path="/inventory/:itemId/edit"
-                element={<EditInventory />}
+                element={<EditInventory getInventories={getInventories} />}
               />
             </Routes>
           </div>

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const EditInventory = () => {
+const EditInventory = ({ getInventories }) => {
   const navigate = useNavigate();
   const { itemId } = useParams();
 
@@ -21,8 +21,7 @@ const EditInventory = () => {
   // Will update the correct input state, based
   // on whichever input the user changed.
   const inputChangeHandler = (e) => {
-    // console.log(e.target.value);
-    console.log(e.target.value);
+    console.log(e.target.name);
     const value = e.target.value;
 
     setFormFields({
@@ -37,10 +36,9 @@ const EditInventory = () => {
     description,
     category,
     status,
-    quantity,
     warehouseName
   ) => {
-    console.log(e);
+    // console.log(e);
     e.preventDefault();
     console.log("saved button clicked");
 
@@ -51,12 +49,11 @@ const EditInventory = () => {
         description: description,
         category: category,
         status: status,
-        quantity: quantity,
         warehouseName: warehouseName,
       }
     );
     navigate("/");
-    console.log(data);
+    // console.log(data);
   };
 
   const saveHandler = (e) => {
@@ -67,7 +64,6 @@ const EditInventory = () => {
       formFields.description,
       formFields.category,
       formFields.status,
-      formFields.quantity,
       formFields.warehouseName
     );
     console.log("success");
@@ -86,13 +82,13 @@ const EditInventory = () => {
         description: data.description,
         category: data.category,
         status: data.status,
-        quantity: data.quantity,
         warehouseName: data.warehouseName,
       });
       // console.log(data);
     };
     getInventoryDetails();
   }, [itemId]);
+  getInventories();
 
   return (
     <>
@@ -130,7 +126,7 @@ const EditInventory = () => {
             name="description"
             cols="30"
             rows="10"
-            className=""
+            className="form__textarea"
             placeholder="please enter a brief item description.."
             onChange={(e) => inputChangeHandler(e)}
             value={formFields.description}></textarea>
@@ -151,10 +147,10 @@ const EditInventory = () => {
             <option value="Health">Health</option>
           </select>
         </div>
-        <div className="form__fields">
+        <div className="form__fields form__fields--active">
           <h2 className="form__title">Item Availability</h2>
           <label htmlFor="status" className="form__label">
-            status
+            Status
           </label>
           <div className="addInventory__availability-radio-container">
             <input
@@ -180,7 +176,7 @@ const EditInventory = () => {
               Out of stock
             </label>
           </div>
-          <label htmlFor="quantity" className="form__label">
+          {/* <label htmlFor="quantity" className="form__label">
             Quantity
           </label>
           <input
@@ -189,8 +185,8 @@ const EditInventory = () => {
             className="form__input form__input--quantity"
             onChange={(e) => inputChangeHandler(e)}
             value={formFields.quantity}
-          />
-          <label htmlFor="phone" className="form__label">
+          /> */}
+          <label htmlFor="phone" className="form__label form__label--active">
             Warehouse
           </label>
           <select
@@ -211,7 +207,7 @@ const EditInventory = () => {
       <section className="form__buttons">
         <button className="form__button">Cancel</button>
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/inventory")}
           className="form__button form__button--blue"
           form="addWarehouseForm">
           Save

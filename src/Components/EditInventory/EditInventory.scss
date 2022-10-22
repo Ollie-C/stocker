@@ -34,6 +34,11 @@ $padding-mobile: 2.4rem;
     @include tablet {
       width: 50%;
     }
+    &--active {
+      @include tablet {
+        border-left: 1px solid $secondary-colour-2;
+      }
+    }
   }
   &__title {
     padding-bottom: 2.6rem;
@@ -45,22 +50,23 @@ $padding-mobile: 2.4rem;
     font-weight: 600;
     font-size: 1.3rem;
     padding: 0.4rem 0;
+
+    &--active {
+      margin-top: 2rem;
+    }
   }
   &__input {
     @include form-input;
     margin-bottom: 2rem;
-
-    &--quantity {
-      @include tablet {
-        max-width: 30%;
-      }
-    }
   }
-
-  &__input-number {
-    @include form-input-number;
+  &__textarea {
     margin-bottom: 2rem;
   }
+
+  // &__input-number {
+  //   @include form-input-number;
+  //   margin-bottom: 2rem;
+  // }
 
   &__buttons {
     display: flex;
@@ -77,7 +83,7 @@ $padding-mobile: 2.4rem;
       @include form-button-blue;
       @include tablet {
         margin-left: 2rem;
-        width: 7rem;
+        width: 6.1rem;
       }
     }
   }
