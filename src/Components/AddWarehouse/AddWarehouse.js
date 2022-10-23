@@ -20,7 +20,6 @@ const AddWarehouse = ({ getWarehouses }) => {
   });
 
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
 
   const addWarehouse = async () => {
     const { data } = await axios
@@ -29,6 +28,7 @@ const AddWarehouse = ({ getWarehouses }) => {
         alert(error.response.statusText);
         console.log(error.response);
       });
+    getWarehouses();
   };
 
   const handleChange = (e) => {
@@ -41,67 +41,53 @@ const AddWarehouse = ({ getWarehouses }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setFormErrors(validate(warehouseDetails));
-    setIsSubmit(true);
-    console.log(warehouseDetails);
-    addWarehouse();
-
-    // if (setIsSubmit(true)) {
-    //   addWarehouse();
-    // alert("Success.");
-    // navigate("/");
-    // addWarehouse();
-    // }
     // const submittedValues = Object.values(warehouseDetails);
-    // const errors = submittedValues.filter((value) => {
-    //   return !value;
-    // });
-    // if (errors.length > 0) {
-    //   alert("Please fill in all fields.");
-    // } else {
-    // addWarehouse();
-    // alert("Success.");
-    // navigate("/");
+    // console.log(submittedValues);
+    // if (submittedValues.length < 8) {
+    //   console.log("no");
     // }
+
+    // addWarehouse();
+    // navigate("/");
   };
 
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(warehouseDetails);
-      navigate("/");
+  const isValidInput = (e) => {
+    const { name, value } = e.target;
+    let error = null;
+    if (!validator.isAlphanumeric(value, "en-GB", { ignore: " " })) {
+      error = "Only letters and numbers can be used";
     }
-  }, [formErrors]);
-  getWarehouses();
+    if (validator.isEmpty(value)) {
+      error = "This field is required";
+    }
+    setFormErrors({
+      ...formErrors,
+      [name]: error ? error : null,
+    });
+  };
 
-  const validate = (values) => {
-    const errors = {};
-    // const regex
-    if (!validator.isAlpha(values.name)) {
-      errors.name = "This field is required";
+  const isValidPhone = (e) => {
+    const { name, value } = e.target;
+    let error = null;
+    if (!validator.isMobilePhone(value) || validator.isEmpty(value)) {
+      error = "Please enter a valid phone number";
     }
-    if (!validator.isAlphanumeric(values.address)) {
-      errors.address = "This field is required";
-    }
-    if (!validator.isAlpha(values.city)) {
-      errors.city = "This field is required";
-    }
-    if (!validator.isAlpha(values.country)) {
-      errors.country = "This field is required";
-    }
-    if (!validator.isAlpha(values.contactName)) {
-      errors.contactName = "This field is required";
-    }
-    if (!validator.isAlphanumeric(values.position)) {
-      errors.position = "This field is required";
-    }
-    // if (!validator.isAlpha(values.phone)) {
-    //   errors.phone = "This field is required";
-    // }
-    if (!validator.isEmail(values.email)) {
-      errors.email = "This field is required";
-    }
+    setFormErrors({
+      ...formErrors,
+      [name]: error,
+    });
+  };
 
-    return errors;
+  const isValidEmail = (e) => {
+    const { name, value } = e.target;
+    let error = null;
+    if (!validator.isEmail(value) || validator.isEmpty(value)) {
+      error = "Please enter a valid email address";
+    }
+    setFormErrors({
+      ...formErrors,
+      [name]: error,
+    });
   };
 
   return (
@@ -115,7 +101,6 @@ const AddWarehouse = ({ getWarehouses }) => {
         />
         <h1 className="addWarehouse-header__title">Add New Warehouse</h1>
       </section>
-      {/* <pre>{JSON.stringify(warehouseDetails, undefined, 2)}</pre> */}
       <form className="add-form" id="addWarehouseForm" onSubmit={submitHandler}>
         <div className="form-fields-wrapper">
           <div className="add-form__fields">
@@ -130,13 +115,14 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Warehouse Name"
                 name="name"
                 onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e)}
               />
               <div
                 style={{ display: formErrors.name ? "flex" : "none" }}
                 className="add-form__error-container"
               >
                 <img className="add-form__icon" src={errorIcon} alt="" />
-                <p className="add-form__error">This field is required</p>
+                <p className="add-form__error">{formErrors.name}</p>
               </div>
             </div>
 
@@ -150,13 +136,14 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Street Address"
                 name="address"
                 onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e)}
               />
               <div
                 style={{ display: formErrors.address ? "flex" : "none" }}
                 className="add-form__error-container"
               >
                 <img className="add-form__icon" src={errorIcon} alt="" />
-                <p className="add-form__error">This field is required</p>
+                <p className="add-form__error">{formErrors.address}</p>
               </div>
             </div>
             <div className="input-wrapper">
@@ -169,13 +156,14 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="City"
                 name="city"
                 onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e)}
               />
               <div
                 style={{ display: formErrors.city ? "flex" : "none" }}
                 className="add-form__error-container"
               >
                 <img className="add-form__icon" src={errorIcon} alt="" />
-                <p className="add-form__error">This field is required</p>
+                <p className="add-form__error">{formErrors.city}</p>
               </div>
             </div>
             <div className="input-wrapper">
@@ -188,13 +176,14 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Country"
                 name="country"
                 onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e)}
               />
               <div
                 style={{ display: formErrors.country ? "flex" : "none" }}
                 className="add-form__error-container"
               >
                 <img className="add-form__icon" src={errorIcon} alt="" />
-                <p className="add-form__error">This field is required</p>
+                <p className="add-form__error">{formErrors.country}</p>
               </div>
             </div>
           </div>
@@ -212,13 +201,14 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Contact Name"
                 name="contactName"
                 onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e)}
               />
               <div
                 style={{ display: formErrors.contactName ? "flex" : "none" }}
                 className="add-form__error-container"
               >
                 <img className="add-form__icon" src={errorIcon} alt="" />
-                <p className="add-form__error">This field is required</p>
+                <p className="add-form__error">{formErrors.contactName}</p>
               </div>
             </div>
             <div className="input-wrapper">
@@ -231,13 +221,14 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Position"
                 name="position"
                 onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e)}
               />
               <div
                 style={{ display: formErrors.position ? "flex" : "none" }}
                 className="add-form__error-container"
               >
                 <img className="add-form__icon" src={errorIcon} alt="" />
-                <p className="add-form__error">This field is required</p>
+                <p className="add-form__error">{formErrors.position}</p>
               </div>
             </div>
             <div className="input-wrapper">
@@ -250,13 +241,14 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Phone Number"
                 name="phone"
                 onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidPhone(e)}
               />
               <div
                 style={{ display: formErrors.phone ? "flex" : "none" }}
                 className="add-form__error-container"
               >
                 <img className="add-form__icon" src={errorIcon} alt="" />
-                <p className="add-form__error">This field is required</p>
+                <p className="add-form__error">{formErrors.phone}</p>
               </div>
             </div>
             <div className="input-wrapper">
@@ -269,6 +261,7 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Email"
                 name="email"
                 onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidEmail(e)}
               />
               <div
                 style={{ display: formErrors.email ? "flex" : "none" }}
@@ -279,7 +272,7 @@ const AddWarehouse = ({ getWarehouses }) => {
                   src={errorIcon}
                   alt="error-icon"
                 />
-                <p className="add-form__error">This field is required</p>
+                <p className="add-form__error">{formErrors.email}</p>
               </div>
             </div>
           </div>
