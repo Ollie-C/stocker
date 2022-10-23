@@ -27,9 +27,10 @@ const InventoryList = ({
           <input
             onChange={(e) => setSearch(e.target.value)}
             className="warehouse-list__search split"
-            placeholder="Search..."></input>
-          <Link to="/warehouses/add">
-            <button className="warehouse-list__button">+ Add New Item</button>
+            placeholder="Search..."
+          ></input>
+          <Link to="/inventory/add" className="warehouse-list__button">
+            + Add New Item
           </Link>
         </div>
       </header>
