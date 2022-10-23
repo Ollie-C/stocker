@@ -29,7 +29,6 @@ const AddWarehouse = ({ getWarehouses }) => {
         alert(error.response.statusText);
         console.log(error.response);
       });
-    // console.log(data);
   };
 
   const handleChange = (e) => {
@@ -44,6 +43,7 @@ const AddWarehouse = ({ getWarehouses }) => {
     e.preventDefault();
     setFormErrors(validate(warehouseDetails));
     setIsSubmit(true);
+    console.log(warehouseDetails);
     addWarehouse();
 
     // if (setIsSubmit(true)) {
@@ -94,9 +94,9 @@ const AddWarehouse = ({ getWarehouses }) => {
     if (!validator.isAlphanumeric(values.position)) {
       errors.position = "This field is required";
     }
-    if (!validator.isAlpha(values.phone)) {
-      errors.phone = "This field is required";
-    }
+    // if (!validator.isAlpha(values.phone)) {
+    //   errors.phone = "This field is required";
+    // }
     if (!validator.isEmail(values.email)) {
       errors.email = "This field is required";
     }
