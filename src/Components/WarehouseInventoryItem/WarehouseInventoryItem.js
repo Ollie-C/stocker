@@ -38,7 +38,7 @@ const WarehouseInventoryItem = ({ inventoryItem }) => {
         </div>
         <div className="card__buttons">
           <button className="card__delete-button"></button>
-          <Link to={`/`}>
+          <Link to={`/inventory/:itemId/edit`}>
             <div className="card__edit-button">
               {" "}
               <img className="card__edit-img" src={editbutton} />

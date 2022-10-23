@@ -64,7 +64,7 @@ const WarehouseList = ({
             className="key__sort"
           />
         </li>
-        <li className="key__label">
+        <li className="key__label key__label--actions">
           <p className="key__text">Actions</p>
         </li>
       </ul>
