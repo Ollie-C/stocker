@@ -1,8 +1,9 @@
 import React from "react";
-import "../WarehouseItem/WarehouseItem.scss";
 import { Link } from "react-router-dom";
 import EditWarehouse from "../EditWarehouse/EditWarehouse";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
+import "./WarehouseItem.scss";
+import editbutton from "../../assets/Icons/edit-24px.svg";
 
 const WarehouseItem = ({
   warehouse,
@@ -46,11 +47,13 @@ const WarehouseItem = ({
           onClick={deleteClickHandler}
           className="card__delete-button"
         ></button>
-        <Link to={`/warehouses/${warehouse.id}/edit`}>
-          <button
+        <Link to={`warehouses/${warehouse.id}/edit`}>
+          <div
             onClick={(e) => handleSelectedProduct(warehouse)}
             className="card__edit-button"
-          ></button>
+          >
+            <img className="card__edit-img" src={editbutton} />
+          </div>
         </Link>
       </div>
     </article>

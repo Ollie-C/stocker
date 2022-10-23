@@ -26,9 +26,17 @@ $padding-mobile: 2.4rem;
 .form {
   @include tablet {
     display: flex;
+    padding: 3rem;
   }
   &__fields {
-    padding: 1.6rem $padding-mobile;
+    padding: 0 $padding-mobile;
+
+    //border between
+    &--active {
+      @include tablet {
+        border-left: 1px solid $secondary-colour-2;
+      }
+    }
   }
   &__title {
     padding-bottom: 2.6rem;
@@ -60,6 +68,7 @@ $padding-mobile: 2.4rem;
       @include form-button-blue;
       @include tablet {
         margin-left: 2rem;
+        width: 6.1rem;
       }
     }
   }

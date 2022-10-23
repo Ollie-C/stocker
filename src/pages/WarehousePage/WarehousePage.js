@@ -9,6 +9,10 @@ const WarehousePage = ({
   handleSelectedProduct,
   selectedProduct,
   showModalHandler,
+  handleChange,
+  sorting,
+  search,
+  setSearch,
 }) => {
   return (
     <>
@@ -16,6 +20,10 @@ const WarehousePage = ({
         warehouses={warehouses}
         handleSelectedProduct={handleSelectedProduct}
         showModalHandler={showModalHandler}
+        // handleChange={handleChange}
+        sorting={sorting}
+        search={search}
+        setSearch={setSearch}
       />
 
       {showModal ? (

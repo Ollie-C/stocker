@@ -54,6 +54,8 @@
     background-color: $background-colour-2;
   }
   &__label {
+    text-transform: uppercase;
+    color: $secondary-colour-1;
     @include tablet {
       min-width: 20%;
       list-style-type: none;

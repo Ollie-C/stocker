@@ -58,8 +58,8 @@ $padding-mobile: 2.4rem;
   }
 
   &__input {
+    margin-bottom: 1rem;
     @include form-input;
-    margin-bottom: 2rem;
     &--error {
       outline: 1px solid $supporting-colour-2;
     }
@@ -83,5 +83,16 @@ $padding-mobile: 2.4rem;
         margin-left: 2rem;
       }
     }
+  }
+
+  &__error-container {
+    display: flex;
+    margin-bottom: 2rem;
+  }
+
+  &__error {
+    padding-left: 1rem;
+    font-weight: 400;
+    color: #c94515;
   }
 }
