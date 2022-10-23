@@ -40,7 +40,6 @@ const EditInventory = ({ getInventories }) => {
   ) => {
     // console.log(e);
     e.preventDefault();
-    console.log("saved button clicked");
 
     const { data } = await axios.put(
       `http://localhost:8080/inventory/${itemId}`,
@@ -52,8 +51,10 @@ const EditInventory = ({ getInventories }) => {
         warehouseName: warehouseName,
       }
     );
-    navigate("/");
-    // console.log(data);
+    console.log("saved button clicked");
+
+    navigate("/inventory");
+    console.log(data);
   };
 
   const saveHandler = (e) => {
@@ -66,7 +67,7 @@ const EditInventory = ({ getInventories }) => {
       formFields.status,
       formFields.warehouseName
     );
-    console.log("success");
+    // console.log("success");
   };
 
   useEffect(() => {
@@ -116,8 +117,8 @@ const EditInventory = ({ getInventories }) => {
             className="form__input"
             placeholder="Warehouse Name"
             name="itemName"
-            onChange={(e) => inputChangeHandler(e)}
             value={formFields.itemName}
+            onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="address" className="form__label">
             Description
@@ -128,18 +129,19 @@ const EditInventory = ({ getInventories }) => {
             rows="10"
             className="form__textarea"
             placeholder="please enter a brief item description.."
-            onChange={(e) => inputChangeHandler(e)}
-            value={formFields.description}></textarea>
+            value={formFields.description}
+            onChange={(e) => inputChangeHandler(e)}></textarea>
 
           <label htmlFor="category" className="form__label">
             Category
           </label>
           <select
+            selected={formFields.category}
             onChange={(e) => inputChangeHandler(e)}
             type="text"
             name="category"
-            className="form__input"
-            selected={formFields.category}>
+            className="form__input">
+            <option value={formFields.category}>{formFields.category}</option>
             <option value="Electronics">Electronics</option>
             <option value="Gear">Gear</option>
             <option value="Apparel">Apparel</option>
@@ -157,9 +159,9 @@ const EditInventory = ({ getInventories }) => {
               type="radio"
               name="status"
               className="form__radio"
-              onChange={(e) => inputChangeHandler(e)}
               value="In Stock"
               checked={formFields.status === "In Stock"}
+              onChange={(e) => inputChangeHandler(e)}
             />
             <label htmlFor="In Stock" className="form__label">
               In Stock
@@ -169,8 +171,8 @@ const EditInventory = ({ getInventories }) => {
               name="status"
               className="form__radio"
               onChange={(e) => inputChangeHandler(e)}
-              value="Out of Stock"
               checked={formFields.status === "Out of Stock"}
+              value="Out of Stock"
             />
             <label htmlFor="Out of Stock" className="form__label">
               Out of stock
@@ -186,7 +188,9 @@ const EditInventory = ({ getInventories }) => {
             onChange={(e) => inputChangeHandler(e)}
             value={formFields.quantity}
           /> */}
-          <label htmlFor="phone" className="form__label form__label--active">
+          <label
+            htmlFor="warehouseName"
+            className="form__label form__label--active">
             Warehouse
           </label>
           <select
@@ -195,6 +199,9 @@ const EditInventory = ({ getInventories }) => {
             type="text"
             name="warehouseName"
             className="form__input">
+            <option value={formFields.warehouseName}>
+              {formFields.warehouseName}
+            </option>
             <option value="Manhattan">Manhattan</option>
             <option value="Washington">Washington</option>
             <option value="Jersey">Jersey</option>
@@ -207,7 +214,6 @@ const EditInventory = ({ getInventories }) => {
       <section className="form__buttons">
         <button className="form__button">Cancel</button>
         <button
-          onClick={() => navigate("/inventory")}
           className="form__button form__button--blue"
           form="addWarehouseForm">
           Save

@@ -45,8 +45,6 @@ const EditWarehouse = ({ getWarehouses }) => {
   ) => {
     e.preventDefault();
 
-    console.log("saved button clicked");
-
     if (
       name.trim("") === "" &&
       address.trim("") &&
