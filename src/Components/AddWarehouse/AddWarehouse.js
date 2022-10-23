@@ -144,7 +144,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.name ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -160,7 +161,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.address ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -176,7 +178,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.city ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -192,7 +195,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.country ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -213,7 +217,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.contactName ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -229,7 +234,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.position ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -245,7 +251,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.phone ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -261,7 +268,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.email ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -275,7 +283,8 @@ const AddWarehouse = ({ getWarehouses }) => {
         </button>
         <button
           className="add-form__button add-form__button--blue"
-          form="addWarehouseForm">
+          form="addWarehouseForm"
+        >
           + Add Warehouse
         </button>
       </section>

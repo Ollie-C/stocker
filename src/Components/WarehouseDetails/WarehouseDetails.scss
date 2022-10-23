@@ -19,16 +19,30 @@
   &__edit {
     background-color: $primary-colour-2;
     display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    @include tablet {
+      width: 81px;
+      height: 38px;
+      border-radius: 20px;
+    }
   }
 
   &__edit-icon {
-    height: 50px;
-    width: 50px;
+    height: 20px;
+    width: 20px;
   }
 
   &__edit-text {
     display: none;
+    @include tablet {
+      display: flex;
+      color: $primary-colour-3;
+      margin-left: 0.4rem;
+    }
   }
 
   &__contact {
@@ -53,6 +67,10 @@
 
   &__address {
     margin-bottom: 3.2rem;
+    @include tablet {
+      width: 40%;
+      margin-right: 1.6rem;
+    }
   }
 
   &__name,
