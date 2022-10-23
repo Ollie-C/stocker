@@ -178,7 +178,12 @@ function App() {
               />
               <Route
                 path="/inventory/add"
-                element={<AddInventoryItem getInventories={getInventories} />}
+                element={
+                  <AddInventoryItem
+                    warehouses={warehouses}
+                    getInventories={getInventories}
+                  />
+                }
               />
             </Routes>
           </div>

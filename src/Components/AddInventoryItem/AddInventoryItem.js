@@ -6,7 +6,7 @@ import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import { useState } from "react";
 // const validator = require("validator");
 
-const AddInventoryItem = ({ getInventories }) => {
+const AddInventoryItem = ({ warehouses, getInventories }) => {
   const navigate = useNavigate();
   const [itemDetails, setItemDetails] = useState({
     warehouseName: "Jersey",
@@ -50,6 +50,10 @@ const AddInventoryItem = ({ getInventories }) => {
       navigate("/inventory");
     }
   };
+  console.log(warehouses);
+  warehouses.forEach((warehouse) => {
+    console.log(warehouse.name);
+  });
 
   return (
     <main className="main">
@@ -154,11 +158,13 @@ const AddInventoryItem = ({ getInventories }) => {
               className="addI-form__input addI-form__input--dropdown"
               onChange={(e) => handleChange(e)}
             >
-              <option value="Jersey">Jersey</option>
-              <option value="Manhattan">Manhattan</option>
-              <option value="San Fran">San Fran</option>
-              <option value="Santa Monica">Santa Monica</option>
-              <option value="Washington">Washington</option>
+              {warehouses.map((warehouse) => {
+                return (
+                  <>
+                    <option value={warehouse.name}>{warehouse.name}</option>
+                  </>
+                );
+              })}
             </select>
           </div>
         </div>
