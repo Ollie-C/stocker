@@ -1,8 +1,8 @@
-//styles
 import "./AddInventoryItem.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
+// import errorIcon from "../../assets/Icons/error-24px.svg";
 import { useState } from "react";
 // const validator = require("validator");
 
@@ -13,7 +13,6 @@ const AddInventoryItem = ({ getInventories }) => {
     itemName: "",
     description: "",
     category: "Accessories",
-    status: "",
     quantity: "0",
   });
   const [stock, setStock] = useState(true);
@@ -31,13 +30,6 @@ const AddInventoryItem = ({ getInventories }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (value === "In Stock") {
-      setStock(true);
-    }
-    if (value === "Out of Stock") {
-      setStock(false);
-    }
-
     setItemDetails({
       ...itemDetails,
       [name]: value,
@@ -52,11 +44,10 @@ const AddInventoryItem = ({ getInventories }) => {
     });
     if (errors.length > 0) {
       alert("Please fill in all fields.");
-      console.log(itemDetails);
     } else {
       addItem();
       alert("Success.");
-      // navigate("/inventory");
+      navigate("/inventory");
     }
   };
 
@@ -127,14 +118,14 @@ const AddInventoryItem = ({ getInventories }) => {
                 type="radio"
                 name="status"
                 value="In Stock"
-                onClick={(e) => handleChange(e)}
+                onClick={() => setStock(true)}
               />
               <label className="addI-form__label--radio">In Stock</label>
               <input
                 type="radio"
                 name="status"
                 value="Out of Stock"
-                onClick={(e) => handleChange(e)}
+                onClick={() => setStock(false)}
               />
               <label className="addI-form__label--radio">Out of stock</label>
             </div>
