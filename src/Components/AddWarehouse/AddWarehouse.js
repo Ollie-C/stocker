@@ -3,10 +3,11 @@ import "./AddWarehouse.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
-import { useState } from "react";
-// const validator = require("validator");
+import { useEffect, useState } from "react";
+import errorIcon from "../../assets/Icons/error-24px.svg";
+var validator = require("validator");
 
-const AddWarehouse = () => {
+const AddWarehouse = ({ getWarehouses }) => {
   const navigate = useNavigate();
   const [warehouseDetails, setWarehouseDetails] = useState({
     name: "",
@@ -18,6 +19,9 @@ const AddWarehouse = () => {
     phone: "",
     email: "",
   });
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const addWarehouse = async () => {
     const { data } = await axios
@@ -37,7 +41,7 @@ const AddWarehouse = () => {
         alert(error.response.statusText);
         console.log(error.response);
       });
-    console.log(data);
+    // console.log(data);
   };
 
   const handleChange = (e) => {
@@ -50,17 +54,66 @@ const AddWarehouse = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const submittedValues = Object.values(warehouseDetails);
-    const errors = submittedValues.filter((value) => {
-      return !value;
-    });
-    if (errors.length > 0) {
-      alert("Please fill in all fields.");
-    } else {
-      addWarehouse();
-      alert("Success.");
+    setFormErrors(validate(warehouseDetails));
+    setIsSubmit(true);
+    addWarehouse();
+
+    // if (setIsSubmit(true)) {
+    //   addWarehouse();
+    // alert("Success.");
+    // navigate("/");
+    // addWarehouse();
+    // }
+    // const submittedValues = Object.values(warehouseDetails);
+    // const errors = submittedValues.filter((value) => {
+    //   return !value;
+    // });
+    // if (errors.length > 0) {
+    //   alert("Please fill in all fields.");
+    // } else {
+    // addWarehouse();
+    // alert("Success.");
+    // navigate("/");
+    // }
+  };
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(warehouseDetails);
       navigate("/");
     }
+  }, [formErrors]);
+  getWarehouses();
+
+  const validate = (values) => {
+    const errors = {};
+    // const regex
+    if (!validator.isAlpha(values.name)) {
+      errors.name = "This field is required";
+    }
+    if (!validator.isAlphanumeric(values.address)) {
+      errors.address = "This field is required";
+    }
+    if (!validator.isAlpha(values.city)) {
+      errors.city = "This field is required";
+    }
+    if (!validator.isAlpha(values.country)) {
+      errors.country = "This field is required";
+    }
+    if (!validator.isAlpha(values.contactName)) {
+      errors.contactName = "This field is required";
+    }
+    if (!validator.isAlphanumeric(values.position)) {
+      errors.position = "This field is required";
+    }
+    if (!validator.isAlpha(values.phone)) {
+      errors.phone = "This field is required";
+    }
+    if (!validator.isEmail(values.email)) {
+      errors.email = "This field is required";
+    }
+
+    return errors;
   };
 
   return (
@@ -74,6 +127,7 @@ const AddWarehouse = () => {
         />
         <h1 className="addWarehouse-header__title">Add New Warehouse</h1>
       </section>
+      {/* <pre>{JSON.stringify(warehouseDetails, undefined, 2)}</pre> */}
       <form className="add-form" id="addWarehouseForm" onSubmit={submitHandler}>
         <div className="form-fields-wrapper">
           <div className="add-form__fields">
@@ -88,7 +142,12 @@ const AddWarehouse = () => {
               name="name"
               onChange={(e) => handleChange(e)}
             />
-
+            <div
+              style={{ display: formErrors.name ? "flex" : "none" }}
+              className="add-form__error-container">
+              <img className="add-form__img" src={errorIcon} alt="" />
+              <p className="add-form__error">This field is required</p>
+            </div>
             <label htmlFor="address" className="add-form__label">
               Street Address
             </label>
@@ -99,6 +158,12 @@ const AddWarehouse = () => {
               name="address"
               onChange={(e) => handleChange(e)}
             />
+            <div
+              style={{ display: formErrors.address ? "flex" : "none" }}
+              className="add-form__error-container">
+              <img className="add-form__img" src={errorIcon} alt="" />
+              <p className="add-form__error">This field is required</p>
+            </div>
             <label htmlFor="city" className="add-form__label">
               City
             </label>
@@ -109,6 +174,12 @@ const AddWarehouse = () => {
               name="city"
               onChange={(e) => handleChange(e)}
             />
+            <div
+              style={{ display: formErrors.city ? "flex" : "none" }}
+              className="add-form__error-container">
+              <img className="add-form__img" src={errorIcon} alt="" />
+              <p className="add-form__error">This field is required</p>
+            </div>
             <label htmlFor="country" className="add-form__label">
               Country
             </label>
@@ -119,6 +190,12 @@ const AddWarehouse = () => {
               name="country"
               onChange={(e) => handleChange(e)}
             />
+            <div
+              style={{ display: formErrors.country ? "flex" : "none" }}
+              className="add-form__error-container">
+              <img className="add-form__img" src={errorIcon} alt="" />
+              <p className="add-form__error">This field is required</p>
+            </div>
           </div>
         </div>
         <div className="form-fields-wrapper">
@@ -134,6 +211,12 @@ const AddWarehouse = () => {
               name="contactName"
               onChange={(e) => handleChange(e)}
             />
+            <div
+              style={{ display: formErrors.contactName ? "flex" : "none" }}
+              className="add-form__error-container">
+              <img className="add-form__img" src={errorIcon} alt="" />
+              <p className="add-form__error">This field is required</p>
+            </div>
             <label htmlFor="position" className="add-form__label">
               Position
             </label>
@@ -144,6 +227,12 @@ const AddWarehouse = () => {
               name="position"
               onChange={(e) => handleChange(e)}
             />
+            <div
+              style={{ display: formErrors.position ? "flex" : "none" }}
+              className="add-form__error-container">
+              <img className="add-form__img" src={errorIcon} alt="" />
+              <p className="add-form__error">This field is required</p>
+            </div>
             <label htmlFor="phone" className="add-form__label">
               Phone Number
             </label>
@@ -154,7 +243,13 @@ const AddWarehouse = () => {
               name="phone"
               onChange={(e) => handleChange(e)}
             />
-            <label htmlFor="emai" className="add-form__label">
+            <div
+              style={{ display: formErrors.phone ? "flex" : "none" }}
+              className="add-form__error-container">
+              <img className="add-form__img" src={errorIcon} alt="" />
+              <p className="add-form__error">This field is required</p>
+            </div>
+            <label htmlFor="email" className="add-form__label">
               Email
             </label>
             <input
@@ -164,6 +259,12 @@ const AddWarehouse = () => {
               name="email"
               onChange={(e) => handleChange(e)}
             />
+            <div
+              style={{ display: formErrors.email ? "flex" : "none" }}
+              className="add-form__error-container">
+              <img className="add-form__img" src={errorIcon} alt="" />
+              <p className="add-form__error">This field is required</p>
+            </div>
           </div>
         </div>
       </form>
@@ -174,8 +275,7 @@ const AddWarehouse = () => {
         </button>
         <button
           className="add-form__button add-form__button--blue"
-          form="addWarehouseForm"
-        >
+          form="addWarehouseForm">
           + Add Warehouse
         </button>
       </section>

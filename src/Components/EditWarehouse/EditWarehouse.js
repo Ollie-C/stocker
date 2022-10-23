@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const EditWarehouse = () => {
+const EditWarehouse = ({ getWarehouses }) => {
   const navigate = useNavigate();
   const { warehouseId } = useParams();
   const [showMessage, setShowMessage] = useState(false);
@@ -44,8 +44,6 @@ const EditWarehouse = () => {
     email
   ) => {
     e.preventDefault();
-
-    console.log("saved button clicked");
 
     if (
       name.trim("") === "" &&
@@ -96,31 +94,6 @@ const EditWarehouse = () => {
     // console.log("success");
   };
 
-  //////////////////////////////////////////////method 2
-  // const saveHandler = (event) => {
-  //   event.preventDefault();
-
-  //   //retrieve values from the form
-  //   const EditedWarehouseObj = {
-  //     name: event.target.name.value,
-  //     address: event.target.address.value,
-  //     city: event.target.city.value,
-  //     country: event.target.country.value,
-  //     contactName: event.target.contactName.value,
-  //     position: event.target.position.value,
-  //     phone: event.target.phone.value,
-  //     email: event.target.email.value,
-  //   };
-  //   axios
-  //     .put(
-  //       `http://localhost:8080/warehouses/${warehouseId}`,
-  //       EditedWarehouseObj
-  //     )
-  //     .then((response) => {
-  //       console.log(response);
-  //     });
-  // };
-
   useEffect(() => {
     // GET request to /warehouses/:warehouseId
     const getWarehouseDetails = async () => {
@@ -143,6 +116,7 @@ const EditWarehouse = () => {
     getWarehouseDetails();
     // Set the state above
   }, [warehouseId]);
+  getWarehouses();
 
   return (
     <main className="main">
@@ -209,7 +183,7 @@ const EditWarehouse = () => {
             onChange={(e) => inputChangeHandler(e)}
           />
         </div>
-        <div className="form__fields">
+        <div className="form__fields form__fields--active">
           <h2 className="form__title">Contact Details</h2>
           <label htmlFor="contactName" className="form__label">
             Contact Name
