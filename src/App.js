@@ -147,7 +147,7 @@ function App() {
                 element={<AddWarehouse getWarehouses={getWarehouses} />}
               />
               <Route
-                path="/:warehouseId/edit"
+                path="/warehouses/:warehouseId/edit"
                 element={<EditWarehouse getWarehouses={getWarehouses} />}
               />
               <Route
