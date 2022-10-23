@@ -1,55 +1,34 @@
-//styles
 import "./AddInventoryItem.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
+// import errorIcon from "../../assets/Icons/error-24px.svg";
 import { useState } from "react";
 // const validator = require("validator");
 
-const AddInventoryItem = ({ warehouses }) => {
+const AddInventoryItem = ({ getInventories }) => {
   const navigate = useNavigate();
   const [itemDetails, setItemDetails] = useState({
     warehouseName: "Jersey",
     itemName: "",
     description: "",
     category: "Accessories",
-    stock: "",
     quantity: "0",
   });
   const [stock, setStock] = useState(true);
 
   const addItem = async () => {
-    // console.log(warehouses);
-    // const warehouse = warehouses.find(
-    //   (warehouse) => warehouse.name === itemDetails.warehouseName
-    // );
-    // console.log(warehouse);
     const { data } = await axios
-      .post("http://localhost:8080/inventory", {
-        // warehouseID: warehouse.id,
-        warehouseName: itemDetails.warehouseName,
-        itemName: itemDetails.itemName,
-        description: itemDetails.description,
-        category: itemDetails.category,
-        status: itemDetails.stock,
-        quantity: parseInt(itemDetails.quantity),
-      })
+      .post("http://localhost:8080/inventory", itemDetails)
       .catch((error) => {
         alert(error.response.statusText);
         console.log(error.response);
       });
-    console.log(data);
+    getInventories();
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (value === "In Stock") {
-      setStock(true);
-    }
-    if (value === "Out of Stock") {
-      setStock(false);
-    }
 
     setItemDetails({
       ...itemDetails,
@@ -137,16 +116,16 @@ const AddInventoryItem = ({ warehouses }) => {
             <div className="addI-form__radio-buttons">
               <input
                 type="radio"
-                name="stock"
+                name="status"
                 value="In Stock"
-                onClick={(e) => handleChange(e)}
+                onClick={() => setStock(true)}
               />
               <label className="addI-form__label--radio">In Stock</label>
               <input
                 type="radio"
-                name="stock"
+                name="status"
                 value="Out of Stock"
-                onClick={(e) => handleChange(e)}
+                onClick={() => setStock(false)}
               />
               <label className="addI-form__label--radio">Out of stock</label>
             </div>

@@ -1,11 +1,10 @@
-//styles
 import "./AddWarehouse.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import { useEffect, useState } from "react";
 import errorIcon from "../../assets/Icons/error-24px.svg";
-var validator = require("validator");
+const validator = require("validator");
 
 const AddWarehouse = ({ getWarehouses }) => {
   const navigate = useNavigate();
@@ -25,23 +24,11 @@ const AddWarehouse = ({ getWarehouses }) => {
 
   const addWarehouse = async () => {
     const { data } = await axios
-      .post("http://localhost:8080/warehouses", {
-        name: warehouseDetails.name,
-        address: warehouseDetails.address,
-        city: warehouseDetails.city,
-        country: warehouseDetails.country,
-        contact: {
-          contactName: warehouseDetails.contactName,
-          position: warehouseDetails.position,
-          phone: warehouseDetails.phone,
-          email: warehouseDetails.email,
-        },
-      })
+      .post("http://localhost:8080/warehouses", warehouseDetails)
       .catch((error) => {
         alert(error.response.statusText);
         console.log(error.response);
       });
-    // console.log(data);
   };
 
   const handleChange = (e) => {
@@ -56,6 +43,7 @@ const AddWarehouse = ({ getWarehouses }) => {
     e.preventDefault();
     setFormErrors(validate(warehouseDetails));
     setIsSubmit(true);
+    console.log(warehouseDetails);
     addWarehouse();
 
     // if (setIsSubmit(true)) {
@@ -106,9 +94,9 @@ const AddWarehouse = ({ getWarehouses }) => {
     if (!validator.isAlphanumeric(values.position)) {
       errors.position = "This field is required";
     }
-    if (!validator.isAlpha(values.phone)) {
-      errors.phone = "This field is required";
-    }
+    // if (!validator.isAlpha(values.phone)) {
+    //   errors.phone = "This field is required";
+    // }
     if (!validator.isEmail(values.email)) {
       errors.email = "This field is required";
     }
@@ -144,7 +132,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.name ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -160,7 +149,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.address ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -176,7 +166,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.city ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -192,7 +183,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.country ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -213,7 +205,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.contactName ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -229,7 +222,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.position ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -245,7 +239,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.phone ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -261,7 +256,8 @@ const AddWarehouse = ({ getWarehouses }) => {
             />
             <div
               style={{ display: formErrors.email ? "flex" : "none" }}
-              className="add-form__error-container">
+              className="add-form__error-container"
+            >
               <img className="add-form__img" src={errorIcon} alt="" />
               <p className="add-form__error">This field is required</p>
             </div>
@@ -275,7 +271,8 @@ const AddWarehouse = ({ getWarehouses }) => {
         </button>
         <button
           className="add-form__button add-form__button--blue"
-          form="addWarehouseForm">
+          form="addWarehouseForm"
+        >
           + Add Warehouse
         </button>
       </section>

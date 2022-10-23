@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import Header from "./Components/Header/Header";
 import WarehousePage from "./pages/WarehousePage/WarehousePage";
 import "./styles/partials/_resets.scss";
@@ -176,7 +176,10 @@ function App() {
                 path="/inventory/:itemId/edit"
                 element={<EditInventory getInventories={getInventories} />}
               />
-              <Route path="/inventory/add" element={<AddInventoryItem />} />
+              <Route
+                path="/inventory/add"
+                element={<AddInventoryItem getInventories={getInventories} />}
+              />
             </Routes>
           </div>
         </div>
