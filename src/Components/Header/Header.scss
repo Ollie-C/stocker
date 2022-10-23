@@ -4,6 +4,9 @@
 .header {
   background-color: $background-colour-1;
   height: 30vh;
+  @include tablet {
+    height: 20vh;
+  }
   &__container {
     display: flex;
     flex-direction: column;
@@ -39,14 +42,18 @@
   &__links {
     list-style-type: none;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     padding: 0;
     margin: 0;
+    @include tablet {
+      justify-content: flex-end;
+    }
   }
 
   &__item {
     text-align: center;
-    width: 50%;
+    width: 45%;
+    text-decoration: none;
     @include tablet {
       width: fit-content;
       margin-left: 4rem;
@@ -55,13 +62,11 @@
 
   &__button--active {
     background-color: $primary-colour-1;
-
     border-radius: 2rem;
   }
 
   &__button {
-    text-decoration: none;
     color: $primary-colour-3;
-    padding: 1.8rem 4rem;
+    padding: 0.8rem 3rem;
   }
 }
