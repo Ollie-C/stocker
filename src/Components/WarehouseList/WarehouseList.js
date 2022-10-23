@@ -44,7 +44,7 @@ const WarehouseList = ({
           <p className="key__text">Contact Information</p>
           <img src={sort} alt="sort" className="key__sort" />
         </li>
-        <li className="key__label">
+        <li className="key__label key__label--actions">
           <p className="key__text">Actions</p>
         </li>
       </ul>

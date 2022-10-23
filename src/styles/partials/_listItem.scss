@@ -4,8 +4,10 @@
 .card {
   border-top: 1px solid $secondary-colour-2;
   padding: 0 1.6rem;
+  padding-bottom: 1.6rem;
   @include tablet {
     display: flex;
+    justify-content: space-between;
     width: 100%;
   }
 
@@ -41,6 +43,7 @@
     align-items: center;
     @include tablet {
       width: 8%;
+      justify-content: right;
     }
   }
 
@@ -77,6 +80,7 @@
   &__contact-details {
     @include tablet {
       width: 50%;
+      padding-left: 0.5rem;
     }
   }
 
