@@ -5,29 +5,23 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-const EditInventory = () => {
+const EditInventory = ({ getInventories }) => {
   const navigate = useNavigate();
   const { itemId } = useParams();
 
-  // const [itemName, setItemName] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [status, setStatus] = useState(false);
-  // const [quantity, setQuantity] = useState(0);
-  // const [warehouseName, setWarehouseName] = useState(false);
-
   const [formFields, setFormFields] = useState({
-    name: "",
+    itemName: "",
     description: "",
     category: "",
-    status: 0,
-    quantity: 0,
+    status: "",
+    quantity: "",
     warehouseName: "",
   });
 
   // Will update the correct input state, based
   // on whichever input the user changed.
   const inputChangeHandler = (e) => {
+    console.log(e.target.name);
     const value = e.target.value;
 
     setFormFields({
@@ -38,28 +32,29 @@ const EditInventory = () => {
 
   const editInventory = async (
     e,
-    name,
+    itemName,
     description,
     category,
     status,
-    quantity,
     warehouseName
   ) => {
+    // console.log(e);
     e.preventDefault();
-    console.log("saved button clicked");
 
     const { data } = await axios.put(
       `http://localhost:8080/inventory/${itemId}`,
       {
-        name: e.target.name.value,
-        description: e.target.description.value,
-        category: e.target.category.value,
-        status: e.target.status.value,
-        quantity: e.target.quantity.value,
-        WarehouseName: e.target.WarehouseName.value,
+        itemName: itemName,
+        description: description,
+        category: category,
+        status: status,
+        warehouseName: warehouseName,
       }
     );
-    navigate("/");
+    console.log("saved button clicked");
+
+    navigate("/inventory");
+    console.log(data);
   };
 
   const saveHandler = (e) => {
@@ -70,7 +65,6 @@ const EditInventory = () => {
       formFields.description,
       formFields.category,
       formFields.status,
-      formFields.quantity,
       formFields.warehouseName
     );
     // console.log("success");
@@ -82,18 +76,20 @@ const EditInventory = () => {
       const { data } = await axios.get(
         `http://localhost:8080/inventory/${itemId}`
       );
+      // console.log(data);
 
       setFormFields({
-        name: data.name,
+        itemName: data.itemName,
         description: data.description,
         category: data.category,
         status: data.status,
-        quantity: data.quantity,
         warehouseName: data.warehouseName,
       });
+      // console.log(data);
     };
     getInventoryDetails();
   }, [itemId]);
+  getInventories();
 
   return (
     <>
@@ -120,7 +116,8 @@ const EditInventory = () => {
             type="text"
             className="form__input"
             placeholder="Warehouse Name"
-            name="name"
+            name="itemName"
+            value={formFields.itemName}
             onChange={(e) => inputChangeHandler(e)}
           />
           <label htmlFor="address" className="form__label">
@@ -128,17 +125,23 @@ const EditInventory = () => {
           </label>
           <textarea
             name="description"
-            id="description"
             cols="30"
             rows="10"
-            className=""
+            className="form__textarea"
             placeholder="please enter a brief item description.."
+            value={formFields.description}
             onChange={(e) => inputChangeHandler(e)}></textarea>
 
           <label htmlFor="category" className="form__label">
             Category
           </label>
-          <select type="text" name="category" className="form__input">
+          <select
+            selected={formFields.category}
+            onChange={(e) => inputChangeHandler(e)}
+            type="text"
+            name="category"
+            className="form__input">
+            <option value={formFields.category}>{formFields.category}</option>
             <option value="Electronics">Electronics</option>
             <option value="Gear">Gear</option>
             <option value="Apparel">Apparel</option>
@@ -146,10 +149,10 @@ const EditInventory = () => {
             <option value="Health">Health</option>
           </select>
         </div>
-        <div className="form__fields">
+        <div className="form__fields form__fields--active">
           <h2 className="form__title">Item Availability</h2>
           <label htmlFor="status" className="form__label">
-            status
+            Status
           </label>
           <div className="addInventory__availability-radio-container">
             <input
@@ -157,35 +160,48 @@ const EditInventory = () => {
               name="status"
               className="form__radio"
               value="In Stock"
+              checked={formFields.status === "In Stock"}
+              onChange={(e) => inputChangeHandler(e)}
             />
-            <label htmlFor="position" className="form__label">
+            <label htmlFor="In Stock" className="form__label">
               In Stock
             </label>
             <input
               type="radio"
               name="status"
               className="form__radio"
-              value="Out of Stock"
               onChange={(e) => inputChangeHandler(e)}
+              checked={formFields.status === "Out of Stock"}
+              value="Out of Stock"
             />
-            <label htmlFor="phone" className="form__label">
+            <label htmlFor="Out of Stock" className="form__label">
               Out of stock
             </label>
           </div>
-          <label htmlFor="quantity" className="form__label">
+          {/* <label htmlFor="quantity" className="form__label">
             Quantity
           </label>
           <input
             type="number"
             name="quantity"
             className="form__input form__input--quantity"
-            value="In Stock"
             onChange={(e) => inputChangeHandler(e)}
-          />
-          <label htmlFor="phone" className="form__label">
+            value={formFields.quantity}
+          /> */}
+          <label
+            htmlFor="warehouseName"
+            className="form__label form__label--active">
             Warehouse
           </label>
-          <select type="text" name="WarehouseName" className="form__input">
+          <select
+            value={formFields.warehouseName}
+            onChange={(e) => inputChangeHandler(e)}
+            type="text"
+            name="warehouseName"
+            className="form__input">
+            <option value={formFields.warehouseName}>
+              {formFields.warehouseName}
+            </option>
             <option value="Manhattan">Manhattan</option>
             <option value="Washington">Washington</option>
             <option value="Jersey">Jersey</option>
@@ -198,7 +214,6 @@ const EditInventory = () => {
       <section className="form__buttons">
         <button className="form__button">Cancel</button>
         <button
-          onClick={() => navigate(-1)}
           className="form__button form__button--blue"
           form="addWarehouseForm">
           Save

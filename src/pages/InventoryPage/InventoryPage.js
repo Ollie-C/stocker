@@ -11,6 +11,9 @@ const InventoryPage = ({
   showModalHandler,
   handleSelectedProduct,
   selectedProduct,
+  sortInventory,
+  search,
+  setSearch,
 }) => {
   return (
     <>
@@ -18,6 +21,9 @@ const InventoryPage = ({
         inventories={inventories}
         handleSelectedProduct={handleSelectedProduct}
         showModalHandler={showModalHandler}
+        sortInventory={sortInventory}
+        search={search}
+        setSearch={setSearch}
       />
       {showModal ? (
         <InventoryModal
