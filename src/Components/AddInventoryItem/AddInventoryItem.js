@@ -9,10 +9,10 @@ import { useState } from "react";
 const AddInventoryItem = ({ warehouses, getInventories }) => {
   const navigate = useNavigate();
   const [itemDetails, setItemDetails] = useState({
-    warehouseName: "Jersey",
+    warehouseName: null,
     itemName: "",
     description: "",
-    category: "Accessories",
+    category: null,
     quantity: "0",
   });
   const [stock, setStock] = useState(true);
@@ -50,10 +50,6 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
       navigate("/inventory");
     }
   };
-  console.log(warehouses);
-  warehouses.forEach((warehouse) => {
-    console.log(warehouse.name);
-  });
 
   return (
     <main className="main">
@@ -103,9 +99,8 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
               className="addI-form__input addI-form__input--dropdown"
               onChange={(e) => handleChange(e)}
             >
-              <option defaultValue="Accessories" value="Accessories">
-                Accessories
-              </option>
+              <option value={null}>Please select</option>
+              <option value="Accessories">Accessories</option>
               <option value="Apparel">Apparel</option>
               <option value="Electronics">Electronics</option>
               <option value="Gear">Gear</option>
@@ -158,6 +153,7 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
               className="addI-form__input addI-form__input--dropdown"
               onChange={(e) => handleChange(e)}
             >
+              <option value={null}>Please select</option>
               {warehouses.map((warehouse) => {
                 return (
                   <>
