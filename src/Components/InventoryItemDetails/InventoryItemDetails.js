@@ -15,7 +15,7 @@ const InventoryItemDetails = () => {
     const { data } = await axios.get(
       `http://localhost:8080/inventory/${itemId}`
     );
-    console.log(data);
+
     SetInventoryItem(data);
   };
 
@@ -31,6 +31,7 @@ const InventoryItemDetails = () => {
             className="item-details__arrow"
             src={arrow}
             onClick={() => navigate(-1)}
+            alt="back-button"
           />
           <h1 className="item-details__title-text">{inventoryItem.itemName}</h1>
         </div>
@@ -57,16 +58,20 @@ const InventoryItemDetails = () => {
         <div className="item-details__right">
           <div className="item-details__stock">
             <div className="item-details__stock-info">
-              <div>
-                <h5 className="item-details__label">Status:</h5>
-                <p className="item-details__status">{inventoryItem.status}</p>
-              </div>
-              <div>
-                <h5 className="item-details__label">Quantity:</h5>
-                <p className="item-details__quantity">
-                  {inventoryItem.quantity}
-                </p>
-              </div>
+              <h5 className="item-details__label">Status:</h5>
+              <p
+                className={`item-details__status stock ${
+                  inventoryItem.status === "In Stock"
+                    ? "default--instock"
+                    : "default--outofstock"
+                }`}
+              >
+                {inventoryItem.status}
+              </p>
+            </div>
+            <div className="item-details__stock-info">
+              <h5 className="item-details__label">Quantity:</h5>
+              <p className="item-details__quantity">{inventoryItem.quantity}</p>
             </div>
           </div>
           <div className="item-details__warehouse">
