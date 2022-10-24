@@ -144,18 +144,23 @@ function App() {
                     />
                   }
                 />
-                {/* <Route InventoryPage inventories={inventories} /> */}
+
                 <Route
                   path="/warehouses/add"
                   element={<AddWarehouse getWarehouses={getWarehouses} />}
                 />
                 <Route
-                  path="/warehouses/:warehouseId/edit"
-                  element={<EditWarehouse getWarehouses={getWarehouses} />}
+                  path="/warehouses/details/:warehouseId"
+                  element={
+                    <WarehouseDetails
+                      handleSelectedProduct={handleSelectedProduct}
+                      showModalHandler={showModalHandler}
+                    />
+                  }
                 />
                 <Route
-                  path="/warehouses/details/:warehouseId"
-                  element={<WarehouseDetails />}
+                  path="/warehouses/:warehouseId/edit"
+                  element={<EditWarehouse getWarehouses={getWarehouses} />}
                 />
 
                 <Route

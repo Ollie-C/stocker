@@ -68,7 +68,6 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
     if (isEmpty(value)) {
       error = isEmpty(value);
     }
-    console.log(value);
 
     setFormErrors({
       ...formErrors,
