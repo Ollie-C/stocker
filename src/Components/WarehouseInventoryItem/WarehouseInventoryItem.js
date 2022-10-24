@@ -3,9 +3,16 @@ import { Link } from "react-router-dom";
 import "./WarehouseInventoryItem.scss";
 import editbutton from "../../assets/Icons/edit-24px.svg";
 
-const WarehouseInventoryItem = ({ inventoryItem }) => {
+const WarehouseInventoryItem = ({
+  inventoryItem,
+  handleSelectedProduct,
+  showModalHandler,
+}) => {
   const inventoryItemId = inventoryItem.id;
-
+  const deleteClickHandler = () => {
+    handleSelectedProduct(inventoryItem);
+    showModalHandler();
+  };
   return (
     <>
       <article className="card">
@@ -42,10 +49,12 @@ const WarehouseInventoryItem = ({ inventoryItem }) => {
           </div>
         </div>
         <div className="card__buttons">
-          <button className="card__delete-button"></button>
+          <button
+            className="card__delete-button"
+            onClick={deleteClickHandler}
+          ></button>
           <Link to={`/inventory/${inventoryItemId}/edit`}>
             <div className="card__edit-button">
-              {" "}
               <img className="card__edit-img" src={editbutton} />
             </div>
           </Link>

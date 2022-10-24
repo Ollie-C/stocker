@@ -50,10 +50,16 @@ const AddWarehouse = ({ getWarehouses }) => {
     const filteredValues = submittedValues.filter((value) => {
       return value;
     });
-    if (filteredValues.length < 8) {
+    const errors = Object.values(formErrors);
+    const filteredErrors = errors.filter((error) => {
+      return error;
+    });
+
+    if (filteredValues.length < 8 || filteredErrors.length > 0) {
       alert("Please fill in all fields");
       return false;
     }
+
     addWarehouse();
     navigate("/");
   };
@@ -80,7 +86,6 @@ const AddWarehouse = ({ getWarehouses }) => {
       ...formErrors,
       [name]: error,
     });
-    console.log(formErrors);
   };
 
   return (

@@ -7,7 +7,7 @@ import "./WarehouseDetails.scss";
 import WarehouseInventoryItem from "../WarehouseInventoryItem/WarehouseInventoryItem";
 import sort from "../../assets/Icons/sort-24px.svg";
 
-const WarehouseDetails = () => {
+const WarehouseDetails = ({ handleSelectedProduct, showModalHandler }) => {
   const { warehouseId } = useParams();
   const [warehouse, SetWarehouse] = useState(null);
   const [warehouseInventory, SetWarehouseInventory] = useState([]);
@@ -52,10 +52,13 @@ const WarehouseDetails = () => {
 
           <h1 className="WH-details__title-text">{warehouse.name}</h1>
         </div>
-        <div className="WH-details__edit">
+        <Link
+          className="WH-details__edit"
+          to={`/warehouses/${warehouse.id}/edit`}
+        >
           <img src={editWhite} className="WH-details__edit-icon" />
           <p className="WH-details__edit-text">Edit</p>
-        </div>
+        </Link>
       </header>
       <section className="WH-details__contact">
         <div className="WH-details__address">
@@ -110,6 +113,8 @@ const WarehouseDetails = () => {
             <WarehouseInventoryItem
               key={inventoryItem.id}
               inventoryItem={inventoryItem}
+              handleSelectedProduct={handleSelectedProduct}
+              showModalHandler={showModalHandler}
             />
           );
         })}

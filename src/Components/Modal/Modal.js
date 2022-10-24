@@ -28,12 +28,13 @@ const Modal = ({
           </div>
           <div className="modal__buttons">
             <button onClick={hideModal} className="modal__button-cancel">
-              cancel
+              Cancel
             </button>
             <button
               onClick={() => deleteWarehouse(selectedProduct.id)}
-              className="modal__button-delete">
-              delete
+              className="modal__button-delete"
+            >
+              Delete
             </button>
           </div>
         </div>
