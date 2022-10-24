@@ -1,5 +1,6 @@
 import arrow from "../../assets/Icons/arrow_back-24px.svg";
 import editWhite from "../../assets/Icons/edit-24px-white.svg";
+import { Link } from "react-router-dom";
 import "./InventoryItemDetails.scss";
 
 const InventoryItemDetails = () => {

@@ -10,7 +10,7 @@ const WarehouseInventoryItem = ({ inventoryItem }) => {
         <div className="card__text-wrapper">
           <div className="card__left">
             <h5 className="card__label">Warehouse</h5>
-            <Link to={`/`} className="card__name split">
+            <Link to={`/inventory/:itemId`} className="card__name split">
               <p>{inventoryItem.itemName}</p>
               <img className="card__chevron" src={chevron} />
             </Link>
