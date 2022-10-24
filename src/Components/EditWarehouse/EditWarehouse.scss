@@ -72,4 +72,35 @@ $padding-mobile: 2.4rem;
       }
     }
   }
+  &__error-container {
+    display: none;
+    @include tablet {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      bottom: 4px;
+    }
+  }
+
+  &__icon {
+    display: none;
+    @include tablet {
+      display: flex;
+      width: 18px;
+    }
+  }
+
+  &__error {
+    display: none;
+    @include tablet {
+      display: flex;
+      padding-left: 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: $supporting-colour-2;
+    }
+  }
+}
+.form-wrapper {
+  position: relative;
 }

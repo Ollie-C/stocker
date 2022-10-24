@@ -80,6 +80,7 @@ const AddWarehouse = ({ getWarehouses }) => {
       ...formErrors,
       [name]: error,
     });
+    console.log(formErrors);
   };
 
   return (
