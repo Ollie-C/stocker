@@ -4,7 +4,12 @@ import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import { useEffect, useState } from "react";
 import errorIcon from "../../assets/Icons/error-24px.svg";
-const validator = require("validator");
+import {
+  isEmpty,
+  isNotAlphanumeric,
+  isInvalidPhone,
+  isInvalidEmail,
+} from "../../utils/Helpers.js";
 
 const AddWarehouse = ({ getWarehouses }) => {
   const navigate = useNavigate();
@@ -20,7 +25,6 @@ const AddWarehouse = ({ getWarehouses }) => {
   });
 
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
 
   const addWarehouse = async () => {
     const { data } = await axios
@@ -29,6 +33,7 @@ const AddWarehouse = ({ getWarehouses }) => {
         alert(error.response.statusText);
         console.log(error.response);
       });
+    getWarehouses();
   };
 
   const handleChange = (e) => {
@@ -41,67 +46,41 @@ const AddWarehouse = ({ getWarehouses }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setFormErrors(validate(warehouseDetails));
-    setIsSubmit(true);
-    console.log(warehouseDetails);
+    const submittedValues = Object.values(warehouseDetails);
+    const filteredValues = submittedValues.filter((value) => {
+      return value;
+    });
+    if (filteredValues.length < 8) {
+      alert("Please fill in all fields");
+      return false;
+    }
     addWarehouse();
-
-    // if (setIsSubmit(true)) {
-    //   addWarehouse();
-    // alert("Success.");
-    // navigate("/");
-    // addWarehouse();
-    // }
-    // const submittedValues = Object.values(warehouseDetails);
-    // const errors = submittedValues.filter((value) => {
-    //   return !value;
-    // });
-    // if (errors.length > 0) {
-    //   alert("Please fill in all fields.");
-    // } else {
-    // addWarehouse();
-    // alert("Success.");
-    // navigate("/");
-    // }
+    navigate("/");
   };
 
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(warehouseDetails);
-      navigate("/");
-    }
-  }, [formErrors]);
-  getWarehouses();
+  const isValidInput = (e, type) => {
+    const { name, value } = e.target;
+    let error = null;
 
-  const validate = (values) => {
-    const errors = {};
-    // const regex
-    if (!validator.isAlpha(values.name)) {
-      errors.name = "This field is required";
+    if (type === "regular") {
+      error = isNotAlphanumeric(value);
     }
-    if (!validator.isAlphanumeric(values.address)) {
-      errors.address = "This field is required";
+    if (type === "phone") {
+      error = isInvalidPhone(value);
     }
-    if (!validator.isAlpha(values.city)) {
-      errors.city = "This field is required";
-    }
-    if (!validator.isAlpha(values.country)) {
-      errors.country = "This field is required";
-    }
-    if (!validator.isAlpha(values.contactName)) {
-      errors.contactName = "This field is required";
-    }
-    if (!validator.isAlphanumeric(values.position)) {
-      errors.position = "This field is required";
-    }
-    // if (!validator.isAlpha(values.phone)) {
-    //   errors.phone = "This field is required";
-    // }
-    if (!validator.isEmail(values.email)) {
-      errors.email = "This field is required";
+    if (type === "email") {
+      error = isInvalidEmail(value);
     }
 
-    return errors;
+    if (isEmpty(value)) {
+      error = isEmpty(value);
+    }
+
+    setFormErrors({
+      ...formErrors,
+      [name]: error,
+    });
+    console.log(formErrors);
   };
 
   return (
@@ -115,151 +94,231 @@ const AddWarehouse = ({ getWarehouses }) => {
         />
         <h1 className="addWarehouse-header__title">Add New Warehouse</h1>
       </section>
-      {/* <pre>{JSON.stringify(warehouseDetails, undefined, 2)}</pre> */}
       <form className="add-form" id="addWarehouseForm" onSubmit={submitHandler}>
         <div className="form-fields-wrapper">
           <div className="add-form__fields">
             <h2 className="add-form__title">Warehouse Details</h2>
-            <label htmlFor="name" className="add-form__label">
-              Warehouse Name
-            </label>
-            <input
-              type="text"
-              className="add-form__input"
-              placeholder="Warehouse Name"
-              name="name"
-              onChange={(e) => handleChange(e)}
-            />
-            <div
-              style={{ display: formErrors.name ? "flex" : "none" }}
-              className="add-form__error-container"
-            >
-              <img className="add-form__img" src={errorIcon} alt="" />
-              <p className="add-form__error">This field is required</p>
+            <div className="input-wrapper">
+              <label htmlFor="name" className="add-form__label">
+                Warehouse Name
+              </label>
+              <input
+                type="text"
+                className="add-form__input"
+                placeholder="Warehouse Name"
+                name="name"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.name ? "1px solid #c94515" : "",
+                }}
+              />
+              <div
+                style={{ display: formErrors.name ? "flex" : "none" }}
+                className="add-form__error-container"
+              >
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="add-form__error">{formErrors.name}</p>
+              </div>
             </div>
-            <label htmlFor="address" className="add-form__label">
-              Street Address
-            </label>
-            <input
-              type="text"
-              className="add-form__input"
-              placeholder="Street Address"
-              name="address"
-              onChange={(e) => handleChange(e)}
-            />
-            <div
-              style={{ display: formErrors.address ? "flex" : "none" }}
-              className="add-form__error-container"
-            >
-              <img className="add-form__img" src={errorIcon} alt="" />
-              <p className="add-form__error">This field is required</p>
+
+            <div className="input-wrapper">
+              <label htmlFor="address" className="add-form__label">
+                Street Address
+              </label>
+              <input
+                type="text"
+                className="add-form__input"
+                placeholder="Street Address"
+                name="address"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.address ? "1px solid #c94515" : "",
+                }}
+              />
+              <div
+                style={{ display: formErrors.address ? "flex" : "none" }}
+                className="add-form__error-container"
+              >
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="add-form__error">{formErrors.address}</p>
+              </div>
             </div>
-            <label htmlFor="city" className="add-form__label">
-              City
-            </label>
-            <input
-              type="text"
-              className="add-form__input"
-              placeholder="City"
-              name="city"
-              onChange={(e) => handleChange(e)}
-            />
-            <div
-              style={{ display: formErrors.city ? "flex" : "none" }}
-              className="add-form__error-container"
-            >
-              <img className="add-form__img" src={errorIcon} alt="" />
-              <p className="add-form__error">This field is required</p>
+            <div className="input-wrapper">
+              <label htmlFor="city" className="add-form__label">
+                City
+              </label>
+              <input
+                type="text"
+                className="add-form__input"
+                placeholder="City"
+                name="city"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.city ? "1px solid #c94515" : "",
+                }}
+              />
+              <div
+                style={{ display: formErrors.city ? "flex" : "none" }}
+                className="add-form__error-container"
+              >
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="add-form__error">{formErrors.city}</p>
+              </div>
             </div>
-            <label htmlFor="country" className="add-form__label">
-              Country
-            </label>
-            <input
-              type="text"
-              className="add-form__input"
-              placeholder="Country"
-              name="country"
-              onChange={(e) => handleChange(e)}
-            />
-            <div
-              style={{ display: formErrors.country ? "flex" : "none" }}
-              className="add-form__error-container"
-            >
-              <img className="add-form__img" src={errorIcon} alt="" />
-              <p className="add-form__error">This field is required</p>
+            <div className="input-wrapper">
+              <label htmlFor="country" className="add-form__label">
+                Country
+              </label>
+              <input
+                type="text"
+                className="add-form__input"
+                placeholder="Country"
+                name="country"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.country ? "1px solid #c94515" : "",
+                }}
+              />
+              <div
+                style={{ display: formErrors.country ? "flex" : "none" }}
+                className="add-form__error-container"
+              >
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="add-form__error">{formErrors.country}</p>
+              </div>
             </div>
           </div>
         </div>
         <div className="form-fields-wrapper">
-          <div className="add-form__fields">
+          <div className="add-form__fields add-form__fields--2">
             <h2 className="add-form__title">Contact Details</h2>
-            <label htmlFor="contactName" className="add-form__label">
-              Contact Name
-            </label>
-            <input
-              type="text"
-              className="add-form__input"
-              placeholder="Contact Name"
-              name="contactName"
-              onChange={(e) => handleChange(e)}
-            />
-            <div
-              style={{ display: formErrors.contactName ? "flex" : "none" }}
-              className="add-form__error-container"
-            >
-              <img className="add-form__img" src={errorIcon} alt="" />
-              <p className="add-form__error">This field is required</p>
+            <div className="input-wrapper">
+              <label htmlFor="contactName" className="add-form__label">
+                Contact Name
+              </label>
+              <input
+                type="text"
+                className="add-form__input"
+                style={{
+                  outline: formErrors.contactName ? "1px solid #c94515" : "",
+                }}
+                placeholder="Contact Name"
+                name="contactName"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
+              />
+              <div
+                style={{ display: formErrors.contactName ? "flex" : "none" }}
+                className="add-form__error-container"
+              >
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="add-form__error">{formErrors.contactName}</p>
+              </div>
             </div>
-            <label htmlFor="position" className="add-form__label">
-              Position
-            </label>
-            <input
-              type="text"
-              className="add-form__input"
-              placeholder="Position"
-              name="position"
-              onChange={(e) => handleChange(e)}
-            />
-            <div
-              style={{ display: formErrors.position ? "flex" : "none" }}
-              className="add-form__error-container"
-            >
-              <img className="add-form__img" src={errorIcon} alt="" />
-              <p className="add-form__error">This field is required</p>
+            <div className="input-wrapper">
+              <label htmlFor="position" className="add-form__label">
+                Position
+              </label>
+              <input
+                type="text"
+                className="add-form__input"
+                placeholder="Position"
+                name="position"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.position ? "1px solid #c94515" : "",
+                }}
+              />
+              <div
+                style={{ display: formErrors.position ? "flex" : "none" }}
+                className="add-form__error-container"
+              >
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="add-form__error">{formErrors.position}</p>
+              </div>
             </div>
-            <label htmlFor="phone" className="add-form__label">
-              Phone Number
-            </label>
-            <input
-              type="text"
-              className="add-form__input"
-              placeholder="Phone Number"
-              name="phone"
-              onChange={(e) => handleChange(e)}
-            />
-            <div
-              style={{ display: formErrors.phone ? "flex" : "none" }}
-              className="add-form__error-container"
-            >
-              <img className="add-form__img" src={errorIcon} alt="" />
-              <p className="add-form__error">This field is required</p>
+            <div className="input-wrapper">
+              <label htmlFor="phone" className="add-form__label">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                className="add-form__input"
+                placeholder="Phone Number"
+                name="phone"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "phone")}
+                style={{
+                  outline: formErrors.phone ? "1px solid #c94515" : "",
+                }}
+              />
+              <div
+                style={{ display: formErrors.phone ? "flex" : "none" }}
+                className="add-form__error-container"
+              >
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="add-form__error">{formErrors.phone}</p>
+              </div>
             </div>
-            <label htmlFor="email" className="add-form__label">
-              Email
-            </label>
-            <input
-              type="text"
-              className="add-form__input"
-              placeholder="Email"
-              name="email"
-              onChange={(e) => handleChange(e)}
-            />
-            <div
-              style={{ display: formErrors.email ? "flex" : "none" }}
-              className="add-form__error-container"
-            >
-              <img className="add-form__img" src={errorIcon} alt="" />
-              <p className="add-form__error">This field is required</p>
+            <div className="input-wrapper">
+              <label htmlFor="email" className="add-form__label">
+                Email
+              </label>
+              <input
+                type="text"
+                className="add-form__input"
+                placeholder="Email"
+                name="email"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "email")}
+                style={{
+                  outline: formErrors.email ? "1px solid #c94515" : "",
+                }}
+              />
+              <div
+                style={{ display: formErrors.email ? "flex" : "none" }}
+                className="add-form__error-container"
+              >
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="add-form__error">{formErrors.email}</p>
+              </div>
             </div>
           </div>
         </div>

@@ -180,16 +180,7 @@ const EditInventory = ({ getInventories }) => {
               Out of stock
             </label>
           </div>
-          {/* <label htmlFor="quantity" className="form__label">
-            Quantity
-          </label>
-          <input
-            type="number"
-            name="quantity"
-            className="form__input form__input--quantity"
-            onChange={(e) => inputChangeHandler(e)}
-            value={formFields.quantity}
-          /> */}
+
           <label
             htmlFor="warehouseName"
             className="form__label form__label--active"
