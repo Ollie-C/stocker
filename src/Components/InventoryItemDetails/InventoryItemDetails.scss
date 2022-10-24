@@ -1,0 +1,47 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.item-details {
+  &__header {
+    display: flex;
+    height: 10rem;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+  &__title {
+    display: flex;
+  }
+
+  &__arrow {
+    width: 4rem;
+  }
+
+  &__edit {
+    background-color: $primary-colour-2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    @include tablet {
+      width: 81px;
+      height: 38px;
+      border-radius: 20px;
+    }
+  }
+
+  &__edit-icon {
+    height: 20px;
+    width: 20px;
+  }
+
+  &__edit-text {
+    display: none;
+    @include tablet {
+      display: flex;
+      color: $primary-colour-3;
+      margin-left: 0.4rem;
+    }
+  }
+}

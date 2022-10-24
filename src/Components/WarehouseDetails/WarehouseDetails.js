@@ -18,7 +18,6 @@ const WarehouseDetails = () => {
     const { data } = await axios.get(
       `http://localhost:8080/warehouses/${warehouseId}`
     );
-    console.log(data);
     SetWarehouse(data);
   };
 
@@ -31,7 +30,6 @@ const WarehouseDetails = () => {
       `http://localhost:8080/warehouses/${warehouseId}/inventory`
     );
     SetWarehouseInventory(inventory.data);
-    console.log(inventory.data);
   };
 
   useEffect(() => {
@@ -84,7 +82,7 @@ const WarehouseDetails = () => {
       </section>
       <ul className="key">
         <li className="key__label">
-          <p className="key__text">Warehouse</p>
+          <p className="key__text">Inventory Item</p>
           <img src={sort} alt="sort" className="key__sort" />
         </li>
         <li className="key__label">
