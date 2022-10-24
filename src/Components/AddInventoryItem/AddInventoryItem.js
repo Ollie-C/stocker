@@ -35,6 +35,7 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(value);
     setItemDetails({
       ...itemDetails,
       [name]: value,
@@ -107,6 +108,9 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
                 name="itemName"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.itemName ? "1px solid #c94515" : "",
+                }}
               />
               <div
                 style={{ display: formErrors.itemName ? "flex" : "none" }}
@@ -130,6 +134,9 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
                 name="description"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.description ? "1px solid #c94515" : "",
+                }}
               ></textarea>
               <div
                 style={{ display: formErrors.description ? "flex" : "none" }}
@@ -152,8 +159,11 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
                 className="addI-form__input addI-form__input--dropdown"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "none")}
+                style={{
+                  outline: formErrors.category ? "1px solid #c94515" : "",
+                }}
               >
-                <option value={null}>Please select</option>
+                <option value="">Please select</option>
                 <option value="Accessories">Accessories</option>
                 <option value="Apparel">Apparel</option>
                 <option value="Electronics">Electronics</option>
@@ -186,14 +196,28 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
                   value="In Stock"
                   onClick={() => setStock(true)}
                 />
-                <label className="addI-form__label--radio">In Stock</label>
+                <label
+                  className="addI-form__label--radio"
+                  style={{
+                    color: !stock ? "#5c667e" : "",
+                  }}
+                >
+                  In Stock
+                </label>
                 <input
                   type="radio"
                   name="status"
                   value="Out of Stock"
                   onClick={() => setStock(false)}
                 />
-                <label className="addI-form__label--radio">Out of stock</label>
+                <label
+                  className="addI-form__label--radio"
+                  style={{
+                    color: stock ? "#5c667e" : "",
+                  }}
+                >
+                  Out of stock
+                </label>
               </div>
             </div>
             <div className="input-wrapper">
@@ -224,8 +248,11 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
                 className="addI-form__input addI-form__input--dropdown"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "none")}
+                style={{
+                  outline: formErrors.warehouseName ? "1px solid #c94515" : "",
+                }}
               >
-                <option value={null}>Please select</option>
+                <option value="">Please select</option>
                 {warehouses.map((warehouse) => {
                   return (
                     <option key={warehouse.id} value={warehouse.name}>

@@ -108,6 +108,9 @@ const AddWarehouse = ({ getWarehouses }) => {
                 name="name"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.name ? "1px solid #c94515" : "",
+                }}
               />
               <div
                 style={{ display: formErrors.name ? "flex" : "none" }}
@@ -133,6 +136,9 @@ const AddWarehouse = ({ getWarehouses }) => {
                 name="address"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.address ? "1px solid #c94515" : "",
+                }}
               />
               <div
                 style={{ display: formErrors.address ? "flex" : "none" }}
@@ -157,6 +163,9 @@ const AddWarehouse = ({ getWarehouses }) => {
                 name="city"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.city ? "1px solid #c94515" : "",
+                }}
               />
               <div
                 style={{ display: formErrors.city ? "flex" : "none" }}
@@ -181,6 +190,9 @@ const AddWarehouse = ({ getWarehouses }) => {
                 name="country"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.country ? "1px solid #c94515" : "",
+                }}
               />
               <div
                 style={{ display: formErrors.country ? "flex" : "none" }}
@@ -206,6 +218,9 @@ const AddWarehouse = ({ getWarehouses }) => {
               <input
                 type="text"
                 className="add-form__input"
+                style={{
+                  outline: formErrors.contactName ? "1px solid #c94515" : "",
+                }}
                 placeholder="Contact Name"
                 name="contactName"
                 onChange={(e) => handleChange(e)}
@@ -234,6 +249,9 @@ const AddWarehouse = ({ getWarehouses }) => {
                 name="position"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "regular")}
+                style={{
+                  outline: formErrors.position ? "1px solid #c94515" : "",
+                }}
               />
               <div
                 style={{ display: formErrors.position ? "flex" : "none" }}
@@ -258,6 +276,9 @@ const AddWarehouse = ({ getWarehouses }) => {
                 name="phone"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "phone")}
+                style={{
+                  outline: formErrors.phone ? "1px solid #c94515" : "",
+                }}
               />
               <div
                 style={{ display: formErrors.phone ? "flex" : "none" }}
@@ -282,6 +303,9 @@ const AddWarehouse = ({ getWarehouses }) => {
                 name="email"
                 onChange={(e) => handleChange(e)}
                 onBlur={(e) => isValidInput(e, "email")}
+                style={{
+                  outline: formErrors.email ? "1px solid #c94515" : "",
+                }}
               />
               <div
                 style={{ display: formErrors.email ? "flex" : "none" }}
