@@ -106,7 +106,8 @@ const EditInventory = ({ getInventories }) => {
       <form
         onSubmit={(e) => saveHandler(e)}
         className="form"
-        id="addWarehouseForm">
+        id="addWarehouseForm"
+      >
         <div className="form__fields">
           <h2 className="form__title">Item Details</h2>
           <label htmlFor="name" className="form__label">
@@ -130,7 +131,8 @@ const EditInventory = ({ getInventories }) => {
             className="form__textarea"
             placeholder="please enter a brief item description.."
             value={formFields.description}
-            onChange={(e) => inputChangeHandler(e)}></textarea>
+            onChange={(e) => inputChangeHandler(e)}
+          ></textarea>
 
           <label htmlFor="category" className="form__label">
             Category
@@ -140,7 +142,8 @@ const EditInventory = ({ getInventories }) => {
             onChange={(e) => inputChangeHandler(e)}
             type="text"
             name="category"
-            className="form__input">
+            className="form__input"
+          >
             <option value={formFields.category}>{formFields.category}</option>
             <option value="Electronics">Electronics</option>
             <option value="Gear">Gear</option>
@@ -178,19 +181,11 @@ const EditInventory = ({ getInventories }) => {
               Out of stock
             </label>
           </div>
-          {/* <label htmlFor="quantity" className="form__label">
-            Quantity
-          </label>
-          <input
-            type="number"
-            name="quantity"
-            className="form__input form__input--quantity"
-            onChange={(e) => inputChangeHandler(e)}
-            value={formFields.quantity}
-          /> */}
+
           <label
             htmlFor="warehouseName"
-            className="form__label form__label--active">
+            className="form__label form__label--active"
+          >
             Warehouse
           </label>
           <select
@@ -198,7 +193,8 @@ const EditInventory = ({ getInventories }) => {
             onChange={(e) => inputChangeHandler(e)}
             type="text"
             name="warehouseName"
-            className="form__input">
+            className="form__input"
+          >
             <option value={formFields.warehouseName}>
               {formFields.warehouseName}
             </option>
@@ -215,7 +211,8 @@ const EditInventory = ({ getInventories }) => {
         <button className="form__button">Cancel</button>
         <button
           className="form__button form__button--blue"
-          form="addWarehouseForm">
+          form="addWarehouseForm"
+        >
           Save
         </button>
       </section>

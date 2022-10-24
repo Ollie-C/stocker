@@ -42,6 +42,11 @@ $padding-mobile: 2.4rem;
 
   &__fields {
     padding: 0 $padding-mobile;
+    &--2 {
+      @include tablet {
+        border-left: 1px solid #bdc5d5;
+      }
+    }
   }
 
   &__title {

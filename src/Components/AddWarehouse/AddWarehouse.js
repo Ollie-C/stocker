@@ -210,7 +210,7 @@ const AddWarehouse = ({ getWarehouses }) => {
           </div>
         </div>
         <div className="form-fields-wrapper">
-          <div className="add-form__fields">
+          <div className="add-form__fields add-form__fields--2">
             <h2 className="add-form__title">Contact Details</h2>
             <div className="input-wrapper">
               <label htmlFor="contactName" className="add-form__label">

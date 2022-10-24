@@ -95,7 +95,7 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
         onSubmit={submitHandler}
       >
         <div className="form-fields-wrapper">
-          <div className="addI-form__fields">
+          <div className="addI-form__fields  addI-form__fields--1">
             <h2 className="addI-form__title">Item Details</h2>
             <div className="input-wrapper">
               <label htmlFor="itemName" className="addI-form__label">

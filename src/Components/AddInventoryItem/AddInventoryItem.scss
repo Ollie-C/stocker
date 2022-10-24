@@ -47,6 +47,12 @@ $padding-mobile: 2.4rem;
     flex-direction: column;
     padding: 0 $padding-mobile;
     width: 100%;
+
+    &--1 {
+      @include tablet {
+        border-right: 1px solid #bdc5d5;
+      }
+    }
   }
 
   &__title {
