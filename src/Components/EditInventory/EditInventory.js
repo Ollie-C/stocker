@@ -207,7 +207,9 @@ const EditInventory = ({ getInventories }) => {
         </div>
       </form>
       <section className="form__buttons">
-        <button className="form__button">Cancel</button>
+        <button className="form__button" onClick={() => navigate(-1)}>
+          Cancel
+        </button>
         <button
           className="form__button form__button--blue"
           form="addWarehouseForm"

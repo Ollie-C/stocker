@@ -18,11 +18,7 @@
     width: 50%;
     border: none;
     @include tablet {
-      position: relative;
-      left: 40px;
-    }
-    @include desktop {
-      left: 80px;
+      width: 20%;
     }
   }
 

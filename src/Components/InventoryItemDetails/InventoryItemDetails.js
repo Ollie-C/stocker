@@ -8,7 +8,6 @@ import axios from "axios";
 const InventoryItemDetails = () => {
   const { itemId } = useParams();
   const [inventoryItem, SetInventoryItem] = useState([]);
-  console.log(useParams());
   const navigate = useNavigate();
 
   const getInventoryItem = async () => {
@@ -35,10 +34,10 @@ const InventoryItemDetails = () => {
           />
           <h1 className="item-details__title-text">{inventoryItem.itemName}</h1>
         </div>
-        <div className="item-details__edit">
+        <Link className="item-details__edit" to={`/inventory/${itemId}/edit`}>
           <img src={editWhite} className="item-details__edit-icon" />
           <p className="item-details__edit-text">Edit</p>
-        </div>
+        </Link>
       </header>
       <section className="item-details__info">
         <div className="item-details__left">
