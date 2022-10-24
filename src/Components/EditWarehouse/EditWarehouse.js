@@ -36,6 +36,7 @@ const EditWarehouse = ({ getWarehouses }) => {
       ...formFields,
       [e.target.name]: value,
     });
+    console.log(formFields);
   };
 
   //method 1
