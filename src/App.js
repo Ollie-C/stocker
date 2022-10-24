@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import InventoryPage from "./pages/InventoryPage/InventoryPage";
 import EditInventory from "./Components/EditInventory/EditInventory";
+import InventoryItemDetails from "./Components/InventoryItemDetails/InventoryItemDetails";
 
 function App() {
   const [warehouses, SetWarehouses] = useState([]);
@@ -171,6 +172,10 @@ function App() {
                     setSearch={setSearch}
                   />
                 }
+              />
+              <Route
+                path="/inventory/:itemId"
+                element={<InventoryItemDetails />}
               />
               <Route
                 path="/inventory/:itemId/edit"

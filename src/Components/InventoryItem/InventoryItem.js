@@ -17,9 +17,7 @@ const InventoryItem = ({
       <div className="card__text-wrapper">
         <div className="card__left">
           <h5 className="card__label">Inventory Item</h5>
-          <Link
-            // to={`/warehouses/details/${warehouse.id}`}
-            className="card__name split">
+          <Link to={`/inventory/${inventory.id}`} className="card__name split">
             <p>{inventory.itemName}</p>
             <img className="card__chevron" src={chevron} />
           </Link>
@@ -39,11 +37,13 @@ const InventoryItem = ({
       <div className="card__buttons">
         <button
           onClick={deleteClickHandler}
-          className="card__delete-button"></button>
+          className="card__delete-button"
+        ></button>
         <Link to={`${inventory.id}/edit`}>
           <button
             onClick={(e) => handleSelectedProduct(inventory)}
-            className="card__edit-button"></button>
+            className="card__edit-button"
+          ></button>
         </Link>
       </div>
     </article>
