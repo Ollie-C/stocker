@@ -44,4 +44,48 @@
       margin-left: 0.4rem;
     }
   }
+
+  &__label {
+    text-transform: uppercase;
+    color: $secondary-colour-1;
+    padding-top: 1.6rem;
+    @include tablet {
+      padding-bottom: 0.8rem;
+    }
+  }
+
+  &__info {
+    padding: 1.6rem;
+    border-top: 1px solid $secondary-colour-2;
+    @include tablet {
+      display: flex;
+      padding: 3.6rem;
+    }
+  }
+
+  &__stock {
+    display: flex;
+    width: 100%;
+  }
+
+  &__stock-info {
+    width: 50%;
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  &__right,
+  &__left {
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  &__right {
+    @include tablet {
+      padding-left: 3.6rem;
+      border-left: 1px solid $secondary-colour-2;
+    }
+  }
 }
