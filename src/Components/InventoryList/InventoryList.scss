@@ -44,7 +44,7 @@
   }
 }
 
-.key {
+.key-inventory {
   display: none;
   @include tablet {
     display: flex;
@@ -55,10 +55,16 @@
   }
   &__label {
     @include tablet {
-      min-width: 20%;
+      min-width: 16%;
       list-style-type: none;
       display: flex;
       align-items: center;
+    }
+  }
+
+  &__label--actions {
+    @include tablet {
+      justify-content: right;
     }
   }
   &__sort {
