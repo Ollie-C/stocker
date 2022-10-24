@@ -122,43 +122,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-<<<<<<< HEAD
-        <Header />
-
-        <div className="parent">
-          <div className="app-container">
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <WarehousePage
-                    warehouses={warehouses}
-                    deleteWarehouse={deleteWarehouse}
-                    showModal={showModal}
-                    hideModal={hideModal}
-                    handleSelectedProduct={handleSelectedProduct}
-                    selectedProduct={selectedProduct}
-                    showModalHandler={showModalHandler}
-                    search={search}
-                    setSearch={setSearch}
-                    sorting={sorting}
-                  />
-                }
-              />
-              {/* <Route InventoryPage inventories={inventories} /> */}
-              <Route
-                path="/warehouses/add"
-                element={<AddWarehouse getWarehouses={getWarehouses} />}
-              />
-              <Route
-                path="/warehouses/:warehouseId/edit"
-                element={<EditWarehouse getWarehouses={getWarehouses} />}
-              />
-              <Route
-                path="/warehouses/details/:warehouseId"
-                element={<WarehouseDetails />}
-              />
-=======
         <div className="flex-wrapper">
           <Header />
           <div className="parent">
@@ -194,7 +157,6 @@ function App() {
                   path="/warehouses/details/:warehouseId"
                   element={<WarehouseDetails />}
                 />
->>>>>>> develop
 
                 <Route
                   path="/inventory"
