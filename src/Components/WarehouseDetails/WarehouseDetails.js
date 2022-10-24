@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import arrow from "../../assets/Icons/arrow_back-24px.svg";
@@ -9,16 +9,15 @@ import sort from "../../assets/Icons/sort-24px.svg";
 
 const WarehouseDetails = () => {
   const { warehouseId } = useParams();
-
   const [warehouse, SetWarehouse] = useState(null);
-
   const [warehouseInventory, SetWarehouseInventory] = useState([]);
+
+  const navigate = useNavigate();
 
   const getWarehouse = async () => {
     const { data } = await axios.get(
       `http://localhost:8080/warehouses/${warehouseId}`
     );
-    console.log(data);
     SetWarehouse(data);
   };
 
@@ -31,7 +30,6 @@ const WarehouseDetails = () => {
       `http://localhost:8080/warehouses/${warehouseId}/inventory`
     );
     SetWarehouseInventory(inventory.data);
-    console.log(inventory.data);
   };
 
   useEffect(() => {
@@ -46,9 +44,12 @@ const WarehouseDetails = () => {
     <div className="WH-details">
       <header className="WH-details__header">
         <div className="WH-details__title">
-          <Link to="/">
-            <img className="WH-details__arrow" src={arrow} />
-          </Link>
+          <img
+            className="WH-details__arrow"
+            src={arrow}
+            onClick={() => navigate(-1)}
+          />
+
           <h1 className="WH-details__title-text">{warehouse.name}</h1>
         </div>
         <div className="WH-details__edit">
@@ -84,7 +85,7 @@ const WarehouseDetails = () => {
       </section>
       <ul className="key">
         <li className="key__label">
-          <p className="key__text">Warehouse</p>
+          <p className="key__text">Inventory Item</p>
           <img src={sort} alt="sort" className="key__sort" />
         </li>
         <li className="key__label">

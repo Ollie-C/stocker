@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import Header from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
 import WarehousePage from "./pages/WarehousePage/WarehousePage";
 import "./styles/partials/_resets.scss";
 import AddWarehouse from "./Components/AddWarehouse/AddWarehouse";
@@ -11,6 +12,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import InventoryPage from "./pages/InventoryPage/InventoryPage";
 import EditInventory from "./Components/EditInventory/EditInventory";
+import InventoryItemDetails from "./Components/InventoryItemDetails/InventoryItemDetails";
 
 function App() {
   const [warehouses, SetWarehouses] = useState([]);
@@ -120,73 +122,80 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
-        <div className="parent">
-          <div className="app-container">
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <WarehousePage
-                    warehouses={warehouses}
-                    deleteWarehouse={deleteWarehouse}
-                    showModal={showModal}
-                    hideModal={hideModal}
-                    handleSelectedProduct={handleSelectedProduct}
-                    selectedProduct={selectedProduct}
-                    showModalHandler={showModalHandler}
-                    search={search}
-                    setSearch={setSearch}
-                    sorting={sorting}
-                  />
-                }
-              />
-              {/* <Route InventoryPage inventories={inventories} /> */}
-              <Route
-                path="/warehouses/add"
-                element={<AddWarehouse getWarehouses={getWarehouses} />}
-              />
-              <Route
-                path="/warehouses/:warehouseId/edit"
-                element={<EditWarehouse getWarehouses={getWarehouses} />}
-              />
-              <Route
-                path="/warehouses/details/:warehouseId"
-                element={<WarehouseDetails />}
-              />
+        <div className="flex-wrapper">
+          <Header />
+          <div className="parent">
+            <div className="app-container">
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <WarehousePage
+                      warehouses={warehouses}
+                      deleteWarehouse={deleteWarehouse}
+                      showModal={showModal}
+                      hideModal={hideModal}
+                      handleSelectedProduct={handleSelectedProduct}
+                      selectedProduct={selectedProduct}
+                      showModalHandler={showModalHandler}
+                      search={search}
+                      setSearch={setSearch}
+                      sorting={sorting}
+                    />
+                  }
+                />
+                {/* <Route InventoryPage inventories={inventories} /> */}
+                <Route
+                  path="/warehouses/add"
+                  element={<AddWarehouse getWarehouses={getWarehouses} />}
+                />
+                <Route
+                  path="/warehouses/:warehouseId/edit"
+                  element={<EditWarehouse getWarehouses={getWarehouses} />}
+                />
+                <Route
+                  path="/warehouses/details/:warehouseId"
+                  element={<WarehouseDetails />}
+                />
 
-              <Route
-                path="/inventory"
-                element={
-                  <InventoryPage
-                    inventories={inventories}
-                    deleteInventory={deleteInventory}
-                    showModal={showModal}
-                    hideModal={hideModal}
-                    handleSelectedProduct={handleSelectedProduct}
-                    selectedProduct={selectedProduct}
-                    showModalHandler={showModalHandler}
-                    sortInventory={sortInventory}
-                    search={search}
-                    setSearch={setSearch}
-                  />
-                }
-              />
-              <Route
-                path="/inventory/:itemId/edit"
-                element={<EditInventory getInventories={getInventories} />}
-              />
-              <Route
-                path="/inventory/add"
-                element={
-                  <AddInventoryItem
-                    warehouses={warehouses}
-                    getInventories={getInventories}
-                  />
-                }
-              />
-            </Routes>
+                <Route
+                  path="/inventory"
+                  element={
+                    <InventoryPage
+                      inventories={inventories}
+                      deleteInventory={deleteInventory}
+                      showModal={showModal}
+                      hideModal={hideModal}
+                      handleSelectedProduct={handleSelectedProduct}
+                      selectedProduct={selectedProduct}
+                      showModalHandler={showModalHandler}
+                      sortInventory={sortInventory}
+                      search={search}
+                      setSearch={setSearch}
+                    />
+                  }
+                />
+                <Route
+                  path="/inventory/:itemId"
+                  element={<InventoryItemDetails />}
+                />
+                <Route
+                  path="/inventory/:itemId/edit"
+                  element={<EditInventory getInventories={getInventories} />}
+                />
+                <Route
+                  path="/inventory/add"
+                  element={
+                    <AddInventoryItem
+                      warehouses={warehouses}
+                      getInventories={getInventories}
+                    />
+                  }
+                />
+              </Routes>
+            </div>
           </div>
+          <Footer />
         </div>
       </BrowserRouter>
     </>
