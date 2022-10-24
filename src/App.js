@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import Header from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
 import WarehousePage from "./pages/WarehousePage/WarehousePage";
 import "./styles/partials/_resets.scss";
 import AddWarehouse from "./Components/AddWarehouse/AddWarehouse";
@@ -188,6 +189,7 @@ function App() {
             </Routes>
           </div>
         </div>
+        <Footer />
       </BrowserRouter>
     </>
   );
