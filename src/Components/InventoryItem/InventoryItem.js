@@ -19,7 +19,7 @@ const InventoryItem = ({
         <div className="inventory__left">
           <h5 className="inventory__label">Inventory Item</h5>
           <Link
-            // to={`/warehouses/details/${warehouse.id}`}
+            to={`/inventory/${inventory.id}`}
             className="inventory__name split">
             <p>{inventory.itemName}</p>
             <img className="inventory__chevron" src={chevron} />

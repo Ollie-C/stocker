@@ -17,6 +17,13 @@
     height: 50px;
     width: 50%;
     border: none;
+    @include tablet {
+      position: relative;
+      left: 40px;
+    }
+    @include desktop {
+      left: 80px;
+    }
   }
 
   &__edit-button {
@@ -42,6 +49,7 @@
     @include tablet {
       width: 32%;
       justify-content: right;
+      position: relative;
     }
   }
 

@@ -61,6 +61,12 @@
       align-items: center;
     }
   }
+
+  &__label--actions {
+    @include tablet {
+      justify-content: right;
+    }
+  }
   &__sort {
     @include tablet {
       width: 25px;

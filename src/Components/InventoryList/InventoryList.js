@@ -73,7 +73,7 @@ const InventoryList = ({
         <li className="key-inventory__label">
           <p className="key-inventory__text">Warehouse</p>
         </li>
-        <li className="key-inventory__label">
+        <li className="key-inventory__label key-inventory__label--actions">
           <p className="key-inventory__text">ACTIONS</p>
         </li>
       </ul>
