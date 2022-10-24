@@ -27,61 +27,60 @@ const InventoryList = ({
           <input
             onChange={(e) => setSearch(e.target.value)}
             className="warehouse-list__search split"
-            placeholder="Search..."
-          ></input>
+            placeholder="Search..."></input>
           <Link to="/inventory/add" className="warehouse-list__button">
             + Add New Item
           </Link>
         </div>
       </header>
-      <ul className="key">
-        <li className="key__label">
-          <p className="key__text">Inventory Item</p>
+      <ul className="key-inventory">
+        <li className="key-inventory__label">
+          <p className="key-inventory__text">Inventory Item</p>
           <img
             onClick={() => sortInventory("itemName")}
             src={sort}
             alt="sort"
-            className="key__sort"
+            className="key-inventory__sort"
           />
         </li>
-        <li className="key__label">
-          <p className="key__text">Category</p>
+        <li className="key-inventory__label">
+          <p className="key-inventory__text">Category</p>
           <img
             onClick={() => sortInventory("category")}
             src={sort}
             alt="sort"
-            className="key__sort"
+            className="key-inventory__sort"
           />
         </li>
-        <li className="key__label">
-          <p className="key__text">Status</p>
+        <li className="key-inventory__label">
+          <p className="key-inventory__text">Status</p>
           <img
             onClick={() => sortInventory("status")}
             src={sort}
             alt="sort"
-            className="key__sort"
+            className="key-inventory__sort"
           />
         </li>
-        <li className="key__label">
-          <p className="key__text">QTY</p>
+        <li className="key-inventory__label">
+          <p className="key-inventory__text">QTY</p>
           <img
             onClick={() => sortInventory("quantity")}
             src={sort}
             alt="sort"
-            className="key__sort"
+            className="key-inventory__sort"
           />
         </li>
-        <li className="key__label">
-          <p className="key__text">Warehouse</p>
+        <li className="key-inventory__label">
+          <p className="key-inventory__text">Warehouse</p>
         </li>
-        <li className="key__label">
-          <p className="key__text">ACTIONS</p>
+        <li className="key-inventory__label">
+          <p className="key-inventory__text">ACTIONS</p>
         </li>
       </ul>
       <ul className="List">
         {inventories
           .filter((inventory) => {
-            // return keys.some((key) =>
+            // return key.some((key) =>
             //   inventory[key].toLowerCase().includes(search)
             // );
             return search.toLowerCase() === ""
