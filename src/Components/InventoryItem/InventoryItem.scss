@@ -1,7 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
-.card {
+.inventory {
   border-top: 1px solid $secondary-colour-2;
   padding: 0 1.6rem;
   padding-bottom: 1.6rem;
@@ -74,13 +74,16 @@
     }
   }
 
+  &__bottom-right {
+    display: flex;
+  }
   &__name,
   &__address,
   &__contact-name,
   &__contact-details {
     @include tablet {
       width: 50%;
-      padding-left: 0.5rem;
+      //   padding-left: 0.5rem;
     }
   }
 

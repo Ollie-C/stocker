@@ -13,37 +13,37 @@ const InventoryItem = ({
     showModalHandler();
   };
   return (
-    <article className="card">
-      <div className="card__text-wrapper">
-        <div className="card__left">
-          <h5 className="card__label">Inventory Item</h5>
+    <article className="inventory">
+      <div className="inventory__text-wrapper">
+        <div className="inventory__left">
+          <h5 className="inventory__label">Inventory Item</h5>
           <Link
             // to={`/warehouses/details/${warehouse.id}`}
-            className="card__name split">
+            className="inventory__name split">
             <p>{inventory.itemName}</p>
-            <img className="card__chevron" src={chevron} />
+            <img className="inventory__chevron" src={chevron} />
           </Link>
-          <h5 className="card__label">CATEGORY</h5>
-          <p className="card__address">{inventory.category}</p>
+          <h5 className="inventory__label">CATEGORY</h5>
+          <p className="inventory__address">{inventory.category}</p>
         </div>
-        <div className="card__right">
-          <h5 className="card__label">STATUS</h5>
-          <p className="card__contact-name split">{inventory.status}</p>
-          <h5 className="card__label">QTY</h5>
-          <p className="card__contact-phone">{inventory.quantity}</p>
-          <h5 className="card__label">WAREHOUSE</h5>
-          <p className="card__contact-phone">{inventory.warehouseName}</p>
-          <div className="card__contact-details"></div>
+        <div className="inventory__right">
+          <h5 className="inventory__label">STATUS</h5>
+          <p className="inventory__contact-name split">{inventory.status}</p>
+          <h5 className="inventory__label">QTY</h5>
+          <p className="inventory__contact-phone">{inventory.quantity}</p>
+          <div className="inventory__contact-details"></div>
+          <h5 className="inventory__label">WAREHOUSE</h5>
+          <p className="inventory__contact-phone">{inventory.warehouseName}</p>
         </div>
       </div>
-      <div className="card__buttons">
+      <div className="inventory__buttons">
         <button
           onClick={deleteClickHandler}
-          className="card__delete-button"></button>
+          className="inventory__delete-button"></button>
         <Link to={`${inventory.id}/edit`}>
           <button
             onClick={(e) => handleSelectedProduct(inventory)}
-            className="card__edit-button"></button>
+            className="inventory__edit-button"></button>
         </Link>
       </div>
     </article>
