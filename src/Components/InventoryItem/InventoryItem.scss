@@ -1,1 +1,108 @@
-@use "../../styles/partials/listItem";
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.inventory {
+  border-top: 1px solid $secondary-colour-2;
+  padding: 0 1.6rem;
+  padding-bottom: 1.6rem;
+  @include tablet {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__delete-button {
+    background: url("../../assets/Icons/delete_outline-24px.svg") no-repeat left
+      50%;
+    height: 50px;
+    width: 50%;
+    border: none;
+    @include tablet {
+      position: relative;
+      left: 40px;
+    }
+    @include desktop {
+      left: 80px;
+    }
+  }
+
+  &__edit-button {
+    height: 50px;
+    width: 100%;
+    border: none;
+  }
+
+  &__text-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 1.6rem;
+    @include tablet {
+      width: 100%;
+    }
+  }
+  &__buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    @include tablet {
+      width: 32%;
+      justify-content: right;
+      position: relative;
+    }
+  }
+
+  &__label {
+    text-transform: uppercase;
+    color: $secondary-colour-1;
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__name {
+    text-decoration: none;
+    color: $primary-colour-2;
+    font-weight: 600;
+    display: flex;
+    @include tablet {
+      align-items: center;
+    }
+  }
+
+  &__right {
+    width: 45%;
+    @include tablet {
+      display: flex;
+      width: 55.8%;
+    }
+  }
+
+  &__left {
+    width: 45%;
+
+    @include tablet {
+      display: flex;
+    }
+  }
+
+  &__bottom-right {
+    display: flex;
+  }
+  &__name,
+  &__address,
+  &__contact-name,
+  &__contact-details {
+    @include tablet {
+      width: 50%;
+      //   padding-left: 0.5rem;
+    }
+  }
+
+  &__chevron {
+    @include tablet {
+      width: 25px;
+    }
+  }
+}

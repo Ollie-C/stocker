@@ -94,13 +94,12 @@ const EditInventory = ({ getInventories }) => {
   return (
     <>
       <section className="editWarehouse-header">
-        <Link className="editWarehouse-header__icon-container" to="/inventory">
-          <img
-            className="editWarehouse-header__icon"
-            src={backIcon}
-            alt="back-button"
-          />
-        </Link>
+        <img
+          className="editWarehouse-header__icon"
+          src={backIcon}
+          alt="back-button"
+          onClick={() => navigate(-1)}
+        />
         <h1 className="editWarehouse-header__title">Edit Inventory Item</h1>
       </section>
       <form
