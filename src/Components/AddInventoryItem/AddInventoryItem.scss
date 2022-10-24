@@ -73,7 +73,7 @@ $padding-mobile: 2.4rem;
 
   &__input {
     @include form-input;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 
     &--error {
       outline: 1px solid $supporting-colour-2;
@@ -93,7 +93,7 @@ $padding-mobile: 2.4rem;
 
   &__textarea {
     @include form-text-area;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
   }
 
   &__buttons {
@@ -115,4 +115,39 @@ $padding-mobile: 2.4rem;
       }
     }
   }
+
+  &__error-container {
+    display: none;
+    @include tablet {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      bottom: 4px;
+    }
+  }
+
+  &__icon {
+    display: none;
+    @include tablet {
+      display: flex;
+      width: 18px;
+    }
+  }
+
+  &__error {
+    display: none;
+    @include tablet {
+      display: flex;
+      padding-left: 0.5rem;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: $supporting-colour-2;
+    }
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }

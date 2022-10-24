@@ -2,9 +2,14 @@ import "./AddInventoryItem.scss";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
-// import errorIcon from "../../assets/Icons/error-24px.svg";
+import errorIcon from "../../assets/Icons/error-24px.svg";
 import { useState } from "react";
-// const validator = require("validator");
+import {
+  isEmpty,
+  isNotAlphanumeric,
+  isInvalidPhone,
+  isInvalidEmail,
+} from "../../utils/Helpers.js";
 
 const AddInventoryItem = ({ warehouses, getInventories }) => {
   const navigate = useNavigate();
@@ -16,6 +21,7 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
     quantity: "0",
   });
   const [stock, setStock] = useState(true);
+  const [formErrors, setFormErrors] = useState({});
 
   const addItem = async () => {
     const { data } = await axios
@@ -29,7 +35,6 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setItemDetails({
       ...itemDetails,
       [name]: value,
@@ -44,11 +49,30 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
     });
     if (errors.length > 0) {
       alert("Please fill in all fields.");
+      return false;
     } else {
       addItem();
-      alert("Success.");
       navigate("/inventory");
     }
+  };
+
+  const isValidInput = (e, type) => {
+    const { name, value } = e.target;
+    let error = null;
+
+    if (type === "regular") {
+      error = isNotAlphanumeric(value);
+    }
+
+    if (isEmpty(value)) {
+      error = isEmpty(value);
+    }
+    console.log(value);
+
+    setFormErrors({
+      ...formErrors,
+      [name]: error,
+    });
   };
 
   return (
@@ -72,96 +96,156 @@ const AddInventoryItem = ({ warehouses, getInventories }) => {
         <div className="form-fields-wrapper">
           <div className="addI-form__fields">
             <h2 className="addI-form__title">Item Details</h2>
-            <label htmlFor="itemName" className="addI-form__label">
-              Item Name
-            </label>
-            <input
-              type="text"
-              className="addI-form__input"
-              placeholder="Item Name"
-              name="itemName"
-              onChange={(e) => handleChange(e)}
-            />
-            <label htmlFor="description" className="addI-form__label">
-              Description
-            </label>
-            <textarea
-              className="addI-form__textarea"
-              placeholder="Please enter a brief item description..."
-              name="description"
-              onChange={(e) => handleChange(e)}
-            ></textarea>
-            <label htmlFor="category" className="addI-form__label">
-              Category
-            </label>
-            <select
-              name="category"
-              className="addI-form__input addI-form__input--dropdown"
-              onChange={(e) => handleChange(e)}
-            >
-              <option value={null}>Please select</option>
-              <option value="Accessories">Accessories</option>
-              <option value="Apparel">Apparel</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Gear">Gear</option>
-              <option value="Health">Health</option>
-            </select>
+            <div className="input-wrapper">
+              <label htmlFor="itemName" className="addI-form__label">
+                Item Name
+              </label>
+              <input
+                type="text"
+                className="addI-form__input"
+                placeholder="Item Name"
+                name="itemName"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
+              />
+              <div
+                style={{ display: formErrors.itemName ? "flex" : "none" }}
+                className="addI-form__error-container"
+              >
+                <img
+                  className="addI-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="addI-form__error">{formErrors.itemName}</p>
+              </div>
+            </div>
+            <div className="input-wrapper">
+              <label htmlFor="description" className="addI-form__label">
+                Description
+              </label>
+              <textarea
+                className="addI-form__textarea"
+                placeholder="Please enter a brief item description..."
+                name="description"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
+              ></textarea>
+              <div
+                style={{ display: formErrors.description ? "flex" : "none" }}
+                className="addI-form__error-container"
+              >
+                <img
+                  className="addI-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="addI-form__error">{formErrors.description}</p>
+              </div>
+            </div>
+            <div className="input-wrapper">
+              <label htmlFor="category" className="addI-form__label">
+                Category
+              </label>
+              <select
+                name="category"
+                className="addI-form__input addI-form__input--dropdown"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "none")}
+              >
+                <option value={null}>Please select</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Apparel">Apparel</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Gear">Gear</option>
+                <option value="Health">Health</option>
+              </select>
+              <div
+                style={{ display: formErrors.category ? "flex" : "none" }}
+                className="addI-form__error-container"
+              >
+                <img
+                  className="addI-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="addI-form__error">{formErrors.category}</p>
+              </div>
+            </div>
           </div>
         </div>
         <div className="form-fields-wrapper">
           <div className="addI-form__fields">
             <h2 className="addI-form__title">Item Availability</h2>
-            <label className="addI-form__label">Status</label>
-            <div className="addI-form__radio-buttons">
-              <input
-                type="radio"
-                name="status"
-                value="In Stock"
-                onClick={() => setStock(true)}
-              />
-              <label className="addI-form__label--radio">In Stock</label>
-              <input
-                type="radio"
-                name="status"
-                value="Out of Stock"
-                onClick={() => setStock(false)}
-              />
-              <label className="addI-form__label--radio">Out of stock</label>
-            </div>
-            {stock ? (
-              <>
-                <label htmlFor="quantity" className="addI-form__label">
-                  Quantity
-                </label>
+            <div className="input-wrapper">
+              <label className="addI-form__label">Status</label>
+              <div className="addI-form__radio-buttons">
                 <input
-                  type="number"
-                  name="quantity"
-                  className="addI-form__input addI-form__input--quantity"
-                  defaultValue="0"
-                  onChange={(e) => handleChange(e)}
-                ></input>
-              </>
-            ) : (
-              <></>
-            )}
+                  type="radio"
+                  name="status"
+                  value="In Stock"
+                  onClick={() => setStock(true)}
+                />
+                <label className="addI-form__label--radio">In Stock</label>
+                <input
+                  type="radio"
+                  name="status"
+                  value="Out of Stock"
+                  onClick={() => setStock(false)}
+                />
+                <label className="addI-form__label--radio">Out of stock</label>
+              </div>
+            </div>
+            <div className="input-wrapper">
+              {stock ? (
+                <>
+                  <label htmlFor="quantity" className="addI-form__label">
+                    Quantity
+                  </label>
+                  <input
+                    type="number"
+                    name="quantity"
+                    className="addI-form__input addI-form__input--quantity"
+                    defaultValue="0"
+                    onChange={(e) => handleChange(e)}
+                  ></input>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
 
-            <label htmlFor="warehouseName" className="addI-form__label">
-              Warehouse
-            </label>
-            <select
-              name="warehouseName"
-              className="addI-form__input addI-form__input--dropdown"
-              onChange={(e) => handleChange(e)}
-            >
-              <option value={null}>Please select</option>
-              {warehouses.map((warehouse) => {
-                return (
-                  <>
-                    <option value={warehouse.name}>{warehouse.name}</option>
-                  </>
-                );
-              })}
-            </select>
+            <div className="input-wrapper">
+              <label htmlFor="warehouseName" className="addI-form__label">
+                Warehouse
+              </label>
+              <select
+                name="warehouseName"
+                className="addI-form__input addI-form__input--dropdown"
+                onChange={(e) => handleChange(e)}
+                onBlur={(e) => isValidInput(e, "none")}
+              >
+                <option value={null}>Please select</option>
+                {warehouses.map((warehouse) => {
+                  return (
+                    <option key={warehouse.id} value={warehouse.name}>
+                      {warehouse.name}
+                    </option>
+                  );
+                })}
+              </select>
+              <div
+                style={{ display: formErrors.warehouseName ? "flex" : "none" }}
+                className="addI-form__error-container"
+              >
+                <img
+                  className="addI-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
+                <p className="addI-form__error">{formErrors.warehouseName}</p>
+              </div>
+            </div>
           </div>
         </div>
       </form>

@@ -4,7 +4,12 @@ import { useNavigate } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import { useEffect, useState } from "react";
 import errorIcon from "../../assets/Icons/error-24px.svg";
-const validator = require("validator");
+import {
+  isEmpty,
+  isNotAlphanumeric,
+  isInvalidPhone,
+  isInvalidEmail,
+} from "../../utils/Helpers.js";
 
 const AddWarehouse = ({ getWarehouses }) => {
   const navigate = useNavigate();
@@ -41,49 +46,36 @@ const AddWarehouse = ({ getWarehouses }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // const submittedValues = Object.values(warehouseDetails);
-    // console.log(submittedValues);
-    // if (submittedValues.length < 8) {
-    //   console.log("no");
-    // }
-
-    // addWarehouse();
-    // navigate("/");
-  };
-
-  const isValidInput = (e) => {
-    const { name, value } = e.target;
-    let error = null;
-    if (!validator.isAlphanumeric(value, "en-GB", { ignore: " " })) {
-      error = "Only letters and numbers can be used";
-    }
-    if (validator.isEmpty(value)) {
-      error = "This field is required";
-    }
-    setFormErrors({
-      ...formErrors,
-      [name]: error ? error : null,
+    const submittedValues = Object.values(warehouseDetails);
+    const filteredValues = submittedValues.filter((value) => {
+      return value;
     });
+    if (filteredValues.length < 8) {
+      alert("Please fill in all fields");
+      return false;
+    }
+    addWarehouse();
+    navigate("/");
   };
 
-  const isValidPhone = (e) => {
+  const isValidInput = (e, type) => {
     const { name, value } = e.target;
     let error = null;
-    if (!validator.isMobilePhone(value) || validator.isEmpty(value)) {
-      error = "Please enter a valid phone number";
-    }
-    setFormErrors({
-      ...formErrors,
-      [name]: error,
-    });
-  };
 
-  const isValidEmail = (e) => {
-    const { name, value } = e.target;
-    let error = null;
-    if (!validator.isEmail(value) || validator.isEmpty(value)) {
-      error = "Please enter a valid email address";
+    if (type === "regular") {
+      error = isNotAlphanumeric(value);
     }
+    if (type === "phone") {
+      error = isInvalidPhone(value);
+    }
+    if (type === "email") {
+      error = isInvalidEmail(value);
+    }
+
+    if (isEmpty(value)) {
+      error = isEmpty(value);
+    }
+
     setFormErrors({
       ...formErrors,
       [name]: error,
@@ -115,13 +107,17 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Warehouse Name"
                 name="name"
                 onChange={(e) => handleChange(e)}
-                onBlur={(e) => isValidInput(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
               />
               <div
                 style={{ display: formErrors.name ? "flex" : "none" }}
                 className="add-form__error-container"
               >
-                <img className="add-form__icon" src={errorIcon} alt="" />
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
                 <p className="add-form__error">{formErrors.name}</p>
               </div>
             </div>
@@ -136,13 +132,17 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Street Address"
                 name="address"
                 onChange={(e) => handleChange(e)}
-                onBlur={(e) => isValidInput(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
               />
               <div
                 style={{ display: formErrors.address ? "flex" : "none" }}
                 className="add-form__error-container"
               >
-                <img className="add-form__icon" src={errorIcon} alt="" />
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
                 <p className="add-form__error">{formErrors.address}</p>
               </div>
             </div>
@@ -156,13 +156,17 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="City"
                 name="city"
                 onChange={(e) => handleChange(e)}
-                onBlur={(e) => isValidInput(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
               />
               <div
                 style={{ display: formErrors.city ? "flex" : "none" }}
                 className="add-form__error-container"
               >
-                <img className="add-form__icon" src={errorIcon} alt="" />
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
                 <p className="add-form__error">{formErrors.city}</p>
               </div>
             </div>
@@ -176,13 +180,17 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Country"
                 name="country"
                 onChange={(e) => handleChange(e)}
-                onBlur={(e) => isValidInput(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
               />
               <div
                 style={{ display: formErrors.country ? "flex" : "none" }}
                 className="add-form__error-container"
               >
-                <img className="add-form__icon" src={errorIcon} alt="" />
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
                 <p className="add-form__error">{formErrors.country}</p>
               </div>
             </div>
@@ -201,13 +209,17 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Contact Name"
                 name="contactName"
                 onChange={(e) => handleChange(e)}
-                onBlur={(e) => isValidInput(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
               />
               <div
                 style={{ display: formErrors.contactName ? "flex" : "none" }}
                 className="add-form__error-container"
               >
-                <img className="add-form__icon" src={errorIcon} alt="" />
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
                 <p className="add-form__error">{formErrors.contactName}</p>
               </div>
             </div>
@@ -221,13 +233,17 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Position"
                 name="position"
                 onChange={(e) => handleChange(e)}
-                onBlur={(e) => isValidInput(e)}
+                onBlur={(e) => isValidInput(e, "regular")}
               />
               <div
                 style={{ display: formErrors.position ? "flex" : "none" }}
                 className="add-form__error-container"
               >
-                <img className="add-form__icon" src={errorIcon} alt="" />
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
                 <p className="add-form__error">{formErrors.position}</p>
               </div>
             </div>
@@ -241,13 +257,17 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Phone Number"
                 name="phone"
                 onChange={(e) => handleChange(e)}
-                onBlur={(e) => isValidPhone(e)}
+                onBlur={(e) => isValidInput(e, "phone")}
               />
               <div
                 style={{ display: formErrors.phone ? "flex" : "none" }}
                 className="add-form__error-container"
               >
-                <img className="add-form__icon" src={errorIcon} alt="" />
+                <img
+                  className="add-form__icon"
+                  src={errorIcon}
+                  alt="error-icon"
+                />
                 <p className="add-form__error">{formErrors.phone}</p>
               </div>
             </div>
@@ -261,7 +281,7 @@ const AddWarehouse = ({ getWarehouses }) => {
                 placeholder="Email"
                 name="email"
                 onChange={(e) => handleChange(e)}
-                onBlur={(e) => isValidEmail(e)}
+                onBlur={(e) => isValidInput(e, "email")}
               />
               <div
                 style={{ display: formErrors.email ? "flex" : "none" }}

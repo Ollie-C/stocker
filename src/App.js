@@ -121,6 +121,7 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
+
         <div className="parent">
           <div className="app-container">
             <Routes>
