@@ -12,11 +12,6 @@ const InventoryList = ({
   search,
   setSearch,
 }) => {
-  // console.log(inventories);
-  // if (inventories.length) {
-  //   return <p>Loading...</p>;
-  // }
-
   const keys = ["warehouseName", "description", "category", "status"];
 
   return (
@@ -27,7 +22,8 @@ const InventoryList = ({
           <input
             onChange={(e) => setSearch(e.target.value)}
             className="warehouse-list__search split"
-            placeholder="Search..."></input>
+            placeholder="Search..."
+          ></input>
           <Link to="/inventory/add" className="warehouse-list__button">
             + Add New Item
           </Link>
@@ -80,9 +76,6 @@ const InventoryList = ({
       <ul className="List">
         {inventories
           .filter((inventory) => {
-            // return key.some((key) =>
-            //   inventory[key].toLowerCase().includes(search)
-            // );
             return search.toLowerCase() === ""
               ? inventory
               : inventory.itemName.toLowerCase().includes(search) ||
