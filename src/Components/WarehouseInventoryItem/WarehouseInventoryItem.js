@@ -4,13 +4,18 @@ import "./WarehouseInventoryItem.scss";
 import editbutton from "../../assets/Icons/edit-24px.svg";
 
 const WarehouseInventoryItem = ({ inventoryItem }) => {
+  const inventoryItemId = inventoryItem.id;
+
   return (
     <>
       <article className="card">
         <div className="card__text-wrapper">
           <div className="card__left">
-            <h5 className="card__label">Warehouse</h5>
-            <Link to={`/inventory/:itemId`} className="card__name split">
+            <h5 className="card__label">Inventory Item</h5>
+            <Link
+              to={`/inventory/${inventoryItemId}`}
+              className="card__name split"
+            >
               <p>{inventoryItem.itemName}</p>
               <img className="card__chevron" src={chevron} />
             </Link>

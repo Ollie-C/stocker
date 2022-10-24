@@ -1,17 +1,38 @@
 import arrow from "../../assets/Icons/arrow_back-24px.svg";
 import editWhite from "../../assets/Icons/edit-24px-white.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./InventoryItemDetails.scss";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const InventoryItemDetails = () => {
+  const { itemId } = useParams();
+  const [inventoryItem, SetInventoryItem] = useState([]);
+  console.log(useParams());
+  const navigate = useNavigate();
+
+  const getInventoryItem = async () => {
+    const { data } = await axios.get(
+      `http://localhost:8080/inventory/${itemId}`
+    );
+    console.log(data);
+    SetInventoryItem(data);
+  };
+
+  useEffect(() => {
+    getInventoryItem();
+  }, []);
+
   return (
     <>
       <header className="item-details__header">
         <div className="item-details__title">
-          <Link to="/">
-            <img className="item-details__arrow" src={arrow} />
-          </Link>
-          <h1 className="item-details__title-text">Television</h1>
+          <img
+            className="item-details__arrow"
+            src={arrow}
+            onClick={() => navigate(-1)}
+          />
+          <h1 className="item-details__title-text">{inventoryItem.itemName}</h1>
         </div>
         <div className="item-details__edit">
           <img src={editWhite} className="item-details__edit-icon" />
@@ -23,13 +44,14 @@ const InventoryItemDetails = () => {
           <div className="item-details__description">
             <h5 className="item-details__label">Item Description:</h5>
             <p className="item-details__description-text">
-              This 50",4K LED TV provides a crystal-clear pciture and vivid
-              colors.
+              {inventoryItem.description}
             </p>
           </div>
           <div className="item-details__category">
             <h5 className="item-details__label">Category:</h5>
-            <p className="item-details__category-name">Electronics</p>
+            <p className="item-details__category-name">
+              {inventoryItem.category}
+            </p>
           </div>
         </div>
         <div className="item-details__right">
@@ -37,17 +59,21 @@ const InventoryItemDetails = () => {
             <div className="item-details__stock-info">
               <div>
                 <h5 className="item-details__label">Status:</h5>
-                <p className="item-details__status">In Stock</p>
+                <p className="item-details__status">{inventoryItem.status}</p>
               </div>
               <div>
                 <h5 className="item-details__label">Quantity:</h5>
-                <p className="item-details__quantity">500</p>
+                <p className="item-details__quantity">
+                  {inventoryItem.quantity}
+                </p>
               </div>
             </div>
           </div>
           <div className="item-details__warehouse">
             <h5 className="item-details__label">Warehouse:</h5>
-            <p className="item-details__warehouse-name">Manhattan</p>
+            <p className="item-details__warehouse-name">
+              {inventoryItem.warehouseName}
+            </p>
           </div>
         </div>
       </section>
